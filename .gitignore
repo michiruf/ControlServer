@@ -1,0 +1,9 @@
+.DS_Store
+Thumbs.db
+build/
+captures/
+.idea/
+.gradle/
+*.iml
+*.properties
+!/gradle/wrapper/gradle-wrapper.properties

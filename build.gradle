@@ -1,0 +1,97 @@
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.6'
+    distributionUrl = 'http://services.gradle.org/distributions/gradle-2.6-all.zip'
+}
+
+allprojects {
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
+}
+
+configure(allprojects) {
+    // TODO
+    //configureMaven(project)
+    configureGitRevision(project)
+
+    // TODO
+    //switch (getProjectGroup(project, rootDir)) {
+    switch ('java') {
+        case 'java':
+            configureJavaPlugin(project)
+            configureJavaProject(project)
+            break;
+        case 'android':
+            configureJavaPlugin(project)
+            configureAndroidProject(project)
+            break;
+        case 'android-aar':
+            configureAndroidPlugin(project)
+            configureAndroidProject(project)
+            break;
+    }
+}
+
+def configureMaven(Project project) {
+    project.apply plugin: 'maven'
+    project.group = 'com.github.michiruf'
+}
+
+def configureGitRevision(Project project) {
+    project.version = ('git rev-list --count HEAD ' + getRelativeProjectPath(project, rootDir))
+            .execute((List) null, rootDir)
+            .text
+            .trim()
+}
+
+def configureJavaPlugin(Project project) {
+    configure(project) {
+        apply plugin: 'java'
+
+        configurations {
+            provided
+            providedPlusCompile.extendsFrom(compile, provided)
+            testCompile.extendsFrom(providedPlusCompile)
+        }
+
+        sourceSets {
+            main.compileClasspath = configurations.providedPlusCompile
+            //test.compileClasspath = configurations.providedPlusCompile
+        }
+
+        plugins.withType(IdeaPlugin) {
+            idea.module.scopes.PROVIDED.plus = [configurations.provided]
+        }
+    }
+}
+
+def configureJavaProject(Project project) {
+}
+
+def configureAndroidPlugin(Project project) {
+    project.apply plugin: 'com.android.library'
+}
+
+def configureAndroidProject(Project project) {
+}
+
+// TODO make these 2 methods nicer
+def getRelativeProjectPath(Project project, File relativeTo) {
+    String relativePath = project.getProjectDir().getCanonicalPath()
+            .replace(relativeTo.getCanonicalPath(), '')
+            .replace('\\', '/')
+    if (relativePath.startsWith('/')) {
+        relativePath = relativePath.substring(1)
+    }
+    return relativePath
+}
+
+def getProjectGroup(Project project, File rootDir) {
+    String relativePath = getRelativeProjectPath(project, rootDir)
+    int slashIndex = relativePath.indexOf('/');
+    if (slashIndex == -1) {
+        return relativePath;
+    }
+    return relativePath.substring(0, slashIndex)
+}
