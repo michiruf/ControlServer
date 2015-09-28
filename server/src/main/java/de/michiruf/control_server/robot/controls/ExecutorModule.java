@@ -15,7 +15,9 @@ import java.util.List;
         injects = {
                 KeyControlExecutor.class,
                 MouseControlExecutor.class
-        }
+        },
+        library = true,
+        complete = false
 )
 public class ExecutorModule {
 
