@@ -2,8 +2,9 @@
 Thumbs.db
 build/
 captures/
-.idea/
 .gradle/
+.idea/
+.vertx
 *.iml
 *.properties
 !/gradle/wrapper/gradle-wrapper.properties

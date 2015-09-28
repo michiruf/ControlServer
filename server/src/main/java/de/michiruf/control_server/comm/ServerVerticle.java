@@ -1,18 +1,24 @@
 package de.michiruf.control_server.comm;
 
+import de.michiruf.control_server.Configuration;
 import io.vertx.core.AbstractVerticle;
+
+import javax.inject.Inject;
+import javax.inject.Singleton;
 
 /**
  * @author Michael Ruf
  * @since 2015-08-28
  */
+@Singleton
 public class ServerVerticle extends AbstractVerticle {
 
-    private final int port;
+    private final Configuration configuration;
 
-    public ServerVerticle(int port) {
+    @Inject
+    public ServerVerticle(Configuration configuration) {
         super();
-        this.port = port;
+        this.configuration = configuration;
     }
 
     @Override
@@ -26,6 +32,6 @@ public class ServerVerticle extends AbstractVerticle {
                 System.out.println(event + "");
             });
             handler.closeHandler(event -> handler.close());
-        }).listen(port);
+        }).listen(configuration.getPort());
     }
 }

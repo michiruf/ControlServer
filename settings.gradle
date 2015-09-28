@@ -1,5 +1,5 @@
 rootProject.name = 'ControlsServer'
 include 'server'
-include 'client'
+//include 'client'
 //include 'client-android'
-include 'client-pc'
+//include 'client-pc'
