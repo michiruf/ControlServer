@@ -1,6 +1,5 @@
 task wrapper(type: Wrapper) {
     gradleVersion = '2.7'
-    distributionUrl = 'http://services.gradle.org/distributions/gradle-2.7-all.zip'
 }
 
 allprojects {
@@ -102,6 +101,8 @@ def getProjectGroup(Project project, File rootDir) {
             return 'java'
         case 'client-android':
             return 'android'
+        default:
+            return 'java'
     }
     //String relativePath = getRelativeProjectPath(project, rootDir)
     //int slashIndex = relativePath.indexOf('/');

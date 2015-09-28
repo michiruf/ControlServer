@@ -13,7 +13,7 @@ import javax.inject.Singleton;
 @Module(
         injects = {
                 Server.class,
-                ServerVerticle.class
+                WebSocketVerticle.class
         },
         library = true,
         complete = false

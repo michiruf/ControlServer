@@ -14,24 +14,36 @@ import javax.inject.Singleton;
 public class Server {
 
     private final Vertx vertx;
-    private final ServerVerticle serverVerticle;
+    private final WebSocketVerticle webSocketVerticle;
     private final Configuration configuration;
 
     @Inject
-    public Server(Vertx vertx, ServerVerticle serverVerticle, Configuration configuration) {
+    public Server(Vertx vertx, WebSocketVerticle webSocketVerticle, Configuration configuration) {
         this.vertx = vertx;
-        this.serverVerticle = serverVerticle;
+        this.webSocketVerticle = webSocketVerticle;
         this.configuration = configuration;
     }
 
     @SuppressWarnings("ThrowableResultOfMethodCallIgnored")
     public void start() {
-        vertx.deployVerticle(serverVerticle, event -> {
+        vertx.deployVerticle(webSocketVerticle, event -> {
             if (event.succeeded()) {
                 System.out.println("Server started on port " + configuration.getPort());
             } else if (event.cause() != null) {
                 event.cause().printStackTrace();
             }
         });
+    }
+
+    public boolean isRunning() {
+        return webSocketVerticle.deploymentID() != null;
+    }
+
+    public void stop() {
+        try {
+            webSocketVerticle.stop();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
