@@ -16,9 +16,6 @@ allprojects {
         jcenter()
         mavenCentral()
     }
-}
-
-configure(allprojects) {
     configureMaven(project)
     configureGitRevision(project)
 }
