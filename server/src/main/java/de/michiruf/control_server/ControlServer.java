@@ -2,7 +2,6 @@ package de.michiruf.control_server;
 
 import dagger.ObjectGraph;
 import de.michiruf.control_server.comm.Server;
-import io.vertx.core.Vertx;
 
 /**
  * @author Michael Ruf

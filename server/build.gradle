@@ -1,3 +1,6 @@
+export GRADLE_OPTS="-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=y,address=5005"
+
+
 apply plugin: 'java'
 apply plugin: 'nebula.provided-base'
 
@@ -10,9 +13,14 @@ dependencies {
     testCompile 'junit:junit:4.12'
 
     compile 'io.vertx:vertx-core:3.0.0'
+    testCompile 'io.vertx:vertx-unit:3.0.0'
+
     compile 'com.squareup.dagger:dagger:1.2.2'
     provided('com.squareup.dagger:dagger-compiler:1.2.2') {
         // Due to dagger itself shell not be provided
+        // (at least intellij gets in trouble with this)
         exclude group: 'com.squareup.dagger', module: 'dagger'
     }
+    // TODO do we need this to have the codegen work in test mode?
+//    compile 'com.squareup.dagger:dagger-compiler:1.2.2'
 }
