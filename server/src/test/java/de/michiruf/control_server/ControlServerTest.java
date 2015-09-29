@@ -4,7 +4,7 @@ import dagger.Module;
 import dagger.ObjectGraph;
 import de.michiruf.control_server.comm.Server;
 import io.vertx.core.Vertx;
-import io.vertx.core.http.HttpClientRequest;
+import io.vertx.core.http.WebSocketStream;
 import io.vertx.ext.unit.Async;
 import io.vertx.ext.unit.TestContext;
 import io.vertx.ext.unit.junit.VertxUnitRunner;
@@ -15,14 +15,12 @@ import org.junit.runner.RunWith;
 
 import javax.inject.Inject;
 
-import static org.junit.Assert.*;
-
 /**
  * @author Michael Ruf
  * @since 2015-09-08
  */
 @RunWith(VertxUnitRunner.class)
-public class PlaygroundTest {
+public class ControlServerTest {
 
     @Inject
     protected Vertx vertx;
@@ -43,31 +41,26 @@ public class PlaygroundTest {
     }
 
     @Test
-    public void testSuccessTest() {
-        assertEquals(true, true);
-    }
-
-    @Test(expected = AssertionError.class)
-    public void testFailingTest() {
-        assertEquals(false, true);
-    }
-
-    @Test
     public void testClient(TestContext context) {
-        // TODO for now this is only an example copied from their docs
         Async async = context.async();
-        HttpClientRequest req = vertx.createHttpClient().get(configuration.getPort(),
-                "localhost", "/");
-        req.exceptionHandler(err -> context.fail(err.getMessage()));
-        req.handler(resp -> {
-            context.assertEquals(200, resp.statusCode());
+        WebSocketStream stream = vertx.createHttpClient().websocketStream(
+                configuration.getPort(), "127.0.0.1", "/");
+        stream.exceptionHandler(err -> {
+            System.out.println("ExceptionHandler got event");
+            context.fail(err.getMessage());
+        });
+        stream.handler(resp -> {
+            System.out.println("Handler got response");
+            resp.handler(event -> {
+                System.out.println("Handler got event");
+                System.out.println(event.length());
+            });
             async.complete();
         });
-        req.end();
     }
 
     @Module(
-            injects = PlaygroundTest.class,
+            injects = ControlServerTest.class,
             includes = ControlServerModule.class,
             overrides = true
     )
