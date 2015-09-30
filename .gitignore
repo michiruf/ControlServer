@@ -4,7 +4,7 @@ build/
 captures/
 .gradle/
 .idea/
-.vertx
+.vertx/
 *.iml
 *.properties
 !/gradle/wrapper/gradle-wrapper.properties
