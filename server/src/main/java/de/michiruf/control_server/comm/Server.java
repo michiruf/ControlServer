@@ -31,6 +31,8 @@ public class Server {
                 System.out.println(String.format(
                         "[Server] STARTED on port %d", configuration.getPort()));
             } else if (event.cause() != null) {
+                System.out.println(String.format(
+                        "[Server] NOT STARTED on port %d", configuration.getPort()));
                 event.cause().printStackTrace();
             }
         });
@@ -45,6 +47,7 @@ public class Server {
             webSocketVerticle.stop();
             System.out.println("[Server] STOPPED");
         } catch (Exception e) {
+            System.err.println("[Server] NOT STOPPED");
             e.printStackTrace();
         }
     }
