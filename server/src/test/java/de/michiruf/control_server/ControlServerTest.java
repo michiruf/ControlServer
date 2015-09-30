@@ -4,6 +4,7 @@ import dagger.Module;
 import dagger.ObjectGraph;
 import de.michiruf.control_server.comm.Server;
 import io.vertx.core.Vertx;
+import io.vertx.core.buffer.Buffer;
 import io.vertx.core.http.WebSocketStream;
 import io.vertx.ext.unit.Async;
 import io.vertx.ext.unit.TestContext;
@@ -46,15 +47,22 @@ public class ControlServerTest {
         WebSocketStream stream = vertx.createHttpClient().websocketStream(
                 configuration.getPort(), "127.0.0.1", "/");
         stream.exceptionHandler(err -> {
-            System.out.println("ExceptionHandler got event");
+            System.out.println("[Test] ExceptionHandler got event");
             context.fail(err.getMessage());
         });
-        stream.handler(resp -> {
-            System.out.println("Handler got response");
-            resp.handler(event -> {
-                System.out.println("Handler got event");
-                System.out.println(event.length());
+        stream.handler(webSocketHandler -> {
+            System.out.println("[Test] Handler got connection");
+
+            webSocketHandler.handler(event -> {
+                String eventLog = String.format("[Test] Handler got event: %s",
+                        event.getString(0, event.length()));
+                System.out.println(eventLog);
             });
+
+            String msg = "KEY{DOWN,W}";
+            System.out.println(String.format("[Test] Sending message %s",
+                    msg));
+            webSocketHandler.write(Buffer.buffer(msg));
             async.complete();
         });
     }

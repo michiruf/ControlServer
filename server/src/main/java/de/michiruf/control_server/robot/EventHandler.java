@@ -14,17 +14,21 @@ import java.util.List;
 public class EventHandler {
 
     private List<ControlExecutor> controlExecutors;
+    private StringEventParser stringEventParser;
 
     @Inject
-    public EventHandler(List<ControlExecutor> controlExecutors) {
+    public EventHandler(List<ControlExecutor> controlExecutors,
+                        StringEventParser stringEventParser) {
         this.controlExecutors = controlExecutors;
+        this.stringEventParser = stringEventParser;
     }
 
     public void handleStringEvent(String event) {
-        // TODO parse string into event
+        handleEvent(stringEventParser.parse(event));
     }
 
     public void handleEvent(Event event) {
+        System.out.println(String.format("[Server] EventHandler got event: %s", event));
         for (ControlExecutor controlExecutor : controlExecutors) {
             if (controlExecutor.perform(event)) {
                 break;

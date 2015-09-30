@@ -13,11 +13,10 @@ import java.awt.Robot;
  */
 @Module(
         injects = {
-                EventHandler.class
+                EventHandler.class,
+                StringEventParser.class
         },
-        includes = {
-                ExecutorModule.class
-        },
+        includes = ExecutorModule.class,
         library = true
 )
 public class RobotModule {
