@@ -1,6 +1,6 @@
-package de.michiruf.control_server.robot.controls;
+package de.michiruf.control_server.server.robot.controls;
 
-import de.michiruf.control_server.robot.Event;
+import de.michiruf.control_server.common.Event;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -11,17 +11,17 @@ import java.awt.Robot;
  * @since 2015-09-28
  */
 @Singleton
-public class KeyControlExecutor implements ControlExecutor {
+public class MouseControlExecutor implements ControlExecutor {
 
     private final Robot robot;
 
     @Inject
-    public KeyControlExecutor(Robot robot) {
+    public MouseControlExecutor(Robot robot) {
         this.robot = robot;
     }
 
     public boolean perform(Event event) {
         // TODO
-        return true;
+        return false;
     }
 }

@@ -1,4 +1,4 @@
-package de.michiruf.control_server.robot.controls;
+package de.michiruf.control_server.server.robot.controls;
 
 import dagger.Module;
 import dagger.Provides;

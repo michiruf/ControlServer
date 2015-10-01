@@ -1,8 +1,8 @@
-package de.michiruf.control_server;
+package de.michiruf.control_server.server;
 
 import dagger.Module;
 import dagger.ObjectGraph;
-import de.michiruf.control_server.comm.Server;
+import de.michiruf.control_server.server.comm.Server;
 import io.vertx.core.Vertx;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.http.WebSocketStream;

@@ -1,7 +1,7 @@
-package de.michiruf.control_server;
+package de.michiruf.control_server.server;
 
 import dagger.ObjectGraph;
-import de.michiruf.control_server.comm.Server;
+import de.michiruf.control_server.server.comm.Server;
 
 /**
  * @author Michael Ruf

@@ -9,6 +9,8 @@ targetCompatibility = JavaVersion.VERSION_1_8
 dependencies {
     testCompile 'junit:junit:4.12'
 
+    compile project(':common')
+
     compile 'io.vertx:vertx-core:3.0.0'
     testCompile 'io.vertx:vertx-unit:3.0.0'
 
@@ -18,4 +20,5 @@ dependencies {
         // (at least IntelliJ IDEA displays this as provided if not excluded)
         exclude group: 'com.squareup.dagger', module: 'dagger'
     }
+
 }

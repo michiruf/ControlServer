@@ -1,4 +1,4 @@
-package de.michiruf.control_server;
+package de.michiruf.control_server.server;
 
 import org.junit.Test;
 

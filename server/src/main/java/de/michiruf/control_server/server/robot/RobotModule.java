@@ -1,9 +1,11 @@
-package de.michiruf.control_server.robot;
+package de.michiruf.control_server.server.robot;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import dagger.Module;
 import dagger.Provides;
-import de.michiruf.control_server.robot.controls.ExecutorModule;
+import de.michiruf.control_server.server.robot.controls.ExecutorModule;
 
+import javax.inject.Singleton;
 import java.awt.AWTException;
 import java.awt.Robot;
 
@@ -23,6 +25,7 @@ public class RobotModule {
 
     @SuppressWarnings("unused")
     @Provides
+    @Singleton
     public Robot provideRobot() {
         try {
             return new Robot();
@@ -30,5 +33,12 @@ public class RobotModule {
             e.printStackTrace();
         }
         return null;
+    }
+
+    @SuppressWarnings("unused")
+    @Provides
+    @Singleton
+    public ObjectMapper provideObjectMapper() {
+        return new ObjectMapper();
     }
 }

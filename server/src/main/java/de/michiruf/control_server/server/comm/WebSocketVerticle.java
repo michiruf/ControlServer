@@ -1,7 +1,7 @@
-package de.michiruf.control_server.comm;
+package de.michiruf.control_server.server.comm;
 
-import de.michiruf.control_server.Configuration;
-import de.michiruf.control_server.robot.EventHandler;
+import de.michiruf.control_server.server.Configuration;
+import de.michiruf.control_server.server.robot.EventHandler;
 import io.vertx.core.AbstractVerticle;
 
 import javax.inject.Inject;

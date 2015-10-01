@@ -1,6 +1,6 @@
-package de.michiruf.control_server.robot.controls;
+package de.michiruf.control_server.server.robot.controls;
 
-import de.michiruf.control_server.robot.Event;
+import de.michiruf.control_server.common.Event;
 
 /**
  * @author Michael Ruf

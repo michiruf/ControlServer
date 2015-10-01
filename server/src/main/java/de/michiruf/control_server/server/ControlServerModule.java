@@ -1,9 +1,9 @@
-package de.michiruf.control_server;
+package de.michiruf.control_server.server;
 
 import dagger.Module;
 import dagger.Provides;
-import de.michiruf.control_server.comm.ServerModule;
-import de.michiruf.control_server.robot.RobotModule;
+import de.michiruf.control_server.server.comm.ServerModule;
+import de.michiruf.control_server.server.robot.RobotModule;
 
 import javax.inject.Singleton;
 

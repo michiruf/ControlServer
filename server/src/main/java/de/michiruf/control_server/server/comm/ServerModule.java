@@ -1,4 +1,4 @@
-package de.michiruf.control_server.comm;
+package de.michiruf.control_server.server.comm;
 
 import dagger.Module;
 import dagger.Provides;
