@@ -1,12 +1,22 @@
 apply plugin: 'java'
+apply plugin: 'nebula.provided-base'
 
-sourceCompatibility = 1.5
-version = '1.0'
+version = '1.0.' + version
 
-repositories {
-    mavenCentral()
-}
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.11'
+    testCompile 'junit:junit4.11'
+
+    compile project(':client')
+
+    provided('com.squareup.dagger:dagger-compiler:1.2.2') {
+        // Due to dagger itself shell not be provided
+        // (at least IntelliJ IDEA displays this as provided if not excluded)
+        exclude group: 'com.squareup.dagger', module: 'dagger'
+    }
 }
+
+
+
