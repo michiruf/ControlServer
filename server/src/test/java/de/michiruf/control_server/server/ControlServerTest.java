@@ -1,5 +1,7 @@
 package de.michiruf.control_server.server;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import dagger.Module;
 import dagger.ObjectGraph;
 import de.michiruf.control_server.server.comm.Server;
@@ -29,10 +31,13 @@ public class ControlServerTest {
     protected Configuration configuration;
     @Inject
     protected Server server;
+    @Inject
+    protected ObjectMapper objectMapper;
 
     @Before
     public void setUp() {
         ObjectGraph.create(new TestModule()).inject(this);
+        objectMapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
         server.start();
     }
 
@@ -41,25 +46,34 @@ public class ControlServerTest {
         server.stop();
     }
 
+    private WebSocketStream createStream() {
+        return vertx.createHttpClient().websocketStream(configuration.getPort(), "127.0.0.1", "/");
+    }
+
     @Test
     public void testClient(TestContext context) {
-        Async async = context.async();
-        WebSocketStream stream = vertx.createHttpClient().websocketStream(
-                configuration.getPort(), "127.0.0.1", "/");
+        WebSocketStream stream = createStream();
         stream.exceptionHandler(err -> {
             System.out.println("[Test] ExceptionHandler got event");
             context.fail(err.getMessage());
         });
         stream.handler(webSocketHandler -> {
             System.out.println("[Test] Handler got connection");
+        });
+    }
 
+    //@Test
+    public void testKeyEvent(TestContext context) {
+        Async async = context.async();
+        WebSocketStream stream = createStream();
+        stream.handler(webSocketHandler -> {
             webSocketHandler.handler(event -> {
                 String eventLog = String.format("[Test] Handler got event: %s",
                         event.getString(0, event.length()));
                 System.out.println(eventLog);
             });
 
-            String msg = "KEY{DOWN,W}";
+            String msg = ExampleEvents.keyEventString(objectMapper);
             System.out.println(String.format("[Test] Sending message %s",
                     msg));
             webSocketHandler.write(Buffer.buffer(msg));

@@ -1,13 +1,12 @@
-package de.michiruf.control_server.server;
+package de.michiruf.control_server.common;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import de.michiruf.control_server.common.Event;
 
 /**
  * @author Michael Ruf
  * @since 2015-10-01
- * @see de.michiruf.control_server.common.ExampleEvents
+ * @see de.michiruf.control_server.server.ExampleEvents
  */
 public class ExampleEvents {
 

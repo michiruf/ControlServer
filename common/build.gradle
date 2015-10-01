@@ -1,4 +1,5 @@
 apply plugin: 'java'
+apply plugin: 'nebula.provided-base'
 
 version = '1.0.' + version
 
@@ -7,4 +8,11 @@ targetCompatibility = JavaVersion.VERSION_1_8
 
 dependencies {
     testCompile 'junit:junit:4.12'
+    
+    provided 'com.fasterxml.jackson.core:jackson-core:2.6.2'
+    provided 'com.fasterxml.jackson.core:jackson-annotations:2.6.2'
+    provided 'com.fasterxml.jackson.core:jackson-databind:2.6.2'
+    testCompile 'com.fasterxml.jackson.core:jackson-core:2.6.2'
+    testCompile 'com.fasterxml.jackson.core:jackson-annotations:2.6.2'
+    testCompile 'com.fasterxml.jackson.core:jackson-databind:2.6.2'
 }
