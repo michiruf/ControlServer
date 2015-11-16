@@ -11,18 +11,18 @@ import de.michiruf.control_server.common.EventData;
 public class KeyData extends EventData {
 
     @JsonProperty("key")
-    private String key;
+    private int key;
 
     protected KeyData() {
         // For jackson
     }
 
-    public KeyData(String key) {
+    public KeyData(int key) {
         this.key = key;
     }
 
     @JsonIgnore
-    public String getKey() {
+    public int getKey() {
         return key;
     }
 }

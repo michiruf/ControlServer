@@ -1,6 +1,8 @@
 package de.michiruf.control_server.server.robot.controls;
 
 import de.michiruf.control_server.common.Event;
+import de.michiruf.control_server.common.Type;
+import de.michiruf.control_server.common.data.KeyData;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -21,7 +23,22 @@ public class KeyControlExecutor implements ControlExecutor {
     }
 
     public boolean perform(Event event) {
-        // TODO
+        if (event.getType() != Type.KEY) {
+            return false;
+        }
+
+        KeyData data = event.getDataAs(KeyData.class);
+        System.out.println(String.format(
+                "[Server] KeyControlExecutor got key: %s", data.getKey()));
+        switch (event.getDirection()) {
+            case DOWN:
+                robot.keyPress(data.getKey()); // TODO events get not called? -- They do?!
+                break;
+            case UP:
+                robot.keyRelease(data.getKey()); // TODO
+                break;
+        }
+
         return true;
     }
 }

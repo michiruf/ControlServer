@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import de.michiruf.control_server.common.data.KeyData;
 import de.michiruf.control_server.common.data.MouseData;
 
+import java.awt.event.KeyEvent;
 import java.util.Date;
 
 /**
@@ -17,7 +18,7 @@ public class ExampleEvents {
         return new Event(
                 Type.KEY,
                 Direction.DOWN,
-                new KeyData("w"),
+                new KeyData(KeyEvent.VK_W),
                 new Date(System.currentTimeMillis()));
     }
 

@@ -81,7 +81,23 @@ public class ControlServerTest {
         });
     }
 
-    // TODO testMouseEvent
+    @Test
+    public void testMouseEvent(TestContext context) {
+        Async async = context.async();
+        WebSocketStream stream = createStream();
+        stream.handler(webSocketHandler -> {
+            webSocketHandler.handler(event -> {
+                String eventLog = String.format("[Test] Handler got event: %s",
+                        event.getString(0, event.length()));
+                System.out.println(eventLog);
+            });
+
+            String msg = ExampleEvents.mouseEventString(objectMapper);
+            System.out.println(String.format("[Test] Sending message %s", msg));
+            webSocketHandler.write(Buffer.buffer(msg));
+            async.complete();
+        });
+    }
 
     @Module(
             injects = ControlServerTest.class,
