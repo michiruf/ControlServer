@@ -81,6 +81,8 @@ public class ControlServerTest {
         });
     }
 
+    // TODO testMouseEvent
+
     @Module(
             injects = ControlServerTest.class,
             includes = ControlServerModule.class,

@@ -2,7 +2,9 @@ package de.michiruf.control_server.common;
 
 /**
  * @author Michael Ruf
- * @since 2015-10-01
+ * @since 2015-11-16
  */
-public abstract class EventData {
+public enum Type {
+
+    KEY, MOUSE
 }
