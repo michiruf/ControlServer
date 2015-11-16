@@ -1,5 +1,6 @@
 rootProject.name = 'ControlsServer'
 include ':common'
+include ':common-example-events'
 include ':server'
 //include ':client'
 //include ':client-android'

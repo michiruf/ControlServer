@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import dagger.Module;
 import dagger.ObjectGraph;
+import de.michiruf.control_server.common.ExampleEvents;
 import de.michiruf.control_server.server.comm.Server;
 import io.vertx.core.Vertx;
 import io.vertx.core.buffer.Buffer;
@@ -62,7 +63,7 @@ public class ControlServerTest {
         });
     }
 
-    //@Test
+    @Test
     public void testKeyEvent(TestContext context) {
         Async async = context.async();
         WebSocketStream stream = createStream();
@@ -74,8 +75,7 @@ public class ControlServerTest {
             });
 
             String msg = ExampleEvents.keyEventString(objectMapper);
-            System.out.println(String.format("[Test] Sending message %s",
-                    msg));
+            System.out.println(String.format("[Test] Sending message %s", msg));
             webSocketHandler.write(Buffer.buffer(msg));
             async.complete();
         });
