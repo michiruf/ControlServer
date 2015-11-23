@@ -58,11 +58,10 @@ public class Event {
     @JsonIgnore
     @SuppressWarnings("unchecked")
     public <T> T getDataAs(Class<T> clazz) {
-        try {
+        if (getData().getClass() == clazz) {
             return (T) getData();
-        } catch (ClassCastException e) {
-            return null;
         }
+        return null;
     }
 
     @JsonIgnore

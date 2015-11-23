@@ -35,7 +35,7 @@ public class ExampleEvents {
         return new Event(
                 Type.MOUSE,
                 Direction.DOWN,
-                new MouseData(100, 100),
+                new MouseData(100, 100, MouseData.CoordinateType.RELATIVE),
                 new Date(System.currentTimeMillis()));
     }
 
