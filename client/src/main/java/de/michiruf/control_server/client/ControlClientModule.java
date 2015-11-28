@@ -1,7 +1,10 @@
 package de.michiruf.control_server.client;
 
 import dagger.Module;
+import dagger.Provides;
 import de.michiruf.control_server.client.comm.ClientModule;
+
+import javax.inject.Singleton;
 
 /**
  * @author Michael Ruf
@@ -14,4 +17,11 @@ import de.michiruf.control_server.client.comm.ClientModule;
         }
 )
 public class ControlClientModule {
+
+        @SuppressWarnings("unused")
+        @Provides
+        @Singleton
+        public Configuration provideDefaultConfiguration() {
+                return Configuration.DEFAULT;
+        }
 }

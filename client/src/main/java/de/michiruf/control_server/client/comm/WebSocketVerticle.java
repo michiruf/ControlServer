@@ -1,8 +1,9 @@
 package de.michiruf.control_server.client.comm;
 
-import de.michiruf.control_server.server.Configuration;
-import de.michiruf.control_server.server.robot.EventHandler;
+import de.michiruf.control_server.client.Configuration;
 import io.vertx.core.AbstractVerticle;
+import io.vertx.core.Handler;
+import io.vertx.core.http.WebSocket;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -14,18 +15,24 @@ import javax.inject.Singleton;
 @Singleton
 public class WebSocketVerticle extends AbstractVerticle {
 
-//    private final Configuration configuration;
+    private final Configuration configuration;
+    private final Handler<WebSocket> handler;
 
     @Inject
     public WebSocketVerticle(Configuration configuration) {
         super();
         this.configuration = configuration;
+        handler = new Handler<WebSocket>() {
+            @Override
+            public void handle(WebSocket event) {
+                // TODO bullshit
+            }
+        };
     }
 
     @Override
     public void start() throws Exception {
         super.start();
-
         vertx.createHttpClient().websocket("url", handler -> {
             handler.write(); // TODO
         });
