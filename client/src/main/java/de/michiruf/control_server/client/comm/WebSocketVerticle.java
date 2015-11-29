@@ -1,6 +1,7 @@
 package de.michiruf.control_server.client.comm;
 
 import de.michiruf.control_server.client.Configuration;
+import de.michiruf.control_server.client.dispatch.EventDispatcher;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Handler;
 import io.vertx.core.http.WebSocket;
@@ -16,31 +17,31 @@ import javax.inject.Singleton;
 public class WebSocketVerticle extends AbstractVerticle {
 
     private final Configuration configuration;
-    private final Handler<WebSocket> handler;
+    private final EventDispatcher eventDispatcher;
 
     @Inject
-    public WebSocketVerticle(Configuration configuration) {
+    public WebSocketVerticle(Configuration configuration, EventDispatcher eventDispatcher) {
         super();
         this.configuration = configuration;
-        handler = new Handler<WebSocket>() {
-            @Override
-            public void handle(WebSocket event) {
-                // TODO bullshit
-            }
-        };
+        this.eventDispatcher = eventDispatcher;
     }
 
     @Override
     public void start() throws Exception {
         super.start();
-        vertx.createHttpClient().websocket("url", handler -> {
-            handler.write(); // TODO
-        });
 
+        Handler<WebSocket> webSocketHandler = handler -> {
+            eventDispatcher.registerListener(() -> {
+                handler.writeFinalTextFrame(""); // TODO
+            });
+            handler.handler(event -> System.out.println(new String(event.getBytes())));
+            handler.closeHandler(event -> handler.close());
+        };
 
-//        vertx.createHttpServer().websocketHandler(handler -> {
-//            handler.handler(event -> eventHandler.handleStringEvent(new String(event.getBytes())));
-//            handler.closeHandler(event -> handler.close());
-//        }).listen(configuration.getPort());
+        vertx.createHttpClient().websocket(
+                configuration.getPort(),
+                configuration.getHost(),
+                "",
+                webSocketHandler);
     }
 }

@@ -31,7 +31,7 @@ public class Server {
                 System.out.println(String.format(
                         "[Server] STARTED on port %d", configuration.getPort()));
             } else if (event.cause() != null) {
-                System.out.println(String.format(
+                System.err.println(String.format(
                         "[Server] NOT STARTED on port %d", configuration.getPort()));
                 event.cause().printStackTrace();
             }

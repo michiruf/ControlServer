@@ -44,7 +44,9 @@ public class ControlServerTest {
 
     @After
     public void tearDown() {
-        server.stop();
+        if (server.isRunning()) {
+            server.stop();
+        }
     }
 
     private WebSocketStream createStream() {
