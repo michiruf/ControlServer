@@ -1,4 +1,4 @@
-package de.michiruf.control_server.server.robot;
+package de.michiruf.control_server.server.convert;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.michiruf.control_server.common.Event;

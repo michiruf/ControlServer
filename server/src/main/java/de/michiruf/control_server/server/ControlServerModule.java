@@ -3,6 +3,7 @@ package de.michiruf.control_server.server;
 import dagger.Module;
 import dagger.Provides;
 import de.michiruf.control_server.server.comm.ServerModule;
+import de.michiruf.control_server.server.convert.ConvertModule;
 import de.michiruf.control_server.server.robot.RobotModule;
 
 import javax.inject.Singleton;
@@ -14,6 +15,7 @@ import javax.inject.Singleton;
 @Module(
         includes = {
                 ServerModule.class,
+                ConvertModule.class,
                 RobotModule.class
         }
 )

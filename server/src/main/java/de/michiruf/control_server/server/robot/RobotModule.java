@@ -1,6 +1,5 @@
 package de.michiruf.control_server.server.robot;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import dagger.Module;
 import dagger.Provides;
 import de.michiruf.control_server.server.robot.controls.ExecutorModule;
@@ -15,11 +14,11 @@ import java.awt.Robot;
  */
 @Module(
         injects = {
-                EventHandler.class,
-                StringEventParser.class
+                EventHandler.class
         },
         includes = ExecutorModule.class,
-        library = true
+        library = true,
+        complete = false
 )
 public class RobotModule {
 
@@ -33,12 +32,5 @@ public class RobotModule {
             e.printStackTrace();
         }
         return null;
-    }
-
-    @SuppressWarnings("unused")
-    @Provides
-    @Singleton
-    public ObjectMapper provideObjectMapper() {
-        return new ObjectMapper();
     }
 }
