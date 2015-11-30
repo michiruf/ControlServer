@@ -1,5 +1,7 @@
 package de.michiruf.control_server.client.dispatch;
 
+import de.michiruf.control_server.common.Event;
+
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.util.ArrayList;
@@ -19,9 +21,9 @@ public class EventDispatcher {
         listeners = new ArrayList<>();
     }
 
-    public void dispatch() {
-        for(EventDispatchListener listener : listeners) {
-            listener.onEvent(); // TODO add Event!
+    public void dispatch(Event event) {
+        for (EventDispatchListener listener : listeners) {
+            listener.onEvent(event);
         }
     }
 
@@ -31,6 +33,6 @@ public class EventDispatcher {
 
     public interface EventDispatchListener {
 
-        void onEvent(); // TODO add Event!
+        void onEvent(Event event);
     }
 }

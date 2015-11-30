@@ -2,6 +2,7 @@ package de.michiruf.control_server.client.comm;
 
 import dagger.Module;
 import dagger.Provides;
+import de.michiruf.control_server.client.convert.EventStringConverter;
 import io.vertx.core.Vertx;
 
 import javax.inject.Singleton;
@@ -13,6 +14,7 @@ import javax.inject.Singleton;
 @Module(
         injects = {
                 Client.class,
+                EventStringConverter.class,
                 WebSocketVerticle.class
         },
         library = true,

@@ -4,6 +4,7 @@ import dagger.Module;
 import dagger.ObjectGraph;
 import de.michiruf.control_server.client.comm.Client;
 import de.michiruf.control_server.client.dispatch.EventDispatcher;
+import de.michiruf.control_server.common.ExampleEvents;
 import io.vertx.core.Vertx;
 import io.vertx.core.http.HttpServer;
 import io.vertx.ext.unit.Async;
@@ -52,29 +53,13 @@ public class ControlClientTest {
             System.out.println(String.format("[Test] Server received message: %s", msg));
         })).listen(configuration.getPort());
         client.connect();
-        eventDispatcher.dispatch();// TODO event
+        eventDispatcher.dispatch(ExampleEvents.keyEvent());
         client.disconnect();
         server.close();
         async.complete();
     }
 
-//    @Test
-//    public void testMouseEvent(TestContext context) {
-//        Async async = context.async();
-//        WebSocketStream stream = createServer();
-//        stream.handler(webSocketHandler -> {
-//            webSocketHandler.handler(event -> {
-//                String eventLog = String.format("[Test] Handler got event: %s",
-//                        event.getString(0, event.length()));
-//                System.out.println(eventLog);
-//            });
-//
-//            String msg = ExampleEvents.mouseEventString(objectMapper);
-//            System.out.println(String.format("[Test] Sending message %s", msg));
-//            webSocketHandler.write(Buffer.buffer(msg));
-//            async.complete();
-//        });
-//    }
+    // TODO testMouseEvent()
 
     @Module(
             injects = ControlClientTest.class,
