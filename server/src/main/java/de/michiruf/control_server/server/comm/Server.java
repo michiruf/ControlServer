@@ -1,6 +1,6 @@
 package de.michiruf.control_server.server.comm;
 
-import de.michiruf.control_server.server.Configuration;
+import de.michiruf.control_server.server.config.Configuration;
 import io.vertx.core.Vertx;
 
 import javax.inject.Inject;

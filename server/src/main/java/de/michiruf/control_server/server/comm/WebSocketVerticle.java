@@ -1,6 +1,6 @@
 package de.michiruf.control_server.server.comm;
 
-import de.michiruf.control_server.server.Configuration;
+import de.michiruf.control_server.server.config.Configuration;
 import de.michiruf.control_server.server.robot.EventHandler;
 import io.vertx.core.AbstractVerticle;
 

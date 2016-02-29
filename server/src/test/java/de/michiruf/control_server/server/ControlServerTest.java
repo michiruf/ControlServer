@@ -4,8 +4,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import dagger.Module;
 import dagger.ObjectGraph;
+import dagger.Provides;
 import de.michiruf.control_server.common.ExampleEvents;
 import de.michiruf.control_server.server.comm.Server;
+import de.michiruf.control_server.server.config.Configuration;
+import de.michiruf.control_server.server.config.DefaultConfiguration;
 import io.vertx.core.Vertx;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.http.WebSocketStream;
@@ -18,6 +21,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 /**
  * @author Michael Ruf
@@ -107,5 +111,12 @@ public class ControlServerTest {
             overrides = true
     )
     public static class TestModule {
+        
+        @SuppressWarnings("unused")
+        @Provides
+        @Singleton
+        public Configuration provideConfiguration() {
+            return new DefaultConfiguration(12345);
+        }
     }
 }

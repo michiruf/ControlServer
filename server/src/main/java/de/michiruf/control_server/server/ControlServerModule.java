@@ -1,12 +1,10 @@
 package de.michiruf.control_server.server;
 
 import dagger.Module;
-import dagger.Provides;
 import de.michiruf.control_server.server.comm.ServerModule;
+import de.michiruf.control_server.server.config.Configuration;
 import de.michiruf.control_server.server.convert.ConvertModule;
 import de.michiruf.control_server.server.robot.RobotModule;
-
-import javax.inject.Singleton;
 
 /**
  * @author Michael Ruf
@@ -17,14 +15,11 @@ import javax.inject.Singleton;
                 ServerModule.class,
                 ConvertModule.class,
                 RobotModule.class
-        }
+        },
+        injects = {
+                Configuration.class
+        },
+        complete = false
 )
 public class ControlServerModule {
-
-    @SuppressWarnings("unused")
-    @Provides
-    @Singleton
-    public Configuration provideDefaultConfiguration() {
-        return Configuration.DEFAULT;
-    }
 }
