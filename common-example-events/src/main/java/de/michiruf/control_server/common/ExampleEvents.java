@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import de.michiruf.control_server.common.data.KeyData;
 import de.michiruf.control_server.common.data.MouseData;
 
+import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.util.Date;
 
@@ -35,7 +36,7 @@ public class ExampleEvents {
         return new Event(
                 Type.MOUSE,
                 Direction.DOWN,
-                new MouseData(100, 100, MouseData.CoordinateType.RELATIVE),
+                new MouseData(100, 100, InputEvent.BUTTON1_MASK, MouseData.CoordinateType.RELATIVE),
                 new Date(System.currentTimeMillis()));
     }
 

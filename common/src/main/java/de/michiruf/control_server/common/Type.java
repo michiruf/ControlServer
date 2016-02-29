@@ -6,5 +6,5 @@ package de.michiruf.control_server.common;
  */
 public enum Type {
 
-    KEY, MOUSE
+    KEY, MOUSE, UNDEFINED
 }

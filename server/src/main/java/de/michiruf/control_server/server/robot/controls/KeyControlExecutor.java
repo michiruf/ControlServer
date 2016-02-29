@@ -30,6 +30,7 @@ public class KeyControlExecutor implements ControlExecutor {
         KeyData data = event.getDataAs(KeyData.class);
         System.out.println(String.format(
                 "[Server] KeyControlExecutor got key: %s", data.getKey()));
+
         switch (event.getDirection()) {
             case DOWN:
                 robot.keyPress(data.getKey());

@@ -1,5 +1,6 @@
 package de.michiruf.control_server.server.robot.controls;
 
+import de.michiruf.control_server.common.Direction;
 import de.michiruf.control_server.common.Event;
 import de.michiruf.control_server.common.Type;
 import de.michiruf.control_server.common.data.MouseData;
@@ -16,6 +17,7 @@ import java.awt.Robot;
 public class MouseControlExecutor implements ControlExecutor {
 
     private final Robot robot;
+    private Direction lastDirection;
 
     @Inject
     public MouseControlExecutor(Robot robot) {
@@ -31,14 +33,20 @@ public class MouseControlExecutor implements ControlExecutor {
         System.out.println(String.format(
                 "[Server] MouseControlExecutor got x: %s, y: %s",
                 data.getMouseX(), data.getMouseY()));
-        switch (event.getDirection()) {
-            case DOWN:
-                robot.mouseMove(data.getMouseX(), data.getMouseY());
-                break;
-            case UP:
-                // TODO
-                break;
+
+        robot.mouseMove(data.getMouseX(), data.getMouseY());
+
+        if (event.getDirection() != Direction.UNDEFINED && event.getDirection() != lastDirection) {
+            switch (event.getDirection()) {
+                case DOWN:
+                    robot.mousePress(data.getButton());
+                    break;
+                case UP:
+                    robot.mouseRelease(data.getButton());
+                    break;
+            }
         }
+
         return false;
     }
 }

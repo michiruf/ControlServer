@@ -12,6 +12,8 @@ public class MouseData {
     private int mouseX;
     @JsonProperty("mouseY")
     private int mouseY;
+    @JsonProperty("button")
+    private int button;
     @JsonProperty("coordinateType")
     private CoordinateType coordinateType;
 
@@ -19,9 +21,10 @@ public class MouseData {
     protected MouseData() {
     }
 
-    public MouseData(int mouseX, int mouseY, CoordinateType coordinateType) {
+    public MouseData(int mouseX, int mouseY, int button, CoordinateType coordinateType) {
         this.mouseX = mouseX;
         this.mouseY = mouseY;
+        this.button = button;
         this.coordinateType = coordinateType;
     }
 
@@ -31,6 +34,10 @@ public class MouseData {
 
     public int getMouseY() {
         return mouseY;
+    }
+
+    public int getButton() {
+        return button;
     }
 
     public CoordinateType getCoordinateType() {
