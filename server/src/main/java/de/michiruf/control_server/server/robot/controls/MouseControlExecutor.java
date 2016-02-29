@@ -2,7 +2,6 @@ package de.michiruf.control_server.server.robot.controls;
 
 import de.michiruf.control_server.common.Direction;
 import de.michiruf.control_server.common.Event;
-import de.michiruf.control_server.common.Type;
 import de.michiruf.control_server.common.data.MouseData;
 
 import javax.inject.Inject;
@@ -25,7 +24,7 @@ public class MouseControlExecutor implements ControlExecutor {
     }
 
     public boolean perform(Event event) {
-        if (event.getType() != Type.MOUSE) {
+        if (!(event.getData() instanceof MouseData)) {
             return false;
         }
 

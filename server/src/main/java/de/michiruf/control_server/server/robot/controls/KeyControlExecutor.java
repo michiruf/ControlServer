@@ -1,7 +1,6 @@
 package de.michiruf.control_server.server.robot.controls;
 
 import de.michiruf.control_server.common.Event;
-import de.michiruf.control_server.common.Type;
 import de.michiruf.control_server.common.data.KeyData;
 
 import javax.inject.Inject;
@@ -23,7 +22,7 @@ public class KeyControlExecutor implements ControlExecutor {
     }
 
     public boolean perform(Event event) {
-        if (event.getType() != Type.KEY) {
+        if (!(event.getData() instanceof KeyData)) {
             return false;
         }
 

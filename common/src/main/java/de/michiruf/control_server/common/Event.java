@@ -15,8 +15,6 @@ import java.util.Date;
  */
 public class Event {
 
-    @JsonProperty("type")
-    private Type type;
     @JsonProperty("direction")
     private Direction direction;
     @JsonProperty("data")
@@ -33,15 +31,10 @@ public class Event {
     protected Event() {
     }
 
-    public Event(Type type, Direction direction, Object data, Date date) {
-        this.type = type;
+    public Event(Direction direction, Object data, Date date) {
         this.direction = direction;
         this.data = data;
         this.time = date;
-    }
-
-    public Type getType() {
-        return type;
     }
 
     public Direction getDirection() {
