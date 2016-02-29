@@ -1,13 +1,12 @@
 package de.michiruf.control_server.common.data;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import de.michiruf.control_server.common.EventData;
 
 /**
  * @author Michael Ruf
  * @since 2015-11-16
  */
-public class KeyData extends EventData {
+public class KeyData {
 
     @JsonProperty("key")
     private int key;

@@ -25,7 +25,7 @@ public class Event {
             @JsonSubTypes.Type(KeyData.class),
             @JsonSubTypes.Type(MouseData.class)
     })
-    private EventData data;
+    private Object data;
     @JsonProperty("time")
     private Date time;
 
@@ -33,7 +33,7 @@ public class Event {
     protected Event() {
     }
 
-    public Event(Type type, Direction direction, EventData data, Date date) {
+    public Event(Type type, Direction direction, Object data, Date date) {
         this.type = type;
         this.direction = direction;
         this.data = data;
@@ -48,12 +48,12 @@ public class Event {
         return direction;
     }
 
-    public EventData getData() {
+    public Object getData() {
         return data;
     }
 
-    @JsonIgnore
     @SuppressWarnings("unchecked")
+    @JsonIgnore
     public <T> T getDataAs(Class<T> clazz) {
         if (getData().getClass() == clazz) {
             return (T) getData();

@@ -6,5 +6,5 @@ package de.michiruf.control_server.common;
  */
 public enum Direction {
 
-    UP, DOWN
+    UP, DOWN, UNDEFINED
 }
