@@ -17,7 +17,6 @@ public class ExampleEvents {
 
     public static Event keyEvent() {
         return new Event(
-                Type.KEY,
                 Direction.DOWN,
                 new KeyData(KeyEvent.VK_W),
                 new Date(System.currentTimeMillis()));
@@ -34,7 +33,6 @@ public class ExampleEvents {
 
     public static Event mouseEvent() {
         return new Event(
-                Type.MOUSE,
                 Direction.DOWN,
                 new MouseData(100, 100, InputEvent.BUTTON1_MASK, MouseData.CoordinateType.RELATIVE),
                 new Date(System.currentTimeMillis()));
