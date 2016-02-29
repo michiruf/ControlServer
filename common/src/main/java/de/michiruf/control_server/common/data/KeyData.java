@@ -1,6 +1,5 @@
 package de.michiruf.control_server.common.data;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import de.michiruf.control_server.common.EventData;
 
@@ -13,15 +12,14 @@ public class KeyData extends EventData {
     @JsonProperty("key")
     private int key;
 
+    @SuppressWarnings("unused") // for jackson
     protected KeyData() {
-        // For jackson
     }
 
     public KeyData(int key) {
         this.key = key;
     }
 
-    @JsonIgnore
     public int getKey() {
         return key;
     }

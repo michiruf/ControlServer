@@ -29,8 +29,8 @@ public class Event {
     @JsonProperty("time")
     private Date time;
 
+    @SuppressWarnings("unused") // for jackson
     protected Event() {
-        // For jackson
     }
 
     public Event(Type type, Direction direction, EventData data, Date date) {
@@ -40,17 +40,14 @@ public class Event {
         this.time = date;
     }
 
-    @JsonIgnore
     public Type getType() {
         return type;
     }
 
-    @JsonIgnore
     public Direction getDirection() {
         return direction;
     }
 
-    @JsonIgnore
     public EventData getData() {
         return data;
     }
@@ -64,7 +61,6 @@ public class Event {
         return null;
     }
 
-    @JsonIgnore
     public Date getTime() {
         return time;
     }

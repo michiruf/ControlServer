@@ -1,6 +1,5 @@
 package de.michiruf.control_server.common.data;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import de.michiruf.control_server.common.EventData;
 
@@ -17,8 +16,8 @@ public class MouseData extends EventData {
     @JsonProperty("coordinateType")
     private CoordinateType coordinateType;
 
+    @SuppressWarnings("unused") // for jackson
     protected MouseData() {
-        // For jackson
     }
 
     public MouseData(int mouseX, int mouseY, CoordinateType coordinateType) {
@@ -27,17 +26,14 @@ public class MouseData extends EventData {
         this.coordinateType = coordinateType;
     }
 
-    @JsonIgnore
     public int getMouseX() {
         return mouseX;
     }
 
-    @JsonIgnore
     public int getMouseY() {
         return mouseY;
     }
 
-    @JsonIgnore
     public CoordinateType getCoordinateType() {
         return coordinateType;
     }
