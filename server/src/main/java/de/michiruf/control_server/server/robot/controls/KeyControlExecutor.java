@@ -32,10 +32,10 @@ public class KeyControlExecutor implements ControlExecutor {
                 "[Server] KeyControlExecutor got key: %s", data.getKey()));
         switch (event.getDirection()) {
             case DOWN:
-                robot.keyPress(data.getKey()); // TODO events get not called? -- They do?!
+                robot.keyPress(data.getKey());
                 break;
             case UP:
-                robot.keyRelease(data.getKey()); // TODO
+                robot.keyRelease(data.getKey());
                 break;
         }
 
