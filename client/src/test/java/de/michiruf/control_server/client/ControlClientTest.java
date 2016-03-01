@@ -3,6 +3,7 @@ package de.michiruf.control_server.client;
 import dagger.Module;
 import dagger.ObjectGraph;
 import de.michiruf.control_server.client.comm.Client;
+import de.michiruf.control_server.client.config.Configuration;
 import de.michiruf.control_server.client.dispatch.EventDispatcher;
 import de.michiruf.control_server.common.ExampleEvents;
 import io.vertx.core.Vertx;

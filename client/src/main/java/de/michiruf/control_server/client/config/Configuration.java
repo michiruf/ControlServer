@@ -1,4 +1,4 @@
-package de.michiruf.control_server.client;
+package de.michiruf.control_server.client.config;
 
 /**
  * @author Michael Ruf

@@ -16,9 +16,6 @@ import de.michiruf.control_server.server.robot.RobotModule;
                 ConvertModule.class,
                 RobotModule.class
         },
-        injects = {
-                Configuration.class
-        },
         complete = false
 )
 public class ControlServerModule {
