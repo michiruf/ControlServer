@@ -8,7 +8,7 @@ import dagger.Module;
  */
 @Module(
         injects = {
-
+                Capture.class
         },
         library = true
 )

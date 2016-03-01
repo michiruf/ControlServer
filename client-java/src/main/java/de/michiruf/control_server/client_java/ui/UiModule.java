@@ -2,12 +2,12 @@ package de.michiruf.control_server.client_java.ui;
 
 import dagger.Module;
 import dagger.Provides;
-import de.michiruf.control_server.client_java.JavaControlClient;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
 import javax.swing.ImageIcon;
 import java.awt.Image;
+import java.net.URL;
 
 /**
  * @author Michael Ruf
@@ -26,14 +26,15 @@ public class UiModule {
     @Provides
     @Named("iconPath")
     public String provideIconPath() {
-        return ""; // TODO
+        return "TrayControlIcon.png";
     }
 
     @SuppressWarnings("unused")
     @Provides
     @Singleton
     public Image provideIconImage(@Named("iconPath") String iconPath) {
-        ImageIcon imageIcon = new ImageIcon(JavaControlClient.class.getResource(iconPath), null);
+        URL iconUri = getClass().getClassLoader().getResource(iconPath);
+        ImageIcon imageIcon = new ImageIcon(iconUri, null);
         return imageIcon.getImage();
     }
 }

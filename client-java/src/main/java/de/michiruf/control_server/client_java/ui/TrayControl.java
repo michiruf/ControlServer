@@ -1,9 +1,13 @@
 package de.michiruf.control_server.client_java.ui;
 
+import de.michiruf.control_server.client_java.capture.Capture;
+
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.awt.AWTException;
 import java.awt.Image;
+import java.awt.MenuItem;
+import java.awt.PopupMenu;
 import java.awt.SystemTray;
 import java.awt.TrayIcon;
 import java.awt.event.MouseEvent;
@@ -19,12 +23,12 @@ public class TrayControl {
     private final TrayIcon icon;
 
     @Inject
-    public TrayControl(Image iconImage, SettingsFrame settingsFrame) {
+    public TrayControl(Image iconImage, SettingsFrame settingsFrame, Capture capture) {
         icon = new TrayIcon(iconImage);
         icon.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                settingsFrame.setVisible(!settingsFrame.isShowing());
+                capture.setActive(!capture.isActive());
             }
 
             @Override
@@ -43,6 +47,21 @@ public class TrayControl {
             public void mouseExited(MouseEvent e) {
             }
         });
+
+        PopupMenu menu = new PopupMenu();
+        icon.setPopupMenu(menu);
+
+        MenuItem item1 = new MenuItem("Capture");
+        item1.addActionListener(e -> capture.setActive(!capture.isActive()));
+        menu.add(item1);
+
+        MenuItem item2 = new MenuItem("Settings");
+        item2.addActionListener(e -> settingsFrame.setVisible(!settingsFrame.isShowing()));
+        menu.add(item2);
+
+        MenuItem item3 = new MenuItem("Exit");
+        item3.addActionListener(e -> System.exit(0));
+        menu.add(item3);
     }
 
     public void show() {
