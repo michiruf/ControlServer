@@ -28,7 +28,9 @@ public class TrayControl {
         icon.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                capture.setActive(!capture.isActive());
+                if (e.getButton() == MouseEvent.BUTTON1) {
+                    capture.setActive(!capture.isActive());
+                }
             }
 
             @Override
@@ -54,6 +56,7 @@ public class TrayControl {
         MenuItem item1 = new MenuItem("Capture");
         item1.addActionListener(e -> capture.setActive(!capture.isActive()));
         menu.add(item1);
+        menu.addSeparator();
 
         MenuItem item2 = new MenuItem("Settings");
         item2.addActionListener(e -> settingsFrame.setVisible(!settingsFrame.isShowing()));
