@@ -3,6 +3,7 @@ package de.michiruf.control_server.client_java.capture;
 import de.michiruf.control_server.client.dispatch.EventDispatcher;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -12,6 +13,7 @@ import java.awt.event.KeyListener;
  */
 // TODO
 // NOTE we want to exit capturing when pressing CTRL + ESC
+@Singleton
 public class KeyCaptureListener implements KeyListener {
 
     private final EventDispatcher dispatcher;

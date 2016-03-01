@@ -28,6 +28,15 @@ public class CaptureFrame extends JFrame {
         addMouseListener(mouseCaptureListener);
     }
 
+    @Override
+    public void setVisible(boolean visible) {
+        super.setVisible(visible);
+
+        if (visible) {
+            requestFocus();
+        }
+    }
+
     public static class TranslucentPane extends JPanel {
 
         public TranslucentPane() {
@@ -41,15 +50,6 @@ public class CaptureFrame extends JFrame {
             Graphics2D g2d = (Graphics2D) g.create();
             g2d.setColor(new Color(0, 0, 0, 100));
             g2d.fillRect(0, 0, getWidth(), getHeight());
-        }
-    }
-
-    @Override
-    public void setVisible(boolean visible) {
-        super.setVisible(visible);
-
-        if (visible) {
-            requestFocus();
         }
     }
 }

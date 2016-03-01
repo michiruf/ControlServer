@@ -6,7 +6,7 @@ package de.michiruf.control_server.server.config;
  */
 public class DefaultConfiguration implements Configuration {
 
-    private int port;
+    private final int port;
 
     public DefaultConfiguration(int port) {
         this.port = port;

@@ -6,8 +6,8 @@ package de.michiruf.control_server.client.config;
  */
 public class DefaultConfiguration implements Configuration {
 
-    private String host;
-    private int port;
+    private final String host;
+    private final int port;
 
     public DefaultConfiguration(String host, int port) {
         this.host = host;

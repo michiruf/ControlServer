@@ -3,6 +3,7 @@ package de.michiruf.control_server.client_java.capture;
 import de.michiruf.control_server.client.dispatch.EventDispatcher;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -11,6 +12,7 @@ import java.awt.event.MouseListener;
  * @since 2016-03-01
  */
 // TODO
+@Singleton
 public class MouseCaptureListener implements MouseListener {
 
     private final EventDispatcher dispatcher;
