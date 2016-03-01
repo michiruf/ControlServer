@@ -8,7 +8,10 @@ import dagger.Module;
  */
 @Module(
         injects = {
-                Capture.class
+                Capture.class,
+                CaptureFrame.class,
+                KeyCaptureListener.class,
+                MouseCaptureListener.class
         },
         library = true
 )
