@@ -1,15 +1,14 @@
 package de.michiruf.control_server.client_java;
 
 import dagger.ObjectGraph;
-import de.michiruf.control_server.client.comm.Client;
-import de.michiruf.control_server.client_java.ui.TrayMenu;
+import de.michiruf.control_server.client_java.ui.TrayControl;
 
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
 /**
  * @author Michael Ruf
- * @since 2015-11-14
+ * @since 2016-03-01
  */
 public class JavaControlClient {
 
@@ -22,8 +21,8 @@ public class JavaControlClient {
 
         SwingUtilities.invokeLater(() -> {
             ObjectGraph appGraph = ObjectGraph.create(new JavaControlClientModule());
-            TrayMenu trayMenu = appGraph.get(TrayMenu.class);
-            trayMenu.show();
+            TrayControl trayControl = appGraph.get(TrayControl.class);
+            trayControl.show();
         });
     }
 }
