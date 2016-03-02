@@ -9,7 +9,8 @@ import dagger.Module;
 @Module(
         injects = {
                 EventDispatcher.class
-        }
+        },
+        library = true
 )
 public class DispatchModule {
 }

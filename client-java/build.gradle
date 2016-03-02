@@ -7,16 +7,14 @@ sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
 dependencies {
-    testCompile 'junit:junit4.11'
+    testCompile 'junit:junit:4.12'
 
     compile project(':client')
 
+    compile 'com.squareup.dagger:dagger:1.2.2'
     provided('com.squareup.dagger:dagger-compiler:1.2.2') {
         // Due to dagger itself shell not be provided
         // (at least IntelliJ IDEA displays this as provided if not excluded)
         exclude group: 'com.squareup.dagger', module: 'dagger'
     }
 }
-
-
-

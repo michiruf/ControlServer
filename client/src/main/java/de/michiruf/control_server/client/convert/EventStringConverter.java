@@ -14,7 +14,7 @@ import javax.inject.Singleton;
 @Singleton
 public class EventStringConverter {
 
-    private ObjectMapper objectMapper;
+    private final ObjectMapper objectMapper;
 
     @Inject
     public EventStringConverter(ObjectMapper objectMapper) {

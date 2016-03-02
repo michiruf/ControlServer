@@ -14,7 +14,6 @@ import javax.inject.Singleton;
 @Module(
         injects = {
                 Client.class,
-                EventStringConverter.class,
                 WebSocketVerticle.class
         },
         library = true,

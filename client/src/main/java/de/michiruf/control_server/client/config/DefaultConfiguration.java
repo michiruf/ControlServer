@@ -1,4 +1,4 @@
-package de.michiruf.control_server.server.config;
+package de.michiruf.control_server.client.config;
 
 /**
  * @author Michael Ruf
@@ -6,10 +6,17 @@ package de.michiruf.control_server.server.config;
  */
 public class DefaultConfiguration implements Configuration {
 
+    private final String host;
     private final int port;
 
-    public DefaultConfiguration(int port) {
+    public DefaultConfiguration(String host, int port) {
+        this.host = host;
         this.port = port;
+    }
+
+    @Override
+    public String getHost() {
+        return host;
     }
 
     @Override

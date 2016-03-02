@@ -14,7 +14,7 @@ import java.io.IOException;
 @Singleton
 public class StringEventParser {
 
-    private ObjectMapper objectMapper;
+    private final ObjectMapper objectMapper;
 
     @Inject
     public StringEventParser(ObjectMapper objectMapper) {

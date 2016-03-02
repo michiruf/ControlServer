@@ -15,8 +15,8 @@ import java.util.List;
 @Singleton
 public class EventHandler {
 
-    private List<ControlExecutor> controlExecutors;
-    private StringEventParser stringEventParser;
+    private final List<ControlExecutor> controlExecutors;
+    private final StringEventParser stringEventParser;
 
     @Inject
     public EventHandler(List<ControlExecutor> controlExecutors,
