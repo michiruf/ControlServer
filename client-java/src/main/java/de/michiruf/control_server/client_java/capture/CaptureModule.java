@@ -13,7 +13,8 @@ import dagger.Module;
                 KeyCaptureListener.class,
                 MouseCaptureListener.class
         },
-        library = true
+        library = true,
+        complete = false
 )
 public class CaptureModule {
 }

@@ -18,7 +18,8 @@ import java.net.URL;
                 SettingsFrame.class,
                 TrayControl.class
         },
-        library = true
+        library = true,
+        complete = false
 )
 public class UiModule {
 
