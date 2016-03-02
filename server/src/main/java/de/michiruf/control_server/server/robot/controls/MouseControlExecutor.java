@@ -7,6 +7,7 @@ import de.michiruf.control_server.common.data.MouseData;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.awt.Robot;
+import java.awt.event.InputEvent;
 
 /**
  * @author Michael Ruf
@@ -16,7 +17,6 @@ import java.awt.Robot;
 public class MouseControlExecutor implements ControlExecutor {
 
     private final Robot robot;
-    private Direction lastDirection;
 
     @Inject
     public MouseControlExecutor(Robot robot) {
@@ -35,17 +35,17 @@ public class MouseControlExecutor implements ControlExecutor {
 
         robot.mouseMove(data.getMouseX(), data.getMouseY());
 
-        if (event.getDirection() != Direction.UNDEFINED && event.getDirection() != lastDirection) {
+        if (event.getDirection() != Direction.UNDEFINED && data.getButton() != 0) {
             switch (event.getDirection()) {
                 case DOWN:
-                    robot.mousePress(data.getButton());
+                    robot.mousePress(InputEvent.getMaskForButton(data.getButton()));
                     break;
                 case UP:
-                    robot.mouseRelease(data.getButton());
+                    robot.mouseRelease(InputEvent.getMaskForButton(data.getButton()));
                     break;
             }
         }
 
-        return false;
+        return true;
     }
 }

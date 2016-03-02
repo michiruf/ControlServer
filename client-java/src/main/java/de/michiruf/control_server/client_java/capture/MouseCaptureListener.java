@@ -82,6 +82,9 @@ public class MouseCaptureListener extends MouseAdapter {
     public void mouseWheelMoved(MouseWheelEvent e) {
         System.out.println("mouseWheelMoved");
 
-        // TODO
+        dispatcher.dispatch(new Event(
+                Direction.DOWN,
+                new MouseData(e.getX(), e.getY(), e.getButton(), MouseData.CoordinateType.ABSOLUTE),
+                new Date(System.currentTimeMillis())));
     }
 }
