@@ -26,6 +26,8 @@ public class CaptureFrame extends JFrame {
 
         addKeyListener(keyCaptureListener);
         addMouseListener(mouseCaptureListener);
+        addMouseMotionListener(mouseCaptureListener);
+        addMouseWheelListener(mouseCaptureListener);
     }
 
     @Override
