@@ -1,6 +1,9 @@
 package de.michiruf.control_server.client_java.ui;
 
 import de.michiruf.control_server.client_java.config.JavaClientConfiguration;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.scene.control.TextField;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -12,20 +15,18 @@ import javax.inject.Singleton;
 @Singleton
 public class SettingsController {
 
-    public static SettingsController INSTANCE;
-
     private JavaClientConfiguration configuration;
 
-    public SettingsController() {
-    }
+    @FXML
+    private TextField actiontarget;
 
     @Inject
     public SettingsController(JavaClientConfiguration configuration) {
-        INSTANCE = this;
         this.configuration = configuration;
+    }
 
-//        setSize(300, 500);
-//        int x = Toolkit.getDefaultToolkit().getScreenSize().width / 2 - getSize().width / 2;
-//        int y = Toolkit.getDefaultToolkit().getScreenSize().height / 2 - getSize().height / 2;
+    @FXML
+    protected void handleSubmitButtonAction(ActionEvent event) {
+        actiontarget.setText("Sign in button pressed");
     }
 }

@@ -11,6 +11,7 @@ import javax.inject.Named;
  */
 @Module(
         injects = {
+                SettingsController.class,
                 SettingsPresenter.class,
                 TrayControl.class,
                 TrayControlIconFactory.class

@@ -1,6 +1,5 @@
 package de.michiruf.control_server.client_java.ui;
 
-import de.michiruf.control_server.client_java.config.JavaClientConfiguration;
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import javafx.fxml.FXMLLoader;
@@ -10,6 +9,7 @@ import javafx.scene.Scene;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.swing.JFrame;
+import javax.swing.WindowConstants;
 import java.awt.Toolkit;
 import java.io.IOException;
 
@@ -19,31 +19,27 @@ import java.io.IOException;
  */
 public class SettingsPresenter extends JFrame {
 
-    private final JavaClientConfiguration configuration;
-    private final String settingsFxml;
-
     @Inject
-    public SettingsPresenter(JavaClientConfiguration configuration, @Named("settingsFxml") String settingsFxml) {
-        this.configuration = configuration;
-        this.settingsFxml = settingsFxml;
-
+    public SettingsPresenter(SettingsController controller, @Named("settingsFxml") String settingsFxml) {
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE); // TODO HIDE_ON_CLOSE
         setSize(300, 500);
         int x = Toolkit.getDefaultToolkit().getScreenSize().width / 2 - getSize().width / 2;
         int y = Toolkit.getDefaultToolkit().getScreenSize().height / 2 - getSize().height / 2;
         setLocation(x, y);
 
-        initializeFx();
+        initializeFx(controller, settingsFxml);
     }
 
-    private void initializeFx() {
+    private void initializeFx(SettingsController controller, String settingsFxml) {
         JFXPanel jfxPanel = new JFXPanel();
         add(jfxPanel);
 
         Platform.runLater(() -> {
             try {
-                @SuppressWarnings("ConstantConditions")
-                Parent rootNode = FXMLLoader.load(getClass().getClassLoader().getResource(settingsFxml));
-                jfxPanel.setScene(new Scene(rootNode));
+                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(settingsFxml));
+                loader.setController(controller);
+                Parent root = loader.load();
+                jfxPanel.setScene(new Scene(root));
             } catch (IOException e) {
                 e.printStackTrace();
             }

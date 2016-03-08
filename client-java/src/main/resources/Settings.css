@@ -1,0 +1,7 @@
+.root {
+    -fx-background-color: grey;
+}
+
+#welcome-text {
+    -fx-font-size: 12px;
+}
