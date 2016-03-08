@@ -33,6 +33,8 @@ public class MouseControlExecutor implements ControlExecutor {
                 "[Server] MouseControlExecutor got x: %s, y: %s",
                 data.getMouseX(), data.getMouseY()));
 
+        // TODO CoordinateType!
+
         robot.mouseMove(data.getMouseX(), data.getMouseY());
 
         if (event.getDirection() != Direction.UNDEFINED && data.getButton() != 0) {

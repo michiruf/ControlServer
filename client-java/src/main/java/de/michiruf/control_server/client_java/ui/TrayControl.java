@@ -1,6 +1,7 @@
 package de.michiruf.control_server.client_java.ui;
 
 import de.michiruf.control_server.client_java.capture.Capture;
+import de.michiruf.control_server.client_java.config.JavaClientConfiguration;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -21,15 +22,27 @@ import java.awt.event.MouseListener;
 public class TrayControl {
 
     private final TrayIcon icon;
+    private final Capture capture;
+    private final SettingsFrame settingsFrame;
+    private final JavaClientConfiguration configuration;
 
     @Inject
-    public TrayControl(Image iconImage, SettingsFrame settingsFrame, Capture capture) {
+    public TrayControl(Image iconImage, Capture capture, SettingsFrame settingsFrame,
+                       JavaClientConfiguration configuration) {
+        this.capture = capture;
+        this.settingsFrame = settingsFrame;
+        this.configuration = configuration;
         icon = new TrayIcon(iconImage);
+
+        draw();
+    }
+
+    private void draw() {
         icon.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (e.getButton() == MouseEvent.BUTTON1) {
-                    capture.setActive(!capture.isActive());
+                    toggleCapturing();
                 }
             }
 
@@ -54,12 +67,12 @@ public class TrayControl {
         icon.setPopupMenu(menu);
 
         MenuItem item1 = new MenuItem("Capture");
-        item1.addActionListener(e -> capture.setActive(!capture.isActive()));
+        item1.addActionListener(e -> toggleCapturing());
         menu.add(item1);
         menu.addSeparator();
 
         MenuItem item2 = new MenuItem("Settings");
-        item2.addActionListener(e -> settingsFrame.setVisible(!settingsFrame.isShowing()));
+        item2.addActionListener(e -> toggleSettings());
         menu.add(item2);
 
         MenuItem item3 = new MenuItem("Exit");
@@ -77,5 +90,18 @@ public class TrayControl {
 
     public void hide() {
         SystemTray.getSystemTray().remove(icon);
+    }
+
+    private void toggleCapturing() {
+        if (!configuration.isProperlyConfigured()) {
+            toggleSettings();
+            return;
+        }
+
+        capture.setActive(!capture.isActive());
+    }
+
+    private void toggleSettings() {
+        settingsFrame.setVisible(!settingsFrame.isShowing());
     }
 }

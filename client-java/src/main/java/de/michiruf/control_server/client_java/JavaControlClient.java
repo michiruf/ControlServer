@@ -14,7 +14,10 @@ public class JavaControlClient {
 
     public static void main(String[] args) {
         try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            //UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            // TODO Just a try:
+            UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
+            // TODO Try synth?
         } catch (Exception e) {
             e.printStackTrace();
         }
