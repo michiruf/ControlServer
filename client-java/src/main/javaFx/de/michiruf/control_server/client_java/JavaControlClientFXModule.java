@@ -20,8 +20,7 @@ import javax.inject.Singleton;
                 CaptureModule.class,
                 JavaClientConfigurationModule.class,
                 UiModule.class
-        },
-        library = true // due to FX duplicate
+        }
 )
 public class JavaControlClientFXModule {
 

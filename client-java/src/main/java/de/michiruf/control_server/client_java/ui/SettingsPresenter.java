@@ -1,53 +1,52 @@
 package de.michiruf.control_server.client_java.ui;
 
+import de.michiruf.control_server.client_java.config.JavaClientConfiguration;
 import javafx.application.Platform;
+import javafx.embed.swing.JFXPanel;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.stage.Stage;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.inject.Singleton;
+import javax.swing.JFrame;
+import java.awt.Toolkit;
 import java.io.IOException;
 
 /**
  * @author Michael Ruf
  * @since 2016-03-08
  */
-@Deprecated
-@Singleton
-public class SettingsPresenter {
+public class SettingsPresenter extends JFrame {
 
-    private final Stage mainStage;
-    private Parent rootNode;
+    private final JavaClientConfiguration configuration;
+    private final String settingsFxml;
 
     @Inject
-    public SettingsPresenter(Stage mainStage, @Named("settingsFxml") String settingsFxml) {
-        this.mainStage = mainStage;
+    public SettingsPresenter(JavaClientConfiguration configuration, @Named("settingsFxml") String settingsFxml) {
+        this.configuration = configuration;
+        this.settingsFxml = settingsFxml;
 
-        try {
-            rootNode = FXMLLoader.load(getClass().getClassLoader().getResource(settingsFxml));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        setSize(300, 500);
+        int x = Toolkit.getDefaultToolkit().getScreenSize().width / 2 - getSize().width / 2;
+        int y = Toolkit.getDefaultToolkit().getScreenSize().height / 2 - getSize().height / 2;
+        setLocation(x, y);
+
+        initializeFx();
     }
 
-    public void setVisible(boolean visible) {
+    private void initializeFx() {
+        JFXPanel jfxPanel = new JFXPanel();
+        add(jfxPanel);
+
         Platform.runLater(() -> {
-            if (mainStage.getScene() != null) {
-                Scene settingsScene = new Scene(rootNode, 300, 500);
-                mainStage.setScene(settingsScene);
+            try {
+                @SuppressWarnings("ConstantConditions")
+                Parent rootNode = FXMLLoader.load(getClass().getClassLoader().getResource(settingsFxml));
+                jfxPanel.setScene(new Scene(rootNode));
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-
-            if (visible)
-                mainStage.show();
-            else
-                mainStage.hide();
         });
-    }
-
-    public boolean isVisible() {
-        return mainStage.isShowing();
     }
 }
