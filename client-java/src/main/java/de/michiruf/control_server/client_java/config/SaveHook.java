@@ -31,7 +31,8 @@ public class SaveHook {
             public void run() {
                 try {
                     byte[] data = objectMapper.writeValueAsBytes(configuration);
-                    Files.write(configurationPath, data, StandardOpenOption.CREATE_NEW);
+                    Files.write(configurationPath, data, StandardOpenOption.CREATE, StandardOpenOption.WRITE,
+                            StandardOpenOption.TRUNCATE_EXISTING);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
