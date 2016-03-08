@@ -5,6 +5,9 @@ import de.michiruf.control_server.client_java.config.JavaClientConfiguration;
 import javax.inject.Inject;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import java.awt.BorderLayout;
 import java.awt.Toolkit;
 
 /**
@@ -19,7 +22,7 @@ public class SettingsFrame extends JFrame {
     public SettingsFrame(JavaClientConfiguration configuration) {
         this.configuration = configuration;
 
-        setDefaultCloseOperation(HIDE_ON_CLOSE);
+        setDefaultCloseOperation(EXIT_ON_CLOSE); // TODO HIDE_ON_CLOSE
         setSize(300, 500);
         int x = Toolkit.getDefaultToolkit().getScreenSize().width / 2 - getSize().width / 2;
         int y = Toolkit.getDefaultToolkit().getScreenSize().height / 2 - getSize().height / 2;
@@ -29,9 +32,10 @@ public class SettingsFrame extends JFrame {
     }
 
     private void drawElements() {
-        //setLayout();
+        setLayout(new BorderLayout());
 
         JLabel hostLabel = new JLabel("Host");
-//        hostLabel.set
+        add(hostLabel);
+        JTextField hostInput = new JTextField();
     }
 }
