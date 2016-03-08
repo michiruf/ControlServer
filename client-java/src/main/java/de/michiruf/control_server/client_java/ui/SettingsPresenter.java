@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.inject.Singleton;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 import java.awt.Toolkit;
@@ -17,6 +18,7 @@ import java.io.IOException;
  * @author Michael Ruf
  * @since 2016-03-08
  */
+@Singleton
 public class SettingsPresenter extends JFrame {
 
     @Inject
