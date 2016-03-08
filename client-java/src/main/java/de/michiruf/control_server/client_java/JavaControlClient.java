@@ -1,8 +1,9 @@
 package de.michiruf.control_server.client_java;
 
 import dagger.ObjectGraph;
-import de.michiruf.control_server.client_java.ui.SettingsFrame;
 import de.michiruf.control_server.client_java.ui.TrayControl;
+import javafx.application.Application;
+import javafx.stage.Stage;
 
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
@@ -13,23 +14,18 @@ import javax.swing.UIManager;
  */
 public class JavaControlClient {
 
-    public static void main(String[] args) {
-        try {
-            //UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-            // TODO Just a try:
-            UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
-            // TODO Try synth?
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        SwingUtilities.invokeLater(() -> {
-            ObjectGraph appGraph = ObjectGraph.create(new JavaControlClientModule());
-            TrayControl trayControl = appGraph.get(TrayControl.class);
-            trayControl.show();
-
-            // TODO remove this
-            appGraph.get(SettingsFrame.class).setVisible(true);
-        });
-    }
+//    public static void main(String[] args) {
+//        try {
+//            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+//            // TODO Try synth?
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//        SwingUtilities.invokeLater(() -> {
+//            ObjectGraph appGraph = ObjectGraph.create(new JavaControlClientModule());
+//            TrayControl trayControl = appGraph.get(TrayControl.class);
+//            trayControl.show();
+//        });
+//    }
 }

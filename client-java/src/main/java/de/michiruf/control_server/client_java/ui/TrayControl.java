@@ -6,7 +6,6 @@ import de.michiruf.control_server.client_java.config.JavaClientConfiguration;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.awt.AWTException;
-import java.awt.Image;
 import java.awt.MenuItem;
 import java.awt.PopupMenu;
 import java.awt.SystemTray;
@@ -23,16 +22,16 @@ public class TrayControl {
 
     private final TrayIcon icon;
     private final Capture capture;
-    private final SettingsFrame settingsFrame;
+    private final SettingsPresenter settingsPresenter;
     private final JavaClientConfiguration configuration;
 
     @Inject
-    public TrayControl(Image iconImage, Capture capture, SettingsFrame settingsFrame,
+    public TrayControl(TrayControlIconFactory iconFactory, Capture capture, SettingsPresenter settingsPresenter,
                        JavaClientConfiguration configuration) {
+        this.icon = iconFactory.getImage();
         this.capture = capture;
-        this.settingsFrame = settingsFrame;
+        this.settingsPresenter = settingsPresenter;
         this.configuration = configuration;
-        icon = new TrayIcon(iconImage);
 
         draw();
     }
@@ -88,10 +87,6 @@ public class TrayControl {
         }
     }
 
-    public void hide() {
-        SystemTray.getSystemTray().remove(icon);
-    }
-
     private void toggleCapturing() {
         if (!configuration.isProperlyConfigured()) {
             toggleSettings();
@@ -102,6 +97,6 @@ public class TrayControl {
     }
 
     private void toggleSettings() {
-        settingsFrame.setVisible(!settingsFrame.isShowing());
+        settingsPresenter.setVisible(!settingsPresenter.isVisible());
     }
 }

@@ -10,13 +10,13 @@ import de.michiruf.control_server.client_java.ui.UiModule;
  * @author Michael Ruf
  * @since 2016-03-01
  */
-@Module(
-        includes = {
-                ControlClientModule.class,
-                CaptureModule.class,
-                JavaClientConfigurationModule.class,
-                UiModule.class
-        }
-)
+//@Module(
+//        includes = {
+//                ControlClientModule.class,
+//                CaptureModule.class,
+//                JavaClientConfigurationModule.class,
+//                UiModule.class
+//        }
+//)
 public class JavaControlClientModule {
 }
