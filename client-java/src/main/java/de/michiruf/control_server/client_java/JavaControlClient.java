@@ -15,6 +15,8 @@ public class JavaControlClient {
     public static void main(String[] args) {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            // TODO Try synth?
+            // should not change anything when using java fx inside
         } catch (Exception e) {
             e.printStackTrace();
         }
