@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 <?import java.net.URL?>
+<?import javafx.scene.control.Label?>
 <BorderPane
         xmlns="http://javafx.com/javafx/8"
         xmlns:fx="http://javafx.com/fxml/1"
@@ -34,12 +35,12 @@
                         <ToggleGroup fx:id="positionToggleGroup"/>
                     </fx:define>
 
-                    <Text text="Host"/>
+                    <Label text="Host" labelFor="$hostInput"/>
                     <TextField fx:id="hostInput"/>
 
                     <Pane prefHeight="15"/>
 
-                    <Text text="Port"/>
+                    <Label text="Port" labelFor="$portInput"/>
                     <TextField fx:id="portInput"/>
 
                     <Pane prefHeight="25"/>
