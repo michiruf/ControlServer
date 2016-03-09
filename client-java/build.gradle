@@ -18,3 +18,11 @@ dependencies {
         exclude group: 'com.squareup.dagger', module: 'dagger'
     }
 }
+
+task runJar(type: Jar) {
+    manifest {
+        attributes 'Main-Class': 'de.michiruf.control_server.client_java.JavaControlClient'
+    }
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}

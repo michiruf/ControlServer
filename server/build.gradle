@@ -22,3 +22,12 @@ dependencies {
         exclude group: 'com.squareup.dagger', module: 'dagger'
     }
 }
+
+// NOTE move to ui project later
+task runJar(type: Jar) {
+    manifest {
+        attributes 'Main-Class': 'de.michiruf.control_server.server.ControlServer'
+    }
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
