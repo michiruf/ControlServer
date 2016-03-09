@@ -2,3 +2,13 @@ We may could implement a logon server to give the user accounts
 The (client) ui must not be configurable then, but can have a list of connected/online computers that can be selected in
 a nicer and simpler ui with may not having different windows and no context menu in the icon
 Also, the server is also the client, pew...
+
+Es könnte so sein:
+* Beim Client loggt man sich am Loginserver ein
+* Der Client hat die Option zum Server
+* Man sieht eine Liste von all seinen Geräten
+* Ist ein Gerät ein Server kann man von jedem Client aus starten
+* Der Server bekommt per Websocket die Daten vom Loginserver
+  -> Es entfällt der Port
+  -> Der separate Server
+  -> Mega geile usability
