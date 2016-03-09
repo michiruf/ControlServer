@@ -1,6 +1,7 @@
 package de.michiruf.control_server.client_java.ui;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 
 import java.awt.Desktop;
 import java.io.IOException;
@@ -13,6 +14,7 @@ import java.net.URL;
  */
 public class FooterController {
 
+    @FXML
     public void githubClick(ActionEvent actionEvent) {
         try {
             Desktop.getDesktop().browse(new URL("https://github.com/michiruf").toURI());

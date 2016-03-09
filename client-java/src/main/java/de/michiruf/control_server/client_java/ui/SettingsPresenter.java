@@ -10,7 +10,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 import javax.swing.JFrame;
-import javax.swing.WindowConstants;
 import java.awt.Toolkit;
 import java.io.IOException;
 
@@ -23,7 +22,7 @@ public class SettingsPresenter extends JFrame {
 
     @Inject
     public SettingsPresenter(SettingsController controller, @Named("settingsFxml") String settingsFxml) {
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE); // TODO HIDE_ON_CLOSE
+        setDefaultCloseOperation(HIDE_ON_CLOSE);
         setSize(300, 500);
         int x = Toolkit.getDefaultToolkit().getScreenSize().width / 2 - getSize().width / 2;
         int y = Toolkit.getDefaultToolkit().getScreenSize().height / 2 - getSize().height / 2;

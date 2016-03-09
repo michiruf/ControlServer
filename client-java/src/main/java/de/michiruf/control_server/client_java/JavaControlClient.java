@@ -1,7 +1,6 @@
 package de.michiruf.control_server.client_java;
 
 import dagger.ObjectGraph;
-import de.michiruf.control_server.client_java.ui.SettingsPresenter;
 import de.michiruf.control_server.client_java.ui.TrayControl;
 
 import javax.swing.SwingUtilities;
@@ -26,9 +25,6 @@ public class JavaControlClient {
             ObjectGraph appGraph = ObjectGraph.create(new JavaControlClientModule());
             TrayControl trayControl = appGraph.get(TrayControl.class);
             trayControl.show();
-
-            // TODO remove this
-            appGraph.get(SettingsPresenter.class).setVisible(true);
         });
     }
 }

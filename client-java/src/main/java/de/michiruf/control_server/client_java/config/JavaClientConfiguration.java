@@ -3,6 +3,7 @@ package de.michiruf.control_server.client_java.config;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import de.michiruf.control_server.client.config.Configuration;
+import de.michiruf.control_server.common.data.MouseData;
 
 /**
  * @author Michael Ruf
@@ -15,6 +16,9 @@ public class JavaClientConfiguration implements Configuration {
 
     @JsonProperty
     private int port;
+
+    @JsonProperty
+    private MouseData.CoordinateType coordinateType = MouseData.CoordinateType.RELATIVE;
 
     @Override
     public String getHost() {
@@ -34,8 +38,16 @@ public class JavaClientConfiguration implements Configuration {
         this.port = port;
     }
 
+    public MouseData.CoordinateType getCoordinateType() {
+        return coordinateType;
+    }
+
+    public void setCoordinateType(MouseData.CoordinateType coordinateType) {
+        this.coordinateType = coordinateType;
+    }
+
     @JsonIgnore
     public boolean isProperlyConfigured() {
-        return host != null && host.length() > 0 && port != 0;
+        return host != null && host.length() > 0 && port != 0 && coordinateType != null;
     }
 }

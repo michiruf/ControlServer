@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
@@ -28,6 +30,10 @@
 
             <center>
                 <VBox>
+                    <fx:define>
+                        <ToggleGroup fx:id="positionToggleGroup"/>
+                    </fx:define>
+
                     <Text text="Host"/>
                     <TextField fx:id="hostInput"/>
 
@@ -35,6 +41,12 @@
 
                     <Text text="Port"/>
                     <TextField fx:id="portInput"/>
+
+                    <Pane prefHeight="25"/>
+
+                    <RadioButton text="Relative positioning" toggleGroup="$positionToggleGroup"/>
+                    <Pane prefHeight="5"/>
+                    <RadioButton text="Absolute positioning" toggleGroup="$positionToggleGroup"/>
                 </VBox>
             </center>
 
