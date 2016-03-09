@@ -12,13 +12,15 @@ import javax.inject.Singleton;
  * @author Michael Ruf
  * @since 2016-03-01
  */
+// TODO we need an onLoaded callback to prepare initial values
+@SuppressWarnings("unused") // due to FXML with unbound controller
 @Singleton
 public class SettingsController {
 
     private JavaClientConfiguration configuration;
 
     @FXML
-    private TextField actiontarget;
+    private TextField hostInput;
 
     @Inject
     public SettingsController(JavaClientConfiguration configuration) {
@@ -26,7 +28,8 @@ public class SettingsController {
     }
 
     @FXML
-    protected void handleSubmitButtonAction(ActionEvent event) {
-        actiontarget.setText("Sign in button pressed");
+    protected void onSave(ActionEvent event) {
+        hostInput.setText("Sign in button pressed");
+        // TODO this is up next with initial values
     }
 }

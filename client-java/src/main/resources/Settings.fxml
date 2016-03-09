@@ -1,27 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--fx:controller="de.michiruf.control_server.client_java.ui.SettingsController"-->
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
-<?import java.net.URL?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
+<?import java.net.URL?>
 <BorderPane
-        xmlns:fx="http://javafx.com/fxml" styleClass="root">
-    <padding>
-        <Insets top="25" right="25" bottom="10" left="25"/>
-    </padding>
+        xmlns="http://javafx.com/javafx/8"
+        xmlns:fx="http://javafx.com/fxml/1"
+        styleClass="root">
     <stylesheets>
-        <URL value="@Settings.css"/>
+        <URL value="@include/Styles.css"/>
     </stylesheets>
 
-    <Label text="User Name:"/>
+    <top>
+        <fx:include source="include/Header.fxml"/>
+    </top>
 
-    <TextField fx:id="actiontarget"/>
+    <center>
+        <BorderPane>
+            <padding>
+                <Insets bottom="25" left="25" right="25" top="25"/>
+            </padding>
 
-    <Text id="welcome-text" text="Welcome"/>
+            <center>
+                <VBox>
+                    <Text text="Host"/>
+                    <TextField fx:id="hostInput"/>
 
-    <Button text="Sign In"
-            onAction="#handleSubmitButtonAction"/>
+                    <Pane prefHeight="15"/>
+
+                    <Text text="Port"/>
+                    <TextField fx:id="portInput"/>
+                </VBox>
+            </center>
+
+            <bottom>
+                <HBox alignment="CENTER">
+                    <Button text="Save" onAction="#onSave"/>
+                </HBox>
+            </bottom>
+        </BorderPane>
+    </center>
+
+    <bottom>
+        <fx:include source="include/Footer.fxml"/>
+    </bottom>
 </BorderPane>
