@@ -40,7 +40,9 @@ public class SettingsController {
     protected void initialize() {
         hostInput.setText(configuration.getHost());
 
-        portInput.setText(Integer.toString(configuration.getPort()));
+        if (configuration.getPort() != 0) {
+            portInput.setText(Integer.toString(configuration.getPort()));
+        }
 
         int positionSelection = Arrays.asList(MouseData.CoordinateType.values())
                 .indexOf(configuration.getCoordinateType());
