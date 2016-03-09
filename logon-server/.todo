@@ -1,0 +1,4 @@
+We may could implement a logon server to give the user accounts
+The (client) ui must not be configurable then, but can have a list of connected/online computers that can be selected in
+a nicer and simpler ui with may not having different windows and no context menu in the icon
+Also, the server is also the client, pew...
