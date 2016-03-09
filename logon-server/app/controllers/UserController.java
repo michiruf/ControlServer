@@ -4,7 +4,8 @@ package controllers;
  * @author Michael Ruf
  * @since 2016-03-09
  */
-public class UserController extends AbstractController {
+@SuppressWarnings("unused")
+public class UserController extends Application {
 
     public static void login() {
         render();

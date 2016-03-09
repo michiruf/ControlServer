@@ -1,5 +1,7 @@
 package models;
 
+import play.db.jpa.Model;
+
 /**
  * @author Michael Ruf
  * @since 2016-03-09

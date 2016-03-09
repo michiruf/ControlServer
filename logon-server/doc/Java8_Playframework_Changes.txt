@@ -1,0 +1,7 @@
+1. Download the latest (tried with 3.18.0 and 3.18.2) javassist from  https://github.com/jboss-javassist/javassist/releases
+2. Place it in play-1.2.7\framework\lib
+3. Replace the dependency in play-1.2.7\framework\dependencies.yml:
+     org.javassist -> javassist 3.9.0.GA
+   to:
+     org.javassist -> javassist 3.18.2.GA
+   for example.

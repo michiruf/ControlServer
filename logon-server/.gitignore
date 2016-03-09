@@ -1,0 +1,8 @@
+# Stuff for manual play framework execution
+data
+documentation
+logs
+modules
+out
+tmp
+*.ipr
