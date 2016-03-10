@@ -6,8 +6,22 @@ sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
 sourceSets.main {
-    java.srcDir 'app'
-    resources.srcDirs = ['app/views', 'conf', 'public']
+    java.srcDirs = [
+            'app',
+            'modules/crud/app',
+            'modules/secure/app'
+    ]
+    resources.srcDirs = [
+            'app/views',
+            'conf',
+            'public',
+            'modules/crud/app/views',
+            'modules/crud/conf',
+            'modules/crud/public',
+            'modules/secure/app/views',
+            'modules/secure/conf',
+            'modules/secure/public'
+    ]
 }
 sourceSets.test {
     java.srcDir 'test'

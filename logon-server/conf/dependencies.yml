@@ -1,4 +1,18 @@
 # Application dependencies
-
 require:
     - play
+    - play -> crud
+    - play -> secure
+    - michiruf -> swagger 0.0.1
+    - michiruf -> swagger_ui 0.0.1
+    - com.fasterxml.jackson.core -> jackson-core 2.6.2
+    - com.fasterxml.jackson.core -> jackson-annotations 2.6.2
+    - com.fasterxml.jackson.core -> jackson-databind 2.6.2
+# TODO update jackson
+
+repositories:
+    - michiruf-play-github:
+        type:       http
+        artifact:   "https://github.com/[organization]/play-[module]/raw/master/release/[module]-[revision].zip"
+        contains:
+            - michiruf -> *

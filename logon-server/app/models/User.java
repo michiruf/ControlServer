@@ -1,6 +1,6 @@
 package models;
 
-import helper.HashHelper;
+import helpers.HashHelper;
 import play.db.jpa.Model;
 
 import javax.persistence.CascadeType;

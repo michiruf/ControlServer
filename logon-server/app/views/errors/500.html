@@ -1,7 +1,7 @@
 #{extends 'main.html' /}
 #{set title: 'Application error' /}
 
-#{if play.mode.name() == 'DEV'}
+#{if play.mode == play.Play.Mode.DEV}
     #{500 exception /}
 #{/if}
 #{else}

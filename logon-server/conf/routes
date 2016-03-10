@@ -1,4 +1,5 @@
-## TODO: Maybe CRUD?
+# Module routes
+*       /admin                                  module:crud
 
 # Ignore favicon requests
 GET     /favicon.ico                            404

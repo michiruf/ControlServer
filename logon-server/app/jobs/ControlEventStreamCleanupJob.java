@@ -1,4 +1,4 @@
-package job;
+package jobs;
 
 import models.ControlEventStream;
 import play.jobs.Every;

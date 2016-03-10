@@ -1,4 +1,4 @@
-package job;
+package jobs;
 
 import models.Device;
 import play.jobs.Every;

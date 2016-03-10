@@ -16,7 +16,7 @@ public class UserController extends Controller {
     //public static void doLogin(String username, String password) {
     //}
 
-    public static void doLoginJson() {
+    public static void doLoginJson(String username, String password) {
 
     }
 

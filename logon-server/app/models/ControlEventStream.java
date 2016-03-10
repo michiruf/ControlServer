@@ -1,6 +1,6 @@
 package models;
 
-import helper.MyArchivedEventStream;
+import helpers.MyArchivedEventStream;
 import play.libs.F;
 
 import java.util.HashMap;

@@ -2,7 +2,6 @@
 data
 documentation
 logs
-modules
 out
 tmp
 *.ipr
