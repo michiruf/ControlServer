@@ -1,19 +1,20 @@
 package controllers;
 
+import play.mvc.Controller;
+
 /**
  * @author Michael Ruf
  * @since 2016-03-09
  */
 @SuppressWarnings("unused")
-public class UserController extends Application {
+public class UserController extends Controller {
 
-    public static void login() {
-        render();
-    }
+    //public static void login() {
+    //    render();
+    //}
 
-    public static void doLogin(String username, String password) {
-
-    }
+    //public static void doLogin(String username, String password) {
+    //}
 
     public static void doLoginJson() {
 
