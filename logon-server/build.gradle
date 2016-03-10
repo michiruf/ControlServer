@@ -9,7 +9,7 @@ sourceSets.main {
     java.srcDirs = [
             'app',
             'modules/crud/app',
-            'modules/secure/app'
+            'modules/security/app'
     ]
     resources.srcDirs = [
             'app/views',
@@ -18,9 +18,9 @@ sourceSets.main {
             'modules/crud/app/views',
             'modules/crud/conf',
             'modules/crud/public',
-            'modules/secure/app/views',
-            'modules/secure/conf',
-            'modules/secure/public'
+            'modules/security/app/views',
+            'modules/security/conf',
+            'modules/security/public'
     ]
 }
 sourceSets.test {
@@ -29,8 +29,8 @@ sourceSets.test {
 
 dependencies {
     compile files('playframework/play-1.3.0.jar')
-    compile fileTree(dir: 'playframework/play-dep', include: '*.jar')
-    testCompile fileTree(dir: 'playframework/play-test-dep', include: '*.jar')
+    compile fileTree(dir: 'playframework/play-dependencies', include: '*.jar')
+    testCompile fileTree(dir: 'playframework/play-test-dependencies', include: '*.jar')
 
     compile project(':common')
 }

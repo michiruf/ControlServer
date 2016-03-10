@@ -2,13 +2,12 @@
 require:
     - play
     - play -> crud
-    - play -> secure
+    - play -> security latest.integration
     - michiruf -> swagger 0.0.1
     - michiruf -> swagger_ui 0.0.1
     - com.fasterxml.jackson.core -> jackson-core 2.6.2
     - com.fasterxml.jackson.core -> jackson-annotations 2.6.2
     - com.fasterxml.jackson.core -> jackson-databind 2.6.2
-# TODO update jackson
 
 repositories:
     - michiruf-play-github:
