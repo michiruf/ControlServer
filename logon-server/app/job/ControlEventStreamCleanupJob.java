@@ -12,7 +12,7 @@ import play.jobs.Job;
 @Every("1h")
 public class ControlEventStreamCleanupJob extends Job {
 
-    public static final int TIMEOUT = 100000; // TODO
+    public static final int TIMEOUT = 3600000; // 1h
 
     @Override
     public void doJob() throws Exception {

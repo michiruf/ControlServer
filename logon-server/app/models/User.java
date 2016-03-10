@@ -1,5 +1,6 @@
 package models;
 
+import helper.HashHelper;
 import play.db.jpa.Model;
 
 import javax.persistence.CascadeType;
@@ -15,9 +16,26 @@ import java.util.List;
 public class User extends Model {
 
     private String username;
-    
+
     private String password;
 
-    @OneToMany(mappedBy = "", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     private List<Device> devices;
+
+    public User(String username, String plainPassword) {
+        this.username = username;
+        this.password = HashHelper.sha(plainPassword);
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public boolean provePassword(String plainPassword) {
+        return password == HashHelper.sha(plainPassword);
+    }
+
+    public List<Device> getDevices() {
+        return devices;
+    }
 }

@@ -14,7 +14,7 @@ import java.util.Date;
 @Every("1h")
 public class DeviceCleanupJob extends Job {
 
-    public static final int TIMEOUT = 100000; // TODO
+    public static final int TIMEOUT = 1209600000; // 14d
 
     @Override
     public void doJob() throws Exception {
