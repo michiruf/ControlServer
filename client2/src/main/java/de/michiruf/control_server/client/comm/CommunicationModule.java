@@ -67,7 +67,7 @@ public class CommunicationModule {
     @SuppressWarnings("unused")
     @Provides
     @Singleton
-    @ForWebServer
+    @ForDirectConnection
     public Client provideDirectConnectionClient(
             Vertx vertx, ClientWebSocketVerticle clientWebSocketVerticle,
             @ForDirectConnection ClientConfiguration configuration) {

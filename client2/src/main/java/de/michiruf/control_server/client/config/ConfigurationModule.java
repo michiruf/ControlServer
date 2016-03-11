@@ -24,7 +24,7 @@ public class ConfigurationModule {
     @Provides
     @Singleton
     @ForWebServer
-    public ClientConfiguration provideWebClientConfiguration() {
+    public ClientConfiguration provideWebServerClientConfiguration() {
         return new ClientConfiguration() {
             @Override
             public String getHost() {

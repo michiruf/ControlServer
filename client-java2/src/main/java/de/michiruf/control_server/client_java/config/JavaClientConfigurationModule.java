@@ -5,6 +5,7 @@ import dagger.Module;
 import dagger.Provides;
 import de.michiruf.control_server.client.config.ClientConfiguration;
 import de.michiruf.control_server.client.config.ServerConfiguration;
+import de.michiruf.control_server.client.qualifier.ForDirectConnection;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -55,7 +56,8 @@ public class JavaClientConfigurationModule {
     @SuppressWarnings("unused")
     @Provides
     @Singleton
-    public ClientConfiguration provideClientConfiguration(JavaClientConfiguration configuration) {
+    @ForDirectConnection
+    public ClientConfiguration provideDirectConnectionClientConfiguration(JavaClientConfiguration configuration) {
         // For the client module
         return configuration;
     }

@@ -37,10 +37,10 @@ public class SettingsController {
 
     @FXML
     protected void initialize() {
-        hostInput.setText(configuration.getDirectConnectionHost());
+        hostInput.setText(configuration.getHost());
 
-        if (configuration.getDirectConnectionPort() != 0) {
-            portInput.setText(Integer.toString(configuration.getDirectConnectionPort()));
+        if (configuration.getPort() != 0) {
+            portInput.setText(Integer.toString(configuration.getPort()));
         }
 
         int positionSelection = Arrays.asList(MouseData.CoordinateType.values())

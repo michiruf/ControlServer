@@ -16,7 +16,9 @@ import de.michiruf.control_server.client_java.ui.UiModule;
                 CaptureModule.class,
                 JavaClientConfigurationModule.class,
                 UiModule.class
-        }
+        },
+        // TODO why is this necessary?
+        complete = false
 )
 public class JavaControlClientModule {
 }
