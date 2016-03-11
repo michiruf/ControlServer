@@ -15,7 +15,6 @@ import java.util.Arrays;
  * @author Michael Ruf
  * @since 2016-03-01
  */
-// TODO we need an onLoaded callback to prepare initial values
 @SuppressWarnings("unused") // due to FXML with unbound controller
 @Singleton
 public class SettingsController {

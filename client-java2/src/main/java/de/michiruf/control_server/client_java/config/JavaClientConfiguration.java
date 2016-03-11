@@ -2,14 +2,15 @@ package de.michiruf.control_server.client_java.config;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import de.michiruf.control_server.client.config.Configuration;
+import de.michiruf.control_server.client.config.ClientConfiguration;
+import de.michiruf.control_server.client.config.ServerConfiguration;
 import de.michiruf.control_server.common.data.MouseData;
 
 /**
  * @author Michael Ruf
  * @since 2016-03-08
  */
-public class JavaClientConfiguration implements Configuration {
+public class JavaClientConfiguration implements ClientConfiguration, ServerConfiguration {
 
     @JsonProperty
     private String host;
@@ -18,10 +19,19 @@ public class JavaClientConfiguration implements Configuration {
     private int port;
 
     @JsonProperty
+    private boolean controllable;
+
+    @JsonIgnore
+    private int hostPort;
+
+    @JsonIgnore
+    private boolean enabled;
+
+    @JsonProperty
     private MouseData.CoordinateType coordinateType = MouseData.CoordinateType.RELATIVE;
 
     @Override
-    public String getDirectConnectionHost() {
+    public String getHost() {
         return host;
     }
 
@@ -30,12 +40,39 @@ public class JavaClientConfiguration implements Configuration {
     }
 
     @Override
-    public int getDirectConnectionPort() {
+    public int getPort() {
         return port;
     }
 
     public void setPort(int port) {
         this.port = port;
+    }
+
+    @Override
+    public boolean isControllable() {
+        return controllable;
+    }
+
+    public void setControllable(boolean controllable) {
+        this.controllable = controllable;
+    }
+
+    @Override
+    public int getHostPort() {
+        return hostPort;
+    }
+
+    public void setHostPort(int hostPort) {
+        this.hostPort = hostPort;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     public MouseData.CoordinateType getCoordinateType() {

@@ -3,7 +3,8 @@ package de.michiruf.control_server.client_java.config;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dagger.Module;
 import dagger.Provides;
-import de.michiruf.control_server.client.config.Configuration;
+import de.michiruf.control_server.client.config.ClientConfiguration;
+import de.michiruf.control_server.client.config.ServerConfiguration;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -54,7 +55,15 @@ public class JavaClientConfigurationModule {
     @SuppressWarnings("unused")
     @Provides
     @Singleton
-    public Configuration provideConfiguration(JavaClientConfiguration configuration) {
+    public ClientConfiguration provideClientConfiguration(JavaClientConfiguration configuration) {
+        // For the client module
+        return configuration;
+    }
+
+    @SuppressWarnings("unused")
+    @Provides
+    @Singleton
+    public ServerConfiguration provideServerConfiguration(JavaClientConfiguration configuration) {
         // For the client module
         return configuration;
     }

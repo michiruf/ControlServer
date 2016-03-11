@@ -2,6 +2,7 @@ package de.michiruf.control_server.client.config;
 
 import dagger.Module;
 import dagger.Provides;
+import de.michiruf.control_server.client.qualifier.ForWebServer;
 
 import javax.inject.Singleton;
 
@@ -22,6 +23,7 @@ public class ConfigurationModule {
     @SuppressWarnings("unused")
     @Provides
     @Singleton
+    @ForWebServer
     public ClientConfiguration provideWebClientConfiguration() {
         return new ClientConfiguration() {
             @Override
@@ -32,6 +34,11 @@ public class ConfigurationModule {
             @Override
             public int getPort() {
                 return 80;
+            }
+
+            @Override
+            public boolean isControllable() {
+                return true;
             }
         };
     }

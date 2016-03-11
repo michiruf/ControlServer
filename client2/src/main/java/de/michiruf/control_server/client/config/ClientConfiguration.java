@@ -9,4 +9,6 @@ public interface ClientConfiguration {
     String getHost();
 
     int getPort();
+
+    boolean isControllable();
 }

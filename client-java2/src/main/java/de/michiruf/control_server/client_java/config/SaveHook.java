@@ -1,7 +1,6 @@
 package de.michiruf.control_server.client_java.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import de.michiruf.control_server.client.config.Configuration;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -26,7 +25,7 @@ public class SaveHook {
         this.configurationPath = configurationPath;
     }
 
-    public void register(Configuration configuration) {
+    public void register(JavaClientConfiguration configuration) {
         Runtime.getRuntime().addShutdownHook(new Thread() {
             public void run() {
                 try {
