@@ -9,13 +9,6 @@ import play.mvc.Controller;
 @SuppressWarnings("unused")
 public class UserController extends Controller {
 
-    //public static void login() {
-    //    render();
-    //}
-
-    //public static void doLogin(String username, String password) {
-    //}
-
     public static void doLoginJson(String username, String password) {
 
     }

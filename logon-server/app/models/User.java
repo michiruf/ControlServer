@@ -32,7 +32,7 @@ public class User extends Model {
     }
 
     public boolean provePassword(String plainPassword) {
-        return password == HashHelper.sha(plainPassword);
+        return password.equals(HashHelper.sha(plainPassword));
     }
 
     public List<Device> getDevices() {

@@ -19,9 +19,9 @@ import static play.mvc.Http.WebSocketEvent.TextFrame;
 @SuppressWarnings("unused")
 public class ControlController extends WebSocketController {
 
-    public static void webservice(String deviceId, String accessToken) {
+    public static void webservice(String deviceId) {
         Device device = Device.find("byDeviceId", deviceId).first();
-        if (device == null || !device.proveAccessToken(accessToken)) {
+        if (device == null) {
             if (inbound.isOpen()) {
                 disconnect();
             }

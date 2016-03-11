@@ -29,7 +29,7 @@ public class ControlEventStream {
         });
     }
 
-    private MyArchivedEventStream<String> stream = new MyArchivedEventStream<>(100);
+    private MyArchivedEventStream<String> stream = new MyArchivedEventStream<>(1);
 
     private ControlEventStream() {
     }

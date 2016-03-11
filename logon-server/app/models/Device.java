@@ -1,8 +1,9 @@
 package models;
 
-import play.db.jpa.Model;
+import play.db.jpa.GenericModel;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import java.util.Date;
 
@@ -11,22 +12,27 @@ import java.util.Date;
  * @since 2016-03-09
  */
 @Entity
-public class Device extends Model {
+public class Device extends GenericModel {
+
+    @Id
+    private String id;
 
     @ManyToOne
     private User user;
 
     private String name;
 
-    private String accessToken;
-
     private Date lastActive;
 
-    public Device(User user, String name, String accessToken) {
+    public Device(String id, User user, String name) {
+        this.id = id;
         this.user = user;
         this.name = name;
-        this.accessToken = accessToken;
         lastActive = new Date(System.currentTimeMillis());
+    }
+
+    public String getId() {
+        return id;
     }
 
     public User getUser() {
@@ -37,8 +43,8 @@ public class Device extends Model {
         return name;
     }
 
-    public boolean proveAccessToken(String accessToken) {
-        return this.accessToken.equals(accessToken);
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Date getLastActive() {
