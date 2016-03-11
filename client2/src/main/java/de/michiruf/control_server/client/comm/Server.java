@@ -1,6 +1,6 @@
 package de.michiruf.control_server.client.comm;
 
-import de.michiruf.control_server.client.config.Configuration;
+import de.michiruf.control_server.client.config.ServerConfiguration;
 import io.vertx.core.Vertx;
 
 import javax.inject.Inject;
@@ -15,10 +15,10 @@ public class Server {
 
     private final Vertx vertx;
     private final ServerWebSocketVerticle serverWebSocketVerticle;
-    private final Configuration configuration;
+    private final ServerConfiguration configuration;
 
     @Inject
-    public Server(Vertx vertx, ServerWebSocketVerticle serverWebSocketVerticle, Configuration configuration) {
+    public Server(Vertx vertx, ServerWebSocketVerticle serverWebSocketVerticle, ServerConfiguration configuration) {
         this.vertx = vertx;
         this.serverWebSocketVerticle = serverWebSocketVerticle;
         this.configuration = configuration;

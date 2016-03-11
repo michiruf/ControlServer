@@ -1,26 +1,21 @@
 package de.michiruf.control_server.client.comm;
 
-import de.michiruf.control_server.client.config.Configuration;
+import de.michiruf.control_server.client.config.ClientConfiguration;
 import de.michiruf.control_server.client.convert.EventStringConverter;
 import de.michiruf.control_server.client.dispatch.EventDispatcher;
 import io.vertx.core.AbstractVerticle;
-
-import javax.inject.Inject;
-import javax.inject.Singleton;
 
 /**
  * @author Michael Ruf
  * @since 2015-11-24
  */
-@Singleton
 public class ClientWebSocketVerticle extends AbstractVerticle {
 
-    private final Configuration configuration;
+    private final ClientConfiguration configuration;
     private final EventStringConverter converter;
     private final EventDispatcher eventDispatcher;
 
-    @Inject
-    public ClientWebSocketVerticle(Configuration configuration, EventStringConverter converter,
+    public ClientWebSocketVerticle(ClientConfiguration configuration, EventStringConverter converter,
                                    EventDispatcher eventDispatcher) {
         super();
         this.configuration = configuration;
@@ -32,8 +27,8 @@ public class ClientWebSocketVerticle extends AbstractVerticle {
     public void start() throws Exception {
         super.start();
         vertx.createHttpClient().websocket(
-                configuration.getDirectConnectionPort(),
-                configuration.getDirectConnectionHost(),
+                configuration.getPort(),
+                configuration.getHost(),
                 "",
                 handler -> {
                     eventDispatcher.registerListener(event ->

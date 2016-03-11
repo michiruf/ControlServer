@@ -1,6 +1,6 @@
 package de.michiruf.control_server.client.comm;
 
-import de.michiruf.control_server.client.config.Configuration;
+import de.michiruf.control_server.client.config.ServerConfiguration;
 import de.michiruf.control_server.client.robot.EventHandler;
 import io.vertx.core.AbstractVerticle;
 
@@ -15,10 +15,10 @@ import javax.inject.Singleton;
 public class ServerWebSocketVerticle extends AbstractVerticle {
 
     private final EventHandler eventHandler;
-    private final Configuration configuration;
+    private final ServerConfiguration configuration;
 
     @Inject
-    public ServerWebSocketVerticle(EventHandler eventHandler, Configuration configuration) {
+    public ServerWebSocketVerticle(EventHandler eventHandler, ServerConfiguration configuration) {
         super();
         this.eventHandler = eventHandler;
         this.configuration = configuration;
