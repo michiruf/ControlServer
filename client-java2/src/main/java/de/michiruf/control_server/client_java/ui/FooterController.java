@@ -14,6 +14,7 @@ import java.net.URL;
  */
 public class FooterController {
 
+    @SuppressWarnings("UnusedParameters")
     @FXML
     public void githubClick(ActionEvent actionEvent) {
         try {

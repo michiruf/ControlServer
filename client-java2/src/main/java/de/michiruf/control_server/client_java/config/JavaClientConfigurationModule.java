@@ -55,7 +55,7 @@ public class JavaClientConfigurationModule {
     @Provides
     @Singleton
     public Configuration provideConfiguration(JavaClientConfiguration configuration) {
-        // For the client project
+        // For the client module
         return configuration;
     }
 }

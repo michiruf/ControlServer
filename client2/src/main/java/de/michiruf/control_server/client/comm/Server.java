@@ -14,37 +14,37 @@ import javax.inject.Singleton;
 public class Server {
 
     private final Vertx vertx;
-    private final ServerWebSocketVerticle webSocketVerticle;
+    private final ServerWebSocketVerticle serverWebSocketVerticle;
     private final Configuration configuration;
 
     @Inject
-    public Server(Vertx vertx, ServerWebSocketVerticle webSocketVerticle, Configuration configuration) {
+    public Server(Vertx vertx, ServerWebSocketVerticle serverWebSocketVerticle, Configuration configuration) {
         this.vertx = vertx;
-        this.webSocketVerticle = webSocketVerticle;
+        this.serverWebSocketVerticle = serverWebSocketVerticle;
         this.configuration = configuration;
     }
 
     @SuppressWarnings("ThrowableResultOfMethodCallIgnored")
     public void start() {
-        vertx.deployVerticle(webSocketVerticle, event -> {
+        vertx.deployVerticle(serverWebSocketVerticle, event -> {
             if (event.succeeded()) {
                 System.out.println(String.format(
-                        "[Server] STARTED on port %d", configuration.getPort()));
+                        "[Server] STARTED on port %d", configuration.getHostPort()));
             } else if (event.cause() != null) {
                 System.err.println(String.format(
-                        "[Server] NOT STARTED on port %d", configuration.getPort()));
+                        "[Server] NOT STARTED on port %d", configuration.getHostPort()));
                 event.cause().printStackTrace();
             }
         });
     }
 
     public boolean isRunning() {
-        return webSocketVerticle.deploymentID() != null;
+        return serverWebSocketVerticle.deploymentID() != null;
     }
 
     public void stop() {
         try {
-            webSocketVerticle.stop();
+            serverWebSocketVerticle.stop();
             System.out.println("[Server] STOPPED");
         } catch (Exception e) {
             System.err.println("[Server] NOT STOPPED");

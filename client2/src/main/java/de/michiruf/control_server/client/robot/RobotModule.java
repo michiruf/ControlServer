@@ -2,7 +2,7 @@ package de.michiruf.control_server.client.robot;
 
 import dagger.Module;
 import dagger.Provides;
-import de.michiruf.control_server.server.robot.controls.ExecutorModule;
+import de.michiruf.control_server.client.robot.controls.ExecutorModule;
 
 import javax.inject.Singleton;
 import java.awt.AWTException;

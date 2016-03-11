@@ -30,6 +30,6 @@ public class ServerWebSocketVerticle extends AbstractVerticle {
         vertx.createHttpServer().websocketHandler(handler -> {
             handler.handler(event -> eventHandler.handleStringEvent(new String(event.getBytes())));
             handler.closeHandler(event -> handler.close());
-        }).listen(configuration.getPort());
+        }).listen(configuration.getHostPort());
     }
 }

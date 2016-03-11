@@ -10,8 +10,7 @@ public interface Configuration {
 
     int getDirectConnectionPort();
 
-    // is directly connectible
+    boolean isHostEnabled();
 
-    // port for this
-    int getPort();
+    int getHostPort();
 }

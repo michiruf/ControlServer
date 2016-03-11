@@ -5,6 +5,7 @@ import de.michiruf.control_server.client.comm.CommunicationModule;
 import de.michiruf.control_server.client.config.ConfigurationModule;
 import de.michiruf.control_server.client.convert.ConvertModule;
 import de.michiruf.control_server.client.dispatch.DispatchModule;
+import de.michiruf.control_server.client.robot.RobotModule;
 
 /**
  * @author Michael Ruf
@@ -15,7 +16,8 @@ import de.michiruf.control_server.client.dispatch.DispatchModule;
                 CommunicationModule.class,
                 ConfigurationModule.class,
                 ConvertModule.class,
-                DispatchModule.class
+                DispatchModule.class,
+                RobotModule.class
         },
         complete = false,
         library = true
