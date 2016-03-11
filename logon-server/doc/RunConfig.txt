@@ -1,0 +1,4 @@
+Main Class:                 play.server.Server
+VM Args:                    -Dapplication.path="."
+Working Dir:                [...]/ControlServer/logon-server  (\ on Windows)
+Gradle Task before "Make":  clean assemble

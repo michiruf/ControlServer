@@ -1,0 +1,12 @@
+#{extends 'main.html' /}
+#{set title: 'Application error' /}
+
+#{if play.mode == play.Play.Mode.DEV}
+    #{404 result /}
+#{/if}
+#{else}
+    <h1>Not found</h1>
+    <p>
+        ${result.message}
+    </p>
+#{/else}

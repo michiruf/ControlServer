@@ -1,0 +1,45 @@
+apply plugin: 'java'
+
+version = '1.0.' + version
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+sourceSets.main {
+    java.srcDirs = [
+            'app',
+            'modules/crud/app',
+            'modules/security/app'
+    ]
+    resources.srcDirs = [
+            'app/views',
+            'conf',
+            'public',
+            'modules/crud/app/views',
+            'modules/crud/conf',
+            'modules/crud/public',
+            'modules/security/app/views',
+            'modules/security/conf',
+            'modules/security/public'
+    ]
+}
+sourceSets.test {
+    java.srcDir 'test'
+}
+
+dependencies {
+    compile files('playframework/play-1.3.0.jar')
+    compile fileTree(dir: 'playframework/play-dependencies', include: '*.jar')
+    testCompile fileTree(dir: 'playframework/play-test-dependencies', include: '*.jar')
+
+    compile project(':common')
+}
+
+task runJar(type: Jar) {
+    manifest {
+        attributes 'Main-Class': 'play.server.Server'
+        //jvmArgs = ['-Dapplication.path="."'] // TODO?
+    }
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
