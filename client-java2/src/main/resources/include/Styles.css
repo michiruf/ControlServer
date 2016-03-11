@@ -1,0 +1,19 @@
+.root {
+    -fx-background-color: #f0f0f0;
+}
+
+Hyperlink {
+    -fx-text-fill: #333;
+    -fx-focus-color: transparent;
+}
+
+#header {
+    -fx-padding: 15px 12px;
+    -fx-spacing: 10px;
+    -fx-background-color: #369;
+}
+
+#footer {
+    -fx-padding: 15px 12px;
+    -fx-background-color: #369;
+}
