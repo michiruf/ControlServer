@@ -1,4 +1,4 @@
-package de.michiruf.control_server.client_java.ui;
+package de.michiruf.control_server.client_java.ui.pages;
 
 import de.michiruf.control_server.client_java.config.JavaClientConfiguration;
 import de.michiruf.control_server.common.data.MouseData;
@@ -8,18 +8,18 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 
 import javax.inject.Inject;
-import javax.inject.Singleton;
 import java.util.Arrays;
 
 /**
  * @author Michael Ruf
- * @since 2016-03-01
+ * @since 2016-03-12
  */
-@SuppressWarnings("unused") // due to FXML with unbound controller
-@Singleton
-public class SettingsController {
+public class DevicesController {
 
-    private JavaClientConfiguration configuration;
+    @Inject
+    protected static JavaClientConfiguration configuration;
+
+    // TODO
 
     @FXML
     private TextField hostInput;
@@ -29,11 +29,6 @@ public class SettingsController {
 
     @FXML
     private ToggleGroup positionToggleGroup;
-
-    @Inject
-    public SettingsController(JavaClientConfiguration configuration) {
-        this.configuration = configuration;
-    }
 
     @FXML
     protected void initialize() {

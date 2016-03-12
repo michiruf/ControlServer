@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import java.net.URL?>
+<BorderPane
+        xmlns="http://javafx.com/javafx/8"
+        xmlns:fx="http://javafx.com/fxml/1"
+        fx:controller="de.michiruf.control_server.client_java.ui.MainWindowController"
+        styleClass="root">
+    <stylesheets>
+        <URL value="@include/Styles.css"/>
+    </stylesheets>
+
+    <center>
+        <fx:include source="pages/Devices.fxml"/>
+        <fx:include source="pages/Login.fxml"/>
+    </center>
+
+    <bottom>
+        <HBox id="footer" alignment="CENTER">
+            <Hyperlink text="Github @michiruf" onAction="#githubClick" underline="true"/>
+        </HBox>
+    </bottom>
+</BorderPane>

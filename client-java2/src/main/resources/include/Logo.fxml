@@ -4,6 +4,5 @@
 <HBox
         xmlns="http://javafx.com/javafx/8"
         id="header">
-
     <Text text="Hallooo"/>
 </HBox>

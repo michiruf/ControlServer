@@ -8,5 +8,5 @@ public interface ServerConfiguration {
 
     int getHostPort();
 
-    boolean isEnabled();
+    boolean isAutoStartEnabled(); // TODO maybe back to isEnabled?
 }

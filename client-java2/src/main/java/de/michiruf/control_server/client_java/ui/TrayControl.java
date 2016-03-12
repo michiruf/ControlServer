@@ -16,12 +16,12 @@ import java.awt.event.MouseListener;
 public class TrayControl {
 
     private final TrayIcon icon;
-    private final SettingsPresenter settingsPresenter;
+    private final MainWindowPresenter mainWindowPresenter;
 
     @Inject
-    public TrayControl(TrayControlIconFactory iconFactory, SettingsPresenter settingsPresenter) {
+    public TrayControl(TrayControlIconFactory iconFactory, MainWindowPresenter mainWindowPresenter) {
         this.icon = iconFactory.getImage();
-        this.settingsPresenter = settingsPresenter;
+        this.mainWindowPresenter = mainWindowPresenter;
         initialize();
     }
 
@@ -59,6 +59,6 @@ public class TrayControl {
     }
 
     private void toggleSettings() {
-        settingsPresenter.setVisible(!settingsPresenter.isVisible());
+        mainWindowPresenter.setVisible(!mainWindowPresenter.isVisible());
     }
 }

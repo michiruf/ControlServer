@@ -21,13 +21,13 @@ import java.io.IOException;
  * @since 2016-03-08
  */
 @Singleton
-public class SettingsPresenter extends JFrame {
+public class MainWindowPresenter extends JFrame {
 
     @Inject
-    public SettingsPresenter(SettingsController controller, @Named("settingsFxml") String settingsFxml) {
+    public MainWindowPresenter(@Named("mainFxml") String fxmlPath) {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setSize(300, 500);
         // TODO maybe: setResizable(false);
+        setSize(300, 500);
         int x = Toolkit.getDefaultToolkit().getScreenSize().width / 2 - getSize().width / 2;
         int y = Toolkit.getDefaultToolkit().getScreenSize().height / 2 - getSize().height / 2;
         setLocation(x, y);
@@ -39,17 +39,16 @@ public class SettingsPresenter extends JFrame {
             }
         });
 
-        initializeFx(controller, settingsFxml);
+        initializeFx(fxmlPath);
     }
 
-    private void initializeFx(SettingsController controller, String settingsFxml) {
+    private void initializeFx(String settingsFxml) {
         JFXPanel jfxPanel = new JFXPanel();
         add(jfxPanel);
 
         Platform.runLater(() -> {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(settingsFxml));
-                loader.setController(controller);
                 Parent root = loader.load();
                 jfxPanel.setScene(new Scene(root));
             } catch (IOException e) {

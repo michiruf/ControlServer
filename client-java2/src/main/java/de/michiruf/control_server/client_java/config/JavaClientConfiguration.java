@@ -28,7 +28,7 @@ public class JavaClientConfiguration implements ClientConfiguration, ServerConfi
     private int hostPort;
 
     @JsonProperty
-    private boolean enabled;
+    private boolean autoStartEnabled;
 
     @JsonProperty
     private MouseData.CoordinateType coordinateType = MouseData.CoordinateType.RELATIVE;
@@ -79,12 +79,12 @@ public class JavaClientConfiguration implements ClientConfiguration, ServerConfi
     }
 
     @Override
-    public boolean isEnabled() {
-        return enabled;
+    public boolean isAutoStartEnabled() {
+        return autoStartEnabled;
     }
 
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
+    public void setAutoStartEnabled(boolean autoStartEnabled) {
+        this.autoStartEnabled = autoStartEnabled;
     }
 
     public MouseData.CoordinateType getCoordinateType() {

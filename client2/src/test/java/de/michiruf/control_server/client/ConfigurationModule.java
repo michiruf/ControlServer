@@ -88,7 +88,7 @@ public class ConfigurationModule {
             }
 
             @Override
-            public boolean isEnabled() {
+            public boolean isAutoStartEnabled() {
                 return true;
             }
         };

@@ -10,10 +10,11 @@ import java.net.URL;
 
 /**
  * @author Michael Ruf
- * @since 2016-03-09
+ * @since 2016-03-01
  */
-public class FooterController {
+public class MainWindowController {
 
+    // TODO delete actionEvent
     @SuppressWarnings("UnusedParameters")
     @FXML
     public void githubClick(ActionEvent actionEvent) {

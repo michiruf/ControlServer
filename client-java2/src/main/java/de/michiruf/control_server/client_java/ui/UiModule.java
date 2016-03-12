@@ -2,6 +2,7 @@ package de.michiruf.control_server.client_java.ui;
 
 import dagger.Module;
 import dagger.Provides;
+import de.michiruf.control_server.client_java.ui.pages.PagesModule;
 
 import javax.inject.Named;
 
@@ -10,9 +11,11 @@ import javax.inject.Named;
  * @since 2016-03-01
  */
 @Module(
+        includes = {
+                PagesModule.class
+        },
         injects = {
-                SettingsController.class,
-                SettingsPresenter.class,
+                MainWindowPresenter.class,
                 TrayControl.class,
                 TrayControlIconFactory.class
         },
@@ -30,8 +33,8 @@ public class UiModule {
 
     @SuppressWarnings("unused")
     @Provides
-    @Named("settingsFxml")
-    public String provideSettingsFxml() {
-        return "Settings.fxml";
+    @Named("mainFxml")
+    public String provideMainFxml() {
+        return "MainWindow.fxml";
     }
 }
