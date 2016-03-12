@@ -10,7 +10,10 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 import javax.swing.JFrame;
+import javax.swing.WindowConstants;
 import java.awt.Toolkit;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 
 /**
@@ -22,11 +25,19 @@ public class SettingsPresenter extends JFrame {
 
     @Inject
     public SettingsPresenter(SettingsController controller, @Named("settingsFxml") String settingsFxml) {
-        setDefaultCloseOperation(HIDE_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setSize(300, 500);
+        // TODO maybe: setResizable(false);
         int x = Toolkit.getDefaultToolkit().getScreenSize().width / 2 - getSize().width / 2;
         int y = Toolkit.getDefaultToolkit().getScreenSize().height / 2 - getSize().height / 2;
         setLocation(x, y);
+
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowIconified(WindowEvent e) {
+                setVisible(false);
+            }
+        });
 
         initializeFx(controller, settingsFxml);
     }
@@ -45,5 +56,13 @@ public class SettingsPresenter extends JFrame {
                 e.printStackTrace();
             }
         });
+    }
+
+    @Override
+    public void setVisible(boolean visible) {
+        super.setVisible(visible);
+        if (visible) {
+            setState(NORMAL);
+        }
     }
 }
