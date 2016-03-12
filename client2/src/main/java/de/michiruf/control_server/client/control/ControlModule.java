@@ -1,8 +1,8 @@
-package de.michiruf.control_server.client.robot;
+package de.michiruf.control_server.client.control;
 
 import dagger.Module;
 import dagger.Provides;
-import de.michiruf.control_server.client.robot.controls.ExecutorModule;
+import de.michiruf.control_server.client.control.executor.ExecutorModule;
 
 import javax.inject.Singleton;
 import java.awt.AWTException;
@@ -22,7 +22,7 @@ import java.awt.Robot;
         library = true,
         complete = false
 )
-public class RobotModule {
+public class ControlModule {
 
     @SuppressWarnings("unused")
     @Provides

@@ -1,7 +1,7 @@
-package de.michiruf.control_server.client.robot;
+package de.michiruf.control_server.client.control;
 
 import de.michiruf.control_server.client.convert.StringEventParser;
-import de.michiruf.control_server.client.robot.controls.ControlExecutor;
+import de.michiruf.control_server.client.control.executor.ControlExecutor;
 import de.michiruf.control_server.common.Event;
 
 import javax.inject.Inject;

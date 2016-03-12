@@ -1,8 +1,8 @@
 package de.michiruf.control_server.client.comm;
 
+import de.michiruf.control_server.client.dispatch.EventDispatcher;
 import de.michiruf.control_server.client.config.ClientConfiguration;
 import de.michiruf.control_server.client.convert.EventStringConverter;
-import de.michiruf.control_server.client.dispatch.EventDispatcher;
 import io.vertx.core.AbstractVerticle;
 
 /**

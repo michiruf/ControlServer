@@ -2,9 +2,9 @@ package de.michiruf.control_server.client.comm;
 
 import dagger.Module;
 import dagger.Provides;
+import de.michiruf.control_server.client.dispatch.EventDispatcher;
 import de.michiruf.control_server.client.config.ClientConfiguration;
 import de.michiruf.control_server.client.convert.EventStringConverter;
-import de.michiruf.control_server.client.dispatch.EventDispatcher;
 import de.michiruf.control_server.client.qualifier.ForDirectConnection;
 import de.michiruf.control_server.client.qualifier.ForWebServer;
 import io.vertx.core.Vertx;

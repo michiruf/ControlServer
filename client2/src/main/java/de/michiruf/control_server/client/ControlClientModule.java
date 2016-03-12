@@ -3,9 +3,8 @@ package de.michiruf.control_server.client;
 import dagger.Module;
 import de.michiruf.control_server.client.comm.CommunicationModule;
 import de.michiruf.control_server.client.config.ConfigurationModule;
+import de.michiruf.control_server.client.control.ControlModule;
 import de.michiruf.control_server.client.convert.ConvertModule;
-import de.michiruf.control_server.client.dispatch.DispatchModule;
-import de.michiruf.control_server.client.robot.RobotModule;
 
 /**
  * @author Michael Ruf
@@ -15,9 +14,8 @@ import de.michiruf.control_server.client.robot.RobotModule;
         includes = {
                 CommunicationModule.class,
                 ConfigurationModule.class,
-                ConvertModule.class,
-                DispatchModule.class,
-                RobotModule.class
+                ControlModule.class,
+                ConvertModule.class
         },
         complete = false,
         library = true

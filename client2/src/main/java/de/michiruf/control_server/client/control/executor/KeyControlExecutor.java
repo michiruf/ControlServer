@@ -1,4 +1,4 @@
-package de.michiruf.control_server.client.robot.controls;
+package de.michiruf.control_server.client.control.executor;
 
 import de.michiruf.control_server.common.Event;
 import de.michiruf.control_server.common.data.KeyData;
