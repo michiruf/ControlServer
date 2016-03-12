@@ -1,4 +1,4 @@
-package de.michiruf.control_server.client_java.capture.controls;
+package de.michiruf.control_server.client_java.capture.control;
 
 import de.michiruf.control_server.client.dispatch.EventDispatcher;
 import de.michiruf.control_server.common.Direction;

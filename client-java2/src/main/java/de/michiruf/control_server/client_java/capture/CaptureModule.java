@@ -1,8 +1,8 @@
 package de.michiruf.control_server.client_java.capture;
 
 import dagger.Module;
-import de.michiruf.control_server.client_java.capture.controls.KeyCaptureListener;
-import de.michiruf.control_server.client_java.capture.controls.MouseCaptureListener;
+import de.michiruf.control_server.client_java.capture.control.KeyCaptureListener;
+import de.michiruf.control_server.client_java.capture.control.MouseCaptureListener;
 
 /**
  * @author Michael Ruf
