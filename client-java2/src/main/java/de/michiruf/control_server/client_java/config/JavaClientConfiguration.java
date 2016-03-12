@@ -24,10 +24,10 @@ public class JavaClientConfiguration implements ClientConfiguration, ServerConfi
     @JsonProperty
     private boolean controlListeningEnabled;
 
-    @JsonIgnore
+    @JsonProperty
     private int hostPort;
 
-    @JsonIgnore
+    @JsonProperty
     private boolean enabled;
 
     @JsonProperty
