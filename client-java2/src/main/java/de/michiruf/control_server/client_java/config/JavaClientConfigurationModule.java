@@ -6,6 +6,7 @@ import dagger.Provides;
 import de.michiruf.control_server.client.config.ClientConfiguration;
 import de.michiruf.control_server.client.config.ServerConfiguration;
 import de.michiruf.control_server.client.qualifier.ForDirectConnection;
+import de.michiruf.control_server.client.qualifier.ForWebServer;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -53,13 +54,65 @@ public class JavaClientConfigurationModule {
         return configuration;
     }
 
+
+    @SuppressWarnings("unused")
+    @Provides
+    @Singleton
+    @ForWebServer
+    public ClientConfiguration provideWebServerClientConfiguration(
+            @ForWebServer String host,
+            JavaClientConfiguration configuration) {
+        // For the client module
+        return new ClientConfiguration() {
+            @Override
+            public String getHost() {
+                return host;
+            }
+
+            @Override
+            public int getPort() {
+                return 80;
+            }
+
+            @Override
+            public boolean isSendControlsEnabled() {
+                return configuration.isSendControlsEnabled();
+            }
+
+            @Override
+            public boolean isControlListeningEnabled() {
+                return configuration.isControlListeningEnabled();
+            }
+        };
+    }
+
     @SuppressWarnings("unused")
     @Provides
     @Singleton
     @ForDirectConnection
     public ClientConfiguration provideDirectConnectionClientConfiguration(JavaClientConfiguration configuration) {
         // For the client module
-        return configuration;
+        return new ClientConfiguration() {
+            @Override
+            public String getHost() {
+                return configuration.getHost();
+            }
+
+            @Override
+            public int getPort() {
+                return configuration.getPort();
+            }
+
+            @Override
+            public boolean isSendControlsEnabled() {
+                return !configuration.isSendControlsEnabled();
+            }
+
+            @Override
+            public boolean isControlListeningEnabled() {
+                return false;
+            }
+        };
     }
 
     @SuppressWarnings("unused")

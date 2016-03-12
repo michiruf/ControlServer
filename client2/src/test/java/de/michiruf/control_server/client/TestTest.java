@@ -2,7 +2,7 @@ package de.michiruf.control_server.client;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * @author Michael Ruf

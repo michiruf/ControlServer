@@ -10,5 +10,7 @@ public interface ClientConfiguration {
 
     int getPort();
 
-    boolean isControllable();
+    boolean isSendControlsEnabled();
+
+    boolean isControlListeningEnabled();
 }

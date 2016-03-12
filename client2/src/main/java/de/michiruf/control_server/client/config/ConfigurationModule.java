@@ -4,8 +4,6 @@ import dagger.Module;
 import dagger.Provides;
 import de.michiruf.control_server.client.qualifier.ForWebServer;
 
-import javax.inject.Singleton;
-
 /**
  * @author Michael Ruf
  * @since 2016-02-29
@@ -22,24 +20,8 @@ public class ConfigurationModule {
 
     @SuppressWarnings("unused")
     @Provides
-    @Singleton
     @ForWebServer
-    public ClientConfiguration provideWebServerClientConfiguration() {
-        return new ClientConfiguration() {
-            @Override
-            public String getHost() {
-                return "localhost"; // TODO
-            }
-
-            @Override
-            public int getPort() {
-                return 80;
-            }
-
-            @Override
-            public boolean isControllable() {
-                return true;
-            }
-        };
+    public String provideHost() {
+        return "localhost";
     }
 }

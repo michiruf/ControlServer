@@ -19,7 +19,10 @@ public class JavaClientConfiguration implements ClientConfiguration, ServerConfi
     private int port;
 
     @JsonProperty
-    private boolean controllable;
+    private boolean sendControlsEnabled;
+
+    @JsonProperty
+    private boolean controlListeningEnabled;
 
     @JsonIgnore
     private int hostPort;
@@ -49,12 +52,21 @@ public class JavaClientConfiguration implements ClientConfiguration, ServerConfi
     }
 
     @Override
-    public boolean isControllable() {
-        return controllable;
+    public boolean isSendControlsEnabled() {
+        return sendControlsEnabled;
     }
 
-    public void setControllable(boolean controllable) {
-        this.controllable = controllable;
+    public void setSendControlsEnabled(boolean sendControlsEnabled) {
+        this.sendControlsEnabled = sendControlsEnabled;
+    }
+
+    @Override
+    public boolean isControlListeningEnabled() {
+        return controlListeningEnabled;
+    }
+
+    public void setControlListeningEnabled(boolean controlListeningEnabled) {
+        this.controlListeningEnabled = controlListeningEnabled;
     }
 
     @Override
@@ -85,6 +97,7 @@ public class JavaClientConfiguration implements ClientConfiguration, ServerConfi
 
     @JsonIgnore
     public boolean isProperlyConfigured() {
+        // TODO!!! (do we still need this?)
         return host != null && host.length() > 0 && port != 0 && coordinateType != null;
     }
 }
