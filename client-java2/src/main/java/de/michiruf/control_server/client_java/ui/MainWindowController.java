@@ -1,6 +1,5 @@
 package de.michiruf.control_server.client_java.ui;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
 import java.awt.Desktop;
@@ -14,10 +13,8 @@ import java.net.URL;
  */
 public class MainWindowController {
 
-    // TODO delete actionEvent
-    @SuppressWarnings("UnusedParameters")
     @FXML
-    public void githubClick(ActionEvent actionEvent) {
+    public void githubClick() {
         try {
             Desktop.getDesktop().browse(new URL("https://github.com/michiruf").toURI());
         } catch (IOException | URISyntaxException e) {

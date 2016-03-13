@@ -42,13 +42,13 @@ public class MainWindowPresenter extends JFrame {
         initializeFx(fxmlPath);
     }
 
-    private void initializeFx(String settingsFxml) {
+    private void initializeFx(String fxmlPath) {
         JFXPanel jfxPanel = new JFXPanel();
         add(jfxPanel);
 
         Platform.runLater(() -> {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(settingsFxml));
+                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(fxmlPath));
                 Parent root = loader.load();
                 jfxPanel.setScene(new Scene(root));
             } catch (IOException e) {

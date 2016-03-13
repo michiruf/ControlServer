@@ -19,6 +19,9 @@ import javax.inject.Named;
                 TrayControl.class,
                 TrayControlIconFactory.class
         },
+        staticInjections = {
+                MainWindowController.class
+        },
         library = true,
         complete = false
 )

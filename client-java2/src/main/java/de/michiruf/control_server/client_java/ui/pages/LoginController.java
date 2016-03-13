@@ -3,6 +3,7 @@ package de.michiruf.control_server.client_java.ui.pages;
 import de.michiruf.control_server.client_java.config.JavaClientConfiguration;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 import javax.inject.Inject;
@@ -17,10 +18,10 @@ public class LoginController {
     protected static JavaClientConfiguration configuration;
 
     @FXML
-    private TextField hostInput;
+    private TextField usernameInput;
 
     @FXML
-    private TextField portInput;
+    private PasswordField passwordInput;
 
     @FXML
     protected void onLogin(ActionEvent event) {
