@@ -25,7 +25,8 @@ import java.util.NoSuchElementException;
                 UiModule.class
         },
         // TODO why is this necessary?
-        complete = false
+        complete = false,
+        library = true // TODO remove (due to computer id)
 )
 public class JavaControlClientModule {
 
