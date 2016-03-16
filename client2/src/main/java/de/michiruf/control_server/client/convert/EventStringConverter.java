@@ -27,7 +27,7 @@ public class EventStringConverter {
         try {
             return objectMapper.writeValueAsString(event);
         } catch (JsonProcessingException e) {
-            e.printStackTrace();
+            e.printStackTrace(); // TODO Error
         }
 
         return null;

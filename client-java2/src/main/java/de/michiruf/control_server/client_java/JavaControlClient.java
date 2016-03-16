@@ -19,7 +19,7 @@ public class JavaControlClient {
             // TODO Try synth?
             // should not change anything when using java fx inside
         } catch (Exception e) {
-            e.printStackTrace();
+            e.printStackTrace(); // TODO Error (only as logging)
         }
 
         SwingUtilities.invokeLater(() -> {

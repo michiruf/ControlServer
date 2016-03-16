@@ -47,6 +47,7 @@ public class JavaClientConfigurationModule {
             byte[] data = Files.readAllBytes(path);
             configuration = objectMapper.readValue(data, JavaClientConfiguration.class);
         } catch (IOException e) {
+            // TODO Error (only as logging)
             configuration = new JavaClientConfiguration();
         }
 

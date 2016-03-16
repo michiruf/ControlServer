@@ -31,7 +31,7 @@ public class ControlModule {
         try {
             return new Robot();
         } catch (AWTException e) {
-            e.printStackTrace();
+            e.printStackTrace(); // TODO Error
         }
         return null;
     }

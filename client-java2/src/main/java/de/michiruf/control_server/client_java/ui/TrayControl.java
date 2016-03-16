@@ -54,7 +54,7 @@ public class TrayControl {
         try {
             SystemTray.getSystemTray().add(icon);
         } catch (AWTException e) {
-            e.printStackTrace();
+            e.printStackTrace(); // TODO Error
         }
     }
 

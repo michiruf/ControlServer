@@ -33,7 +33,7 @@ public class Server {
             } else if (event.cause() != null) {
                 System.err.println(String.format(
                         "[Server] NOT STARTED on port %d", configuration.getHostPort()));
-                event.cause().printStackTrace();
+                event.cause().printStackTrace(); // TODO Error
             }
         });
     }
@@ -48,7 +48,7 @@ public class Server {
             System.out.println("[Server] STOPPED");
         } catch (Exception e) {
             System.err.println("[Server] NOT STOPPED");
-            e.printStackTrace();
+            e.printStackTrace(); // TODO Error
         }
     }
 }

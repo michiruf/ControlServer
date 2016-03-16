@@ -28,7 +28,7 @@ public class SettingsPresenter {
         try {
             rootNode = FXMLLoader.load(getClass().getClassLoader().getResource(settingsFxml));
         } catch (IOException e) {
-            e.printStackTrace();
+            e.printStackTrace(); // TODO Error
         }
     }
 

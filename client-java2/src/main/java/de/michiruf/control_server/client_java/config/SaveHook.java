@@ -33,7 +33,7 @@ public class SaveHook {
                     Files.write(configurationPath, data, StandardOpenOption.CREATE, StandardOpenOption.WRITE,
                             StandardOpenOption.TRUNCATE_EXISTING);
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    e.printStackTrace(); // TODO Error
                 }
             }
         });

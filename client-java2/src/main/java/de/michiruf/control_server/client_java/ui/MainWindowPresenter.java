@@ -52,7 +52,7 @@ public class MainWindowPresenter extends JFrame {
                 Parent root = loader.load();
                 jfxPanel.setScene(new Scene(root));
             } catch (IOException e) {
-                e.printStackTrace();
+                e.printStackTrace(); // TODO Error
             }
         });
     }
