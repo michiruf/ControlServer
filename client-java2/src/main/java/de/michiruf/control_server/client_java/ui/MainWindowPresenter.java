@@ -3,7 +3,6 @@ package de.michiruf.control_server.client_java.ui;
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 
 import javax.inject.Inject;
@@ -49,10 +48,9 @@ public class MainWindowPresenter extends JFrame {
         Platform.runLater(() -> {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(fxmlPath));
-                Parent root = loader.load();
-                jfxPanel.setScene(new Scene(root));
+                jfxPanel.setScene(new Scene(loader.load()));
             } catch (IOException e) {
-                e.printStackTrace();
+                e.printStackTrace(); // TODO Error
             }
         });
     }

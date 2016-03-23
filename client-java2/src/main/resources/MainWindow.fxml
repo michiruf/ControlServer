@@ -13,8 +13,16 @@
     </stylesheets>
 
     <center>
-        <fx:include source="pages/Devices.fxml"/>
-        <fx:include source="pages/Login.fxml"/>
+        <BorderPane>
+            <center>
+                <fx:include source="pages/Devices.fxml"/>
+                <fx:include source="pages/Login.fxml"/>
+            </center>
+
+            <bottom>
+                <fx:include source="pages/DirectConnection.fxml"/>
+            </bottom>
+        </BorderPane>
     </center>
 
     <bottom>

@@ -30,7 +30,6 @@ public class JavaClientConfigurationModule {
 
     @SuppressWarnings("unused")
     @Provides
-    @Singleton
     @Named("configurationPath")
     public Path provideConfigurationPath() {
         return Paths.get("settings.json");
@@ -47,6 +46,7 @@ public class JavaClientConfigurationModule {
             byte[] data = Files.readAllBytes(path);
             configuration = objectMapper.readValue(data, JavaClientConfiguration.class);
         } catch (IOException e) {
+            // TODO Error (only as logging)
             configuration = new JavaClientConfiguration();
         }
 

@@ -28,7 +28,7 @@ public class StringEventParser {
         try {
             return objectMapper.readValue(eventString, Event.class);
         } catch (IOException e) {
-            e.printStackTrace();
+            e.printStackTrace(); // TODO Error
         }
 
         return null;

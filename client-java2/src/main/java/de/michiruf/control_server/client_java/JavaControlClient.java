@@ -19,11 +19,14 @@ public class JavaControlClient {
             // TODO Try synth?
             // should not change anything when using java fx inside
         } catch (Exception e) {
-            e.printStackTrace();
+            e.printStackTrace(); // TODO Error (only as logging)
         }
 
         SwingUtilities.invokeLater(() -> {
             ObjectGraph appGraph = ObjectGraph.create(new JavaControlClientModule());
+			// TODO appGraph.injectStatics();
+			// Without this the controllers should fail
+		
             TrayControl trayControl = appGraph.get(TrayControl.class);
             trayControl.show();
 

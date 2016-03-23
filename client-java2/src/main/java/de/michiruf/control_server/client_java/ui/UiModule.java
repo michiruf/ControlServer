@@ -20,7 +20,7 @@ import javax.inject.Named;
                 TrayControlIconFactory.class
         },
         staticInjections = {
-                MainWindowController.class
+                MainWindowController.class // TODO needed?
         },
         library = true,
         complete = false

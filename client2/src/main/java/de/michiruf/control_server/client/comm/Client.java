@@ -31,7 +31,7 @@ public class Client {
                 System.err.println(String.format(
                         "[Client] NOT CONNECTED on port %s:%d",
                         configuration.getHost(), configuration.getPort()));
-                event.cause().printStackTrace();
+                event.cause().printStackTrace(); // TODO Error
             }
         });
     }
@@ -46,7 +46,7 @@ public class Client {
             System.out.println("[Client] DISCONNECTED");
         } catch (Exception e) {
             System.err.println("[Client] NOT DISCONNECTED");
-            e.printStackTrace();
+            e.printStackTrace(); // TODO Error
         }
     }
 }

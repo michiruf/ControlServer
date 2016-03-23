@@ -18,7 +18,7 @@ public class MainWindowController {
         try {
             Desktop.getDesktop().browse(new URL("https://github.com/michiruf").toURI());
         } catch (IOException | URISyntaxException e) {
-            e.printStackTrace();
+            e.printStackTrace(); // TODO Error
         }
     }
 }
