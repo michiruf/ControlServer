@@ -24,6 +24,9 @@ public class JavaControlClient {
 
         SwingUtilities.invokeLater(() -> {
             ObjectGraph appGraph = ObjectGraph.create(new JavaControlClientModule());
+			// TODO appGraph.injectStatics();
+			// Without this the controllers should fail
+		
             TrayControl trayControl = appGraph.get(TrayControl.class);
             trayControl.show();
 
