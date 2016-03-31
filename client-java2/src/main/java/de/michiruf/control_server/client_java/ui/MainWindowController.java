@@ -2,10 +2,11 @@ package de.michiruf.control_server.client_java.ui;
 
 import javafx.fxml.FXML;
 
+import javax.inject.Inject;
+import javax.inject.Named;
 import java.awt.Desktop;
 import java.io.IOException;
-import java.net.URISyntaxException;
-import java.net.URL;
+import java.net.URI;
 
 /**
  * @author Michael Ruf
@@ -13,11 +14,15 @@ import java.net.URL;
  */
 public class MainWindowController {
 
+    @Inject
+    @Named("githubUri")
+    protected static URI githubUri;
+
     @FXML
-    public void githubClick() {
+    public void onGithubClick() {
         try {
-            Desktop.getDesktop().browse(new URL("https://github.com/michiruf").toURI());
-        } catch (IOException | URISyntaxException e) {
+            Desktop.getDesktop().browse(githubUri);
+        } catch (IOException e) {
             e.printStackTrace(); // TODO Error
         }
     }

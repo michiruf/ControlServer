@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import java.net.URL?>
 <BorderPane
         xmlns="http://javafx.com/javafx/8"
@@ -12,22 +16,35 @@
         <URL value="@include/Styles.css"/>
     </stylesheets>
 
+    <top>
+        <fx:include source="include/Logo.fxml"/>
+    </top>
+
     <center>
-        <BorderPane>
-            <center>
+        <GridPane>
+            <columnConstraints>
+                <ColumnConstraints percentWidth="50"/>
+                <ColumnConstraints percentWidth="50"/>
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints percentHeight="100"/>
+            </rowConstraints>
+
+            <Pane id="left-content" GridPane.columnIndex="0" GridPane.rowIndex="0">
                 <fx:include source="pages/Devices.fxml"/>
                 <fx:include source="pages/Login.fxml"/>
-            </center>
+            </Pane>
 
-            <bottom>
+            <Pane id="right-content" GridPane.columnIndex="1" GridPane.rowIndex="0">
                 <fx:include source="pages/DirectConnection.fxml"/>
-            </bottom>
-        </BorderPane>
+                <fx:include source="pages/Options.fxml"/>
+            </Pane>
+        </GridPane>
     </center>
 
     <bottom>
         <HBox id="footer" alignment="CENTER">
-            <Hyperlink text="Github @michiruf" onAction="#githubClick" underline="true"/>
+            <Hyperlink text="Github @michiruf" onAction="#onGithubClick"/>
         </HBox>
     </bottom>
 </BorderPane>

@@ -8,7 +8,9 @@ import javafx.scene.Scene;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
+import javax.swing.BorderFactory;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.WindowConstants;
 import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
@@ -22,14 +24,13 @@ import java.io.IOException;
 @Singleton
 public class MainWindowPresenter extends JFrame {
 
+    private boolean initialized = false;
+    private boolean visibleRequest = false;
+
     @Inject
     public MainWindowPresenter(@Named("mainFxml") String fxmlPath) {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        // TODO maybe: setResizable(false);
-        setSize(300, 500);
-        int x = Toolkit.getDefaultToolkit().getScreenSize().width / 2 - getSize().width / 2;
-        int y = Toolkit.getDefaultToolkit().getScreenSize().height / 2 - getSize().height / 2;
-        setLocation(x, y);
+        setResizable(false);
 
         addWindowListener(new WindowAdapter() {
             @Override
@@ -43,20 +44,47 @@ public class MainWindowPresenter extends JFrame {
 
     private void initializeFx(String fxmlPath) {
         JFXPanel jfxPanel = new JFXPanel();
-        add(jfxPanel);
+        setContentPane(jfxPanel);
 
         Platform.runLater(() -> {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(fxmlPath));
-                jfxPanel.setScene(new Scene(loader.load()));
+                Scene scene = new Scene(loader.load());
+                jfxPanel.setScene(scene);
+                jfxPanel.setSize((int) scene.getWidth(), (int) scene.getHeight());
+                pack();
             } catch (IOException e) {
+                setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+                setContentPane(new JLabel("Error initializing java fx. See logging for more information.") {{
+                    setBorder(BorderFactory.createEmptyBorder(25, 25, 25, 25));
+                }});
+                pack();
+
                 e.printStackTrace(); // TODO Error
+            } finally {
+                initialized();
             }
         });
     }
 
+    private void initialized() {
+        int x = Toolkit.getDefaultToolkit().getScreenSize().width / 2 - getSize().width / 2;
+        int y = Toolkit.getDefaultToolkit().getScreenSize().height / 2 - getSize().height / 2;
+        setLocation(x, y);
+
+        initialized = true;
+        if (visibleRequest) {
+            setVisible(true);
+        }
+    }
+
     @Override
     public void setVisible(boolean visible) {
+        if (!initialized) {
+            visibleRequest = true;
+            return;
+        }
+
         super.setVisible(visible);
         if (visible) {
             setState(NORMAL);

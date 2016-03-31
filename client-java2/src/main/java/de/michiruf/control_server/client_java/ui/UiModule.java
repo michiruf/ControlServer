@@ -5,6 +5,10 @@ import dagger.Provides;
 import de.michiruf.control_server.client_java.ui.pages.PagesModule;
 
 import javax.inject.Named;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 
 /**
  * @author Michael Ruf
@@ -20,7 +24,7 @@ import javax.inject.Named;
                 TrayControlIconFactory.class
         },
         staticInjections = {
-                MainWindowController.class // TODO needed?
+                MainWindowController.class
         },
         library = true,
         complete = false
@@ -39,5 +43,17 @@ public class UiModule {
     @Named("mainFxml")
     public String provideMainFxml() {
         return "MainWindow.fxml";
+    }
+
+    @SuppressWarnings("unused")
+    @Provides
+    @Named("githubUri")
+    public URI provideGithubUrl() {
+        try {
+            return new URL("https://github.com/michiruf").toURI();
+        } catch (URISyntaxException | MalformedURLException e) {
+            e.printStackTrace(); // TODO Error
+        }
+        return null;
     }
 }

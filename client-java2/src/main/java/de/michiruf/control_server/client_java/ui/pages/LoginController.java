@@ -24,7 +24,17 @@ public class LoginController {
     private PasswordField passwordInput;
 
     @FXML
-    protected void onLogin(ActionEvent event) {
+    protected void onLoginClick(ActionEvent event) {
         System.out.println(event != null ? "nonnull" : "null");
+    }
+
+    @FXML
+    protected void onRegisterClick(ActionEvent actionEvent) {
+        // TODO
+    }
+
+    @FXML
+    protected void onForgotPasswordClick(ActionEvent actionEvent) {
+        // TODO
     }
 }

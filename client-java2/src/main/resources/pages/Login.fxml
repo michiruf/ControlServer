@@ -8,43 +8,43 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
-<BorderPane
+<VBox
         xmlns="http://javafx.com/javafx/8"
         xmlns:fx="http://javafx.com/fxml/1"
-        fx:controller="de.michiruf.control_server.client_java.ui.pages.LoginController"
-        visible="true"> <!-- TODO -->
-    <top>
-        <fx:include source="../include/Logo.fxml"/>
-    </top>
+        fx:controller="de.michiruf.control_server.client_java.ui.pages.LoginController">
+    <padding>
+        <Insets bottom="25" left="25" right="25" top="25"/>
+    </padding>
 
-    <center>
-        <VBox>
-            <padding>
-                <Insets bottom="25" left="25" right="25" top="25"/>
-            </padding>
+    <!-- TODO this shit does not wrap into next line if window too small -->
+    <Label text="If you are logged in you can simply choose one of your registered online devices. You don't need to login to use direct connection!"
+           wrapText="true"/>
 
-            <!-- TODO this shit does not wrap into next line if window too small -->
-            <Label text="If you are logged in you can simply choose one of your devices." wrapText="true"/>
+    <Pane prefHeight="25"/>
 
-            <Pane prefHeight="25"/>
+    <Label text="Username" labelFor="$usernameInput"/>
+    <TextField fx:id="usernameInput"/>
 
-            <Label text="Username" labelFor="$usernameInput"/>
-            <TextField fx:id="usernameInput"/>
+    <Pane prefHeight="15"/>
 
-            <Pane prefHeight="15"/>
+    <Label text="Password" labelFor="$passwordInput"/>
+    <PasswordField fx:id="passwordInput"/>
 
-            <Label text="Password" labelFor="$passwordInput"/>
-            <PasswordField fx:id="passwordInput"/>
-        </VBox>
-    </center>
+    <BorderPane>
+        <padding>
+            <Insets top="25"/>
+        </padding>
 
-    <bottom>
-        <HBox alignment="CENTER">
-            <padding>
-                <Insets bottom="25" left="25" right="25" top="25"/>
-            </padding>
+        <left>
+            <Button text="Login" onAction="#onLoginClick"/>
+        </left>
 
-            <Button text="Login" onAction="#onLogin"/>
-        </HBox>
-    </bottom>
-</BorderPane>
+        <right>
+            <HBox>
+                <Button text="Register" onAction="#onRegisterClick"/>
+                <Pane prefWidth="15"/>
+                <Button text="Forgot-Password?" onAction="#onForgotPasswordClick"/>
+            </HBox>
+        </right>
+    </BorderPane>
+</VBox>
