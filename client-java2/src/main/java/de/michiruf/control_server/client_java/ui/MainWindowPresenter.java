@@ -50,6 +50,8 @@ public class MainWindowPresenter extends JFrame {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(fxmlPath));
                 Scene scene = new Scene(loader.load());
+                // NOTE we may can get the root element in the controller by fxml?
+                ((MainWindowController) loader.getController()).setRootNode(scene.getRoot());
                 jfxPanel.setScene(scene);
                 jfxPanel.setSize((int) scene.getWidth(), (int) scene.getHeight());
                 pack();

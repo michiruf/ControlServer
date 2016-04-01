@@ -4,7 +4,6 @@
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import java.net.URL?>
 <BorderPane
@@ -30,21 +29,28 @@
                 <RowConstraints percentHeight="100"/>
             </rowConstraints>
 
-            <Pane id="left-content" GridPane.columnIndex="0" GridPane.rowIndex="0">
-                <fx:include source="pages/Devices.fxml"/>
-                <fx:include source="pages/Login.fxml"/>
-            </Pane>
+            <!-- Contents needs to be BorderPanes because full width and height are only provided by those -->
+            <!-- TODO would a stack pane also be good?! -->
 
-            <Pane id="right-content" GridPane.columnIndex="1" GridPane.rowIndex="0">
-                <fx:include source="pages/DirectConnection.fxml"/>
-                <fx:include source="pages/Options.fxml"/>
-            </Pane>
+            <BorderPane id="left-content" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                <center>
+                    <fx:include source="pages/Devices.fxml"/>
+                    <fx:include source="pages/Login.fxml"/>
+                </center>
+            </BorderPane>
+
+            <BorderPane id="right-content" GridPane.columnIndex="1" GridPane.rowIndex="0">
+                <center>
+                    <fx:include source="pages/DirectConnection.fxml"/>
+                    <fx:include source="pages/Options.fxml"/>
+                </center>
+            </BorderPane>
         </GridPane>
     </center>
 
     <bottom>
         <HBox id="footer" alignment="CENTER">
-            <Hyperlink text="Github @michiruf" onAction="#onGithubClick"/>
+            <Hyperlink text="_github_label" onAction="#onGithubClick"/>
         </HBox>
     </bottom>
 </BorderPane>

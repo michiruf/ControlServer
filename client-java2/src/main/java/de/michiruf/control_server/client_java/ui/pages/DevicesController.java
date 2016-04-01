@@ -30,6 +30,7 @@ public class DevicesController {
     @FXML
     private ToggleGroup positionToggleGroup;
 
+    @SuppressWarnings("unused") // due to FXML
     @FXML
     protected void initialize() {
         hostInput.setText(configuration.getHost());

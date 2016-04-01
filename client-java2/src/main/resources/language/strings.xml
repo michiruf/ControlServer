@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+
+    <string name="login_hint">If you are logged in you can simply choose one of your registered online devices. You
+        don't need to login to use direct connection!
+    </string>
+    <string name="login_username">Username</string>
+    <string name="login_password">Username</string>
+    <string name="login_login">Login</string>
+    <string name="login_register">Register</string>
+    <string name="login_forgot_password">Forgot password?</string>
+
+    <string name="github_label">Github @michiruf</string>
+</resources>

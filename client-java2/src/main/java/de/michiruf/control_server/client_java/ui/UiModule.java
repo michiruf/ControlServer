@@ -19,6 +19,7 @@ import java.net.URL;
                 PagesModule.class
         },
         injects = {
+                LanguageProvider.class,
                 MainWindowPresenter.class,
                 TrayControl.class,
                 TrayControlIconFactory.class
@@ -36,6 +37,13 @@ public class UiModule {
     @Named("iconPath")
     public String provideIconPath() {
         return "TrayControlIcon.png";
+    }
+
+    @SuppressWarnings("unused")
+    @Provides
+    @Named("stringsXml")
+    public String provideStringsXml() {
+        return "language/strings.xml";
     }
 
     @SuppressWarnings("unused")

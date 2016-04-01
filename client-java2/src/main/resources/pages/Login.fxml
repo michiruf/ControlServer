@@ -16,18 +16,16 @@
         <Insets bottom="25" left="25" right="25" top="25"/>
     </padding>
 
-    <!-- TODO this shit does not wrap into next line if window too small -->
-    <Label text="If you are logged in you can simply choose one of your registered online devices. You don't need to login to use direct connection!"
-           wrapText="true"/>
+    <Label text="_login_hint" wrapText="true"/>
 
     <Pane prefHeight="25"/>
 
-    <Label text="Username" labelFor="$usernameInput"/>
+    <Label text="_login_username" labelFor="$usernameInput"/>
     <TextField fx:id="usernameInput"/>
 
     <Pane prefHeight="15"/>
 
-    <Label text="Password" labelFor="$passwordInput"/>
+    <Label text="_login_password" labelFor="$passwordInput"/>
     <PasswordField fx:id="passwordInput"/>
 
     <BorderPane>
@@ -36,14 +34,14 @@
         </padding>
 
         <left>
-            <Button text="Login" onAction="#onLoginClick"/>
+            <Button text="_login_login" onAction="#onLoginClick"/>
         </left>
 
         <right>
             <HBox>
-                <Button text="Register" onAction="#onRegisterClick"/>
+                <Button text="_login_register" onAction="#onRegisterClick"/>
                 <Pane prefWidth="15"/>
-                <Button text="Forgot-Password?" onAction="#onForgotPasswordClick"/>
+                <Button text="_login_forgot_password" onAction="#onForgotPasswordClick"/>
             </HBox>
         </right>
     </BorderPane>
