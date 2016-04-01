@@ -29,7 +29,7 @@ public class TrayControl {
         icon.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                toggleSettings();
+                toggleMainWindow();
             }
 
             @Override
@@ -58,7 +58,7 @@ public class TrayControl {
         }
     }
 
-    private void toggleSettings() {
+    private void toggleMainWindow() {
         mainWindowPresenter.setVisible(!mainWindowPresenter.isVisible());
     }
 }
