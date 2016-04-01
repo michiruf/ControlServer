@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import java.net.URL?>
+<VBox
+        xmlns="http://javafx.com/javafx/8"
+        xmlns:fx="http://javafx.com/fxml/1"
+        fx:controller="de.michiruf.control_server.client_java.ui.DirectConnectionWindowController"
+        fx:id="root"
+        styleClass="root"
+        id="directConnection">
+    <stylesheets>
+        <URL value="@include/Styles.css"/>
+    </stylesheets>
+    <padding>
+        <Insets bottom="25" left="25" right="25" top="25"/>
+    </padding>
+
+    <Label text="_start_direct_connection_host" labelFor="$startDirectConnectionHost"/>
+    <TextField fx:id="startDirectConnectionHost"/>
+    <Pane prefHeight="15"/>
+
+    <HBox>
+        <Label text="_start_direct_connection_port" labelFor="$startDirectConnectionPort">
+            <HBox.margin>
+                <Insets top="3" right="12"/>
+            </HBox.margin>
+        </Label>
+        <TextField fx:id="startDirectConnectionPort" prefWidth="40" onAction="#onChange"/>
+    </HBox>
+    <Pane prefHeight="25"/>
+
+    <Button text="_start_direct_connection_connect" onAction="#onConnectClick"/>
+</VBox>

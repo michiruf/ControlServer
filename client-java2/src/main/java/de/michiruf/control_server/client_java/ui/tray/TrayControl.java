@@ -1,4 +1,6 @@
-package de.michiruf.control_server.client_java.ui;
+package de.michiruf.control_server.client_java.ui.tray;
+
+import de.michiruf.control_server.client_java.ui.FxWindowPresenter;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -16,10 +18,10 @@ import java.awt.event.MouseListener;
 public class TrayControl {
 
     private final TrayIcon icon;
-    private final MainWindowPresenter mainWindowPresenter;
+    private final FxWindowPresenter mainWindowPresenter;
 
     @Inject
-    public TrayControl(TrayControlIconFactory iconFactory, MainWindowPresenter mainWindowPresenter) {
+    public TrayControl(TrayControlIconFactory iconFactory, FxWindowPresenter mainWindowPresenter) {
         this.icon = iconFactory.getImage();
         this.mainWindowPresenter = mainWindowPresenter;
         initialize();

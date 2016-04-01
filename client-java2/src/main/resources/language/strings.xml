@@ -17,6 +17,10 @@
     <string name="direct_connection_start">Start direct connection</string>
     <string name="direct_connection_allow_for_port">Allow direct connection for port</string>
 
+    <string name="start_direct_connection_host">Host</string>
+    <string name="start_direct_connection_port">Port</string>
+    <string name="start_direct_connection_connect">Connect</string>
+
     <string name="options_allow_controllable">Computer can be controlled in general (-> security)</string>
     <string name="options_relative_positioning">Relative positioning</string>
     <string name="options_absolute_positioning">Absolute positioning</string>

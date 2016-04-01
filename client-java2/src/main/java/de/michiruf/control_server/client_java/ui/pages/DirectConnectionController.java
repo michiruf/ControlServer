@@ -1,6 +1,8 @@
 package de.michiruf.control_server.client_java.ui.pages;
 
+import de.michiruf.control_server.client.qualifier.ForDirectConnection;
 import de.michiruf.control_server.client_java.config.JavaClientConfiguration;
+import de.michiruf.control_server.client_java.ui.FxWindowPresenter;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
@@ -15,6 +17,10 @@ public class DirectConnectionController {
 
     @Inject
     protected static JavaClientConfiguration configuration;
+
+    @Inject
+    @ForDirectConnection
+    protected static FxWindowPresenter directConnectionWindowPresenter;
 
     @FXML
     private CheckBox allowDirectConnection;
@@ -48,6 +54,6 @@ public class DirectConnectionController {
 
     @FXML
     protected void onStartDirectConnectionClick() {
-        // TODO
+        directConnectionWindowPresenter.setVisible(true);
     }
 }

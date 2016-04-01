@@ -1,4 +1,4 @@
-package de.michiruf.control_server.client_java.ui;
+package de.michiruf.control_server.client_java.ui.language;
 
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -18,16 +18,14 @@ public class LanguageAdoptingController {
     @Inject
     protected static LanguageProvider languageProvider;
 
-    private boolean initialized = false;
-    private Node rootNode;
+    @SuppressWarnings("unused") // due to FXML inheritance
+    @FXML
+    private Node root;
 
     @SuppressWarnings("unused") // due to FXML
     @FXML
     protected void initialize() {
-        initialized = true;
-        if (rootNode != null) {
-            initializeImpl(rootNode);
-        }
+        initializeImpl(root);
     }
 
     private void initializeImpl(Node node) {
@@ -42,13 +40,6 @@ public class LanguageAdoptingController {
                     label.setText(newValue);
                 }
             }
-        }
-    }
-
-    public void setRootNode(Node rootNode) {
-        this.rootNode = rootNode;
-        if (initialized) {
-            initialize();
         }
     }
 }

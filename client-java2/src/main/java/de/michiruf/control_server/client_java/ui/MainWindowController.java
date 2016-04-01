@@ -1,6 +1,7 @@
 package de.michiruf.control_server.client_java.ui;
 
 import de.michiruf.control_server.Constants;
+import de.michiruf.control_server.client_java.ui.language.LanguageAdoptingController;
 import javafx.fxml.FXML;
 
 import java.awt.Desktop;

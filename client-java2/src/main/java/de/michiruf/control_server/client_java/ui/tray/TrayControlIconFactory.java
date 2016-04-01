@@ -1,4 +1,4 @@
-package de.michiruf.control_server.client_java.ui;
+package de.michiruf.control_server.client_java.ui.tray;
 
 import javax.inject.Inject;
 import javax.inject.Named;

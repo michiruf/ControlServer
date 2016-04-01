@@ -1,6 +1,11 @@
-#root {
+.root {
     -fx-background-color: #f0f0f0;
+}
+#main {
     -fx-pref-width: 780px;
+}
+#directConnection {
+    -fx-pref-width: 200px;
 }
 
 Hyperlink {

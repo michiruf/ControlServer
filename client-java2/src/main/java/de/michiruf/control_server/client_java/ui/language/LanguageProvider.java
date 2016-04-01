@@ -1,4 +1,4 @@
-package de.michiruf.control_server.client_java.ui;
+package de.michiruf.control_server.client_java.ui.language;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;

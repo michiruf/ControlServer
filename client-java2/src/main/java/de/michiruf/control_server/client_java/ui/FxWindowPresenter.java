@@ -5,9 +5,6 @@ import javafx.embed.swing.JFXPanel;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 
-import javax.inject.Inject;
-import javax.inject.Named;
-import javax.inject.Singleton;
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -21,21 +18,32 @@ import java.io.IOException;
  * @author Michael Ruf
  * @since 2016-03-08
  */
-@Singleton
-public class MainWindowPresenter extends JFrame {
+public class FxWindowPresenter extends JFrame {
+
+    private boolean minimizeToTray;
+    private boolean centerFrame;
 
     private boolean initialized = false;
     private boolean visibleRequest = false;
 
-    @Inject
-    public MainWindowPresenter(@Named("mainFxml") String fxmlPath) {
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setResizable(false);
+    public FxWindowPresenter(String fxmlPath) {
+        this(fxmlPath, false);
+    }
 
+    public FxWindowPresenter(String fxmlPath, boolean minimizeToTray) {
+        this(fxmlPath, minimizeToTray, true);
+    }
+
+    public FxWindowPresenter(String fxmlPath, boolean minimizeToTray, boolean centerFrame) {
+        setMinimizeToTray(minimizeToTray);
+        setCenterFrame(centerFrame);
+        setResizable(false);
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowIconified(WindowEvent e) {
-                setVisible(false);
+                if (minimizeToTray) {
+                    setVisible(false);
+                }
             }
         });
 
@@ -50,8 +58,6 @@ public class MainWindowPresenter extends JFrame {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(fxmlPath));
                 Scene scene = new Scene(loader.load());
-                // NOTE we may can get the root element in the controller by fxml?
-                ((MainWindowController) loader.getController()).setRootNode(scene.getRoot());
                 jfxPanel.setScene(scene);
                 jfxPanel.setSize((int) scene.getWidth(), (int) scene.getHeight());
                 pack();
@@ -70,9 +76,11 @@ public class MainWindowPresenter extends JFrame {
     }
 
     private void initialized() {
-        int x = Toolkit.getDefaultToolkit().getScreenSize().width / 2 - getSize().width / 2;
-        int y = Toolkit.getDefaultToolkit().getScreenSize().height / 2 - getSize().height / 2;
-        setLocation(x, y);
+        if (centerFrame) {
+            int x = Toolkit.getDefaultToolkit().getScreenSize().width / 2 - getSize().width / 2;
+            int y = Toolkit.getDefaultToolkit().getScreenSize().height / 2 - getSize().height / 2;
+            setLocation(x, y);
+        }
 
         initialized = true;
         if (visibleRequest) {
@@ -88,8 +96,25 @@ public class MainWindowPresenter extends JFrame {
         }
 
         super.setVisible(visible);
-        if (visible) {
+
+        if (visible && minimizeToTray) {
             setState(NORMAL);
         }
+    }
+
+    public boolean isMinimizeToTray() {
+        return minimizeToTray;
+    }
+
+    public void setMinimizeToTray(boolean minimizeToTray) {
+        this.minimizeToTray = minimizeToTray;
+    }
+
+    public boolean isCenterFrame() {
+        return centerFrame;
+    }
+
+    public void setCenterFrame(boolean centerFrame) {
+        this.centerFrame = centerFrame;
     }
 }
