@@ -1,6 +1,5 @@
 package de.michiruf.control_server.client_java.config;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import de.michiruf.control_server.client.config.ClientConfiguration;
 import de.michiruf.control_server.client.config.ServerConfiguration;
@@ -93,11 +92,5 @@ public class JavaClientConfiguration implements ClientConfiguration, ServerConfi
 
     public void setCoordinateType(MouseData.CoordinateType coordinateType) {
         this.coordinateType = coordinateType;
-    }
-
-    @JsonIgnore
-    public boolean isProperlyConfigured() {
-        // TODO!!! (do we still need this?)
-        return host != null && host.length() > 0 && port != 0 && coordinateType != null;
     }
 }

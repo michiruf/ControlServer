@@ -17,22 +17,17 @@
     </padding>
 
     <Label text="_login_hint" wrapText="true"/>
-
     <Pane prefHeight="25"/>
 
     <Label text="_login_username" labelFor="$usernameInput"/>
     <TextField fx:id="usernameInput"/>
-
     <Pane prefHeight="15"/>
 
     <Label text="_login_password" labelFor="$passwordInput"/>
     <PasswordField fx:id="passwordInput"/>
+    <Pane prefHeight="25"/>
 
     <BorderPane>
-        <padding>
-            <Insets top="25"/>
-        </padding>
-
         <left>
             <Button text="_login_login" onAction="#onLoginClick"/>
         </left>

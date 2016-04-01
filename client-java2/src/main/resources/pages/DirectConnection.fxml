@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.text.Text?>
-<BorderPane
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<VBox
         xmlns:fx="http://javafx.com/fxml/1"
         xmlns="http://javafx.com/javafx/8"
         fx:controller="de.michiruf.control_server.client_java.ui.pages.DirectConnectionController">
@@ -10,7 +15,18 @@
         <Insets bottom="25" left="25" right="25" top="25"/>
     </padding>
 
-    <center>
-        <Text text="Hallaaa"/>
-    </center>
-</BorderPane>
+    <Label text="_direct_connection_hint" wrapText="true"/>
+    <Pane prefHeight="25"/>
+
+    <Button text="_direct_connection_start" onAction="#onStartDirectConnectionClick"/>
+    <Pane prefHeight="25"/>
+
+    <HBox>
+        <CheckBox fx:id="allowDirectConnection" text="_direct_connection_allow_for_port" onAction="#onChange">
+            <HBox.margin>
+                <Insets top="3" right="12"/>
+            </HBox.margin>
+        </CheckBox>
+        <TextField fx:id="directConnectionPort" prefWidth="40" onKeyReleased="#onChange"/>
+    </HBox>
+</VBox>

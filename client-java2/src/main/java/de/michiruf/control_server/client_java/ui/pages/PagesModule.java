@@ -10,7 +10,8 @@ import dagger.Module;
         staticInjections = {
                 DevicesController.class,
                 DirectConnectionController.class,
-                LoginController.class
+                LoginController.class,
+                OptionsController.class
         },
         library = true,
         complete = false

@@ -1,16 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.text.Text?>
-<BorderPane
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<VBox
         xmlns:fx="http://javafx.com/fxml/1"
         xmlns="http://javafx.com/javafx/8"
-        fx:controller="de.michiruf.control_server.client_java.ui.pages.DirectConnectionController">
+        fx:controller="de.michiruf.control_server.client_java.ui.pages.OptionsController">
     <padding>
         <Insets bottom="25" left="25" right="25" top="25"/>
     </padding>
 
-    <center>
-        <Text text="Hallaaa"/>
-    </center>
-</BorderPane>
+    <CheckBox fx:id="allowControllable" text="_options_allow_controllable" onAction="#onChange"/>
+    <Pane prefHeight="25"/>
+
+    <fx:define>
+        <ToggleGroup fx:id="positioningType"/>
+    </fx:define>
+    <RadioButton text="_options_relative_positioning" toggleGroup="$positioningType" onAction="#onChange"/>
+    <Pane prefHeight="3"/>
+    <RadioButton text="_options_absolute_positioning" toggleGroup="$positioningType" onAction="#onChange"/>
+</VBox>
