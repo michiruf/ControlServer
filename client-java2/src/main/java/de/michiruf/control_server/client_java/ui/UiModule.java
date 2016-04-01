@@ -25,6 +25,7 @@ import java.net.URL;
                 TrayControlIconFactory.class
         },
         staticInjections = {
+                LanguageAdoptingController.class,
                 MainWindowController.class
         },
         library = true,
