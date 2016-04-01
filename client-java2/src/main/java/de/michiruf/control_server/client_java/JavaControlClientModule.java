@@ -32,8 +32,8 @@ public class JavaControlClientModule {
 
     @SuppressWarnings("unused")
     @Provides
-    @Named("computerId")
-    public String provideComputerId() {
+    @Named("deviceId")
+    public String provideDeviceId() {
         try {
             NetworkInterface networkInterface = NetworkInterface.getNetworkInterfaces().nextElement();
             return Arrays.toString(networkInterface.getHardwareAddress());

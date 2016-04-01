@@ -1,5 +1,6 @@
 package de.michiruf.control_server.client_java.ui.pages;
 
+import de.michiruf.control_server.Constants;
 import de.michiruf.control_server.client_java.config.JavaClientConfiguration;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -7,6 +8,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 import javax.inject.Inject;
+import java.awt.Desktop;
+import java.io.IOException;
 
 /**
  * @author Michael Ruf
@@ -26,15 +29,24 @@ public class LoginController {
     @FXML
     protected void onLoginClick(ActionEvent event) {
         System.out.println(event != null ? "nonnull" : "null");
-    }
-
-    @FXML
-    protected void onRegisterClick(ActionEvent actionEvent) {
         // TODO
     }
 
     @FXML
-    protected void onForgotPasswordClick(ActionEvent actionEvent) {
-        // TODO
+    protected void onRegisterClick() {
+        try {
+            Desktop.getDesktop().browse(Constants.REGISTRATION_URI);
+        } catch (IOException e) {
+            e.printStackTrace(); // TODO Error
+        }
+    }
+
+    @FXML
+    protected void onForgotPasswordClick() {
+        try {
+            Desktop.getDesktop().browse(Constants.FORGOT_PASSWORD_URI);
+        } catch (IOException e) {
+            e.printStackTrace(); // TODO Error
+        }
     }
 }

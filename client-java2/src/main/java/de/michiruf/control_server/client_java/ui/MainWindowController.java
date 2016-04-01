@@ -1,12 +1,10 @@
 package de.michiruf.control_server.client_java.ui;
 
+import de.michiruf.control_server.Constants;
 import javafx.fxml.FXML;
 
-import javax.inject.Inject;
-import javax.inject.Named;
 import java.awt.Desktop;
 import java.io.IOException;
-import java.net.URI;
 
 /**
  * @author Michael Ruf
@@ -14,14 +12,10 @@ import java.net.URI;
  */
 public class MainWindowController extends LanguageAdoptingController {
 
-    @Inject
-    @Named("githubUri")
-    protected static URI githubUri;
-
     @FXML
     public void onGithubClick() {
         try {
-            Desktop.getDesktop().browse(githubUri);
+            Desktop.getDesktop().browse(Constants.GITHUB_URI);
         } catch (IOException e) {
             e.printStackTrace(); // TODO Error
         }
