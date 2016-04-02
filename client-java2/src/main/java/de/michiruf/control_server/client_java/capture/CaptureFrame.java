@@ -12,6 +12,7 @@ import java.awt.Graphics2D;
  * @author Michael Ruf
  * @since 2016-03-01
  */
+// TODO Add a description of how to cancel this in this frame
 @Singleton
 public class CaptureFrame extends JFrame {
 

@@ -17,6 +17,8 @@ dependencies {
         // (at least IntelliJ IDEA displays this as provided if not excluded)
         exclude group: 'com.squareup.dagger', module: 'dagger'
     }
+
+    compile 'com.1stleg:jnativehook:2.0.2'
 }
 
 task runJar(type: Jar) {
