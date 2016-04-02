@@ -7,7 +7,6 @@ import de.michiruf.control_server.common.Event;
 import de.michiruf.control_server.common.data.KeyData;
 import de.michiruf.control_server.common.data.MouseData;
 import org.jnativehook.GlobalScreen;
-import org.jnativehook.NativeHookException;
 import org.jnativehook.NativeInputEvent;
 import org.jnativehook.keyboard.NativeKeyEvent;
 import org.jnativehook.keyboard.NativeKeyListener;
@@ -28,6 +27,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * @author Michael Ruf
+ * @see <a href="https://github.com/kwhat/jnativehook/wiki/ConsumingEvents">Github wiki</a>
  * @since 2016-04-02
  */
 @Singleton
@@ -66,11 +66,10 @@ public class JNativeKeyListener implements ControlListener, NativeKeyListener, N
 
     @Override
     public void stop() {
-        try {
-            GlobalScreen.unregisterNativeHook();
-        } catch (NativeHookException e) {
-            e.printStackTrace();
-        }
+        GlobalScreen.removeNativeKeyListener(this);
+        GlobalScreen.removeNativeMouseListener(this);
+        GlobalScreen.removeNativeMouseMotionListener(this);
+        GlobalScreen.removeNativeMouseWheelListener(this);
     }
 
     @Override

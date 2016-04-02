@@ -26,16 +26,14 @@ public class SaveHook {
     }
 
     public void register(JavaClientConfiguration configuration) {
-        Runtime.getRuntime().addShutdownHook(new Thread() {
-            public void run() {
-                try {
-                    byte[] data = objectMapper.writeValueAsBytes(configuration);
-                    Files.write(configurationPath, data, StandardOpenOption.CREATE, StandardOpenOption.WRITE,
-                            StandardOpenOption.TRUNCATE_EXISTING);
-                } catch (IOException e) {
-                    e.printStackTrace(); // TODO Error
-                }
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            try {
+                byte[] data = objectMapper.writeValueAsBytes(configuration);
+                Files.write(configurationPath, data, StandardOpenOption.CREATE, StandardOpenOption.WRITE,
+                        StandardOpenOption.TRUNCATE_EXISTING);
+            } catch (IOException e) {
+                e.printStackTrace(); // TODO Error
             }
-        });
+        }));
     }
 }

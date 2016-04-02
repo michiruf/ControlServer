@@ -7,6 +7,8 @@ import org.jnativehook.GlobalScreen;
 import org.jnativehook.NativeHookException;
 
 import javax.inject.Singleton;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * @author Michael Ruf
@@ -27,6 +29,16 @@ public class ControlModule {
     public ControlListener provideControlListener(EventDispatcher dispatcher) {
         try {
             GlobalScreen.registerNativeHook();
+            Logger logger = Logger.getLogger(GlobalScreen.class.getPackage().getName());
+            logger.setLevel(Level.WARNING);
+            logger.setUseParentHandlers(false);
+            Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+                try {
+                    GlobalScreen.unregisterNativeHook();
+                } catch (NativeHookException e) {
+                    // Do nothing
+                }
+            }));
             return new JNativeKeyListener(dispatcher);
         } catch (NativeHookException e) {
             e.printStackTrace();
