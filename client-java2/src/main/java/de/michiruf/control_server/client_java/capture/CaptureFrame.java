@@ -32,6 +32,7 @@ public class CaptureFrame extends JFrame {
         super.setVisible(visible);
 
         if (visible) {
+            // Bring to front
             requestFocus();
         }
     }
