@@ -25,7 +25,7 @@ public class Capture {
         registerListeners();
 
         // Initially the frame shell not be active
-        setActive(false);
+        captureFrame.setVisible(false);
     }
 
     private void registerListeners() {

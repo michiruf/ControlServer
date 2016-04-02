@@ -20,8 +20,8 @@ import java.io.IOException;
  */
 public class FxWindowPresenter extends JFrame {
 
-    private boolean minimizeToTray;
-    private boolean centerFrame;
+    private boolean minimizeToTrayEnabled;
+    private boolean centerFrameEnabled;
 
     private boolean initialized = false;
     private boolean visibleRequest = false;
@@ -30,18 +30,18 @@ public class FxWindowPresenter extends JFrame {
         this(fxmlPath, false);
     }
 
-    public FxWindowPresenter(String fxmlPath, boolean minimizeToTray) {
-        this(fxmlPath, minimizeToTray, true);
+    public FxWindowPresenter(String fxmlPath, boolean minimizeToTrayEnabled) {
+        this(fxmlPath, minimizeToTrayEnabled, true);
     }
 
-    public FxWindowPresenter(String fxmlPath, boolean minimizeToTray, boolean centerFrame) {
-        setMinimizeToTray(minimizeToTray);
-        setCenterFrame(centerFrame);
+    public FxWindowPresenter(String fxmlPath, boolean minimizeToTrayEnabled, boolean centerFrameEnabled) {
+        setMinimizeToTrayEnabled(minimizeToTrayEnabled);
+        setCenterFrameEnabled(centerFrameEnabled);
         setResizable(false);
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowIconified(WindowEvent e) {
-                if (minimizeToTray) {
+                if (minimizeToTrayEnabled) {
                     setVisible(false);
                 }
             }
@@ -76,7 +76,7 @@ public class FxWindowPresenter extends JFrame {
     }
 
     private void initialized() {
-        if (centerFrame) {
+        if (centerFrameEnabled) {
             int x = Toolkit.getDefaultToolkit().getScreenSize().width / 2 - getSize().width / 2;
             int y = Toolkit.getDefaultToolkit().getScreenSize().height / 2 - getSize().height / 2;
             setLocation(x, y);
@@ -97,24 +97,24 @@ public class FxWindowPresenter extends JFrame {
 
         super.setVisible(visible);
 
-        if (visible && minimizeToTray) {
+        if (visible && minimizeToTrayEnabled) {
             setState(NORMAL);
         }
     }
 
-    public boolean isMinimizeToTray() {
-        return minimizeToTray;
+    public boolean isMinimizeToTrayEnabled() {
+        return minimizeToTrayEnabled;
     }
 
-    public void setMinimizeToTray(boolean minimizeToTray) {
-        this.minimizeToTray = minimizeToTray;
+    public void setMinimizeToTrayEnabled(boolean enabled) {
+        minimizeToTrayEnabled = enabled;
     }
 
-    public boolean isCenterFrame() {
-        return centerFrame;
+    public boolean isCenterFrameEnabled() {
+        return centerFrameEnabled;
     }
 
-    public void setCenterFrame(boolean centerFrame) {
-        this.centerFrame = centerFrame;
+    public void setCenterFrameEnabled(boolean enabled) {
+        centerFrameEnabled = enabled;
     }
 }
