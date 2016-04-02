@@ -24,7 +24,7 @@ import javax.swing.WindowConstants;
                 FxWindowPresenter.class
         },
         staticInjections = {
-                DirectConnectionWindowController.class,
+                StartDirectConnectionWindowController.class,
         },
         library = true,
         complete = false
@@ -45,6 +45,6 @@ public class UiModule {
     @Singleton
     @ForDirectConnection
     public FxWindowPresenter provideDirectConnectionWindowPresenter() {
-        return new FxWindowPresenter("DirectConnectionWindow.fxml");
+        return new FxWindowPresenter("StartDirectConnectionWindow.fxml");
     }
 }

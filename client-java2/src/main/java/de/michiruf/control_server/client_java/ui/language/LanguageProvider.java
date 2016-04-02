@@ -52,7 +52,6 @@ public class LanguageProvider {
                 String value = prepareValue(node.getTextContent());
                 strings.put(key, value);
             }
-
         } catch (IOException | ParserConfigurationException | SAXException e) {
             e.printStackTrace(); // TODO Error!
         }

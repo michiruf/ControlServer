@@ -35,11 +35,17 @@ public class Capture {
         captureFrame.addMouseWheelListener(mouseCaptureListener);
     }
 
+    @Deprecated
     public void setActive(boolean active) {
         captureFrame.setVisible(active);
     }
 
+    @Deprecated
     public boolean isActive() {
         return captureFrame.isVisible();
+    }
+
+    public void start() {
+        captureFrame.setVisible(true);
     }
 }

@@ -10,7 +10,7 @@
 <VBox
         xmlns="http://javafx.com/javafx/8"
         xmlns:fx="http://javafx.com/fxml/1"
-        fx:controller="de.michiruf.control_server.client_java.ui.DirectConnectionWindowController"
+        fx:controller="de.michiruf.control_server.client_java.ui.StartDirectConnectionWindowController"
         fx:id="root"
         styleClass="root"
         id="directConnection">
@@ -22,7 +22,7 @@
     </padding>
 
     <Label text="_start_direct_connection_host" labelFor="$startDirectConnectionHost"/>
-    <TextField fx:id="startDirectConnectionHost"/>
+    <TextField fx:id="startDirectConnectionHost" onKeyReleased="#onChange"/>
     <Pane prefHeight="15"/>
 
     <HBox>
@@ -31,9 +31,10 @@
                 <Insets top="3" right="12"/>
             </HBox.margin>
         </Label>
-        <TextField fx:id="startDirectConnectionPort" prefWidth="40" onAction="#onChange"/>
+        <TextField fx:id="startDirectConnectionPort" prefWidth="60" onAction="#onChange"/>
     </HBox>
     <Pane prefHeight="25"/>
 
+    <!-- TODO center this: -->
     <Button text="_start_direct_connection_connect" onAction="#onConnectClick"/>
 </VBox>

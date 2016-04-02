@@ -27,6 +27,6 @@
                 <Insets top="3" right="12"/>
             </HBox.margin>
         </CheckBox>
-        <TextField fx:id="directConnectionPort" prefWidth="40" onKeyReleased="#onChange"/>
+        <TextField fx:id="directConnectionPort" prefWidth="60" onKeyReleased="#onChange"/>
     </HBox>
 </VBox>

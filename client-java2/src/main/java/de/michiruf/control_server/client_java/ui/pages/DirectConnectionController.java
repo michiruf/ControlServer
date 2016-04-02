@@ -33,8 +33,8 @@ public class DirectConnectionController {
     protected void initialize() {
         allowDirectConnection.setSelected(configuration.isAutoStartEnabled());
 
-        if (configuration.getPort() != 0) {
-            directConnectionPort.setText(Integer.toString(configuration.getPort()));
+        if (configuration.getHostPort() != 0) {
+            directConnectionPort.setText(Integer.toString(configuration.getHostPort()));
         }
     }
 
@@ -45,7 +45,7 @@ public class DirectConnectionController {
         try {
             int intPort = Integer.parseInt(directConnectionPort.getText());
             if (intPort != 0) {
-                configuration.setPort(intPort);
+                configuration.setHostPort(intPort);
             }
         } catch (NumberFormatException e) {
             // Do nothing
