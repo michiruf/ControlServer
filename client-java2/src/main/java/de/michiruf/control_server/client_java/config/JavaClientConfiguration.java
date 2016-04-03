@@ -86,6 +86,7 @@ public class JavaClientConfiguration implements ClientConfiguration, ServerConfi
         this.autoStartEnabled = autoStartEnabled;
     }
 
+    // TODO Should remove the coordinate type
     public MouseData.CoordinateType getCoordinateType() {
         return coordinateType;
     }

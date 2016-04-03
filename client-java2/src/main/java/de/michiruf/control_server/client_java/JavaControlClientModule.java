@@ -1,6 +1,7 @@
 package de.michiruf.control_server.client_java;
 
 import dagger.Module;
+import dagger.ObjectGraph;
 import dagger.Provides;
 import de.michiruf.control_server.client.ControlClientModule;
 import de.michiruf.control_server.client_java.capture.CaptureModule;
@@ -8,6 +9,7 @@ import de.michiruf.control_server.client_java.config.JavaClientConfigurationModu
 import de.michiruf.control_server.client_java.ui.UiModule;
 
 import javax.inject.Named;
+import javax.inject.Singleton;
 import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.util.Arrays;
@@ -23,6 +25,9 @@ import java.util.NoSuchElementException;
                 CaptureModule.class,
                 JavaClientConfigurationModule.class,
                 UiModule.class
+        },
+        injects = {
+                JavaControlClient.class
         },
         // TODO why is this necessary?
         complete = false,

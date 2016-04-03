@@ -8,6 +8,7 @@ import io.vertx.core.Vertx;
  * @since 2015-11-14
  */
 // TODO we need to not send data or listen data if the configuration is not enabled (maybe in better verticle?)
+// TODO automatically reconnect!
 public class Client {
 
     private final Vertx vertx;

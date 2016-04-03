@@ -3,6 +3,7 @@ package de.michiruf.control_server.client_java.config;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dagger.Module;
 import dagger.Provides;
+import de.michiruf.control_server.Constants;
 import de.michiruf.control_server.client.config.ClientConfiguration;
 import de.michiruf.control_server.client.config.ServerConfiguration;
 import de.michiruf.control_server.client.qualifier.ForDirectConnection;
@@ -59,19 +60,17 @@ public class JavaClientConfigurationModule {
     @Provides
     @Singleton
     @ForWebServer
-    public ClientConfiguration provideWebServerClientConfiguration(
-            @ForWebServer String host,
-            JavaClientConfiguration configuration) {
+    public ClientConfiguration provideWebServerClientConfiguration(JavaClientConfiguration configuration) {
         // For the client module
         return new ClientConfiguration() {
             @Override
             public String getHost() {
-                return host;
+                return Constants.LOGON_SERVER_HOST;
             }
 
             @Override
             public int getPort() {
-                return 80;
+                return Constants.LOGON_SERVER_PORT;
             }
 
             @Override

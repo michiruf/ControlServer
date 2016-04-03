@@ -1,5 +1,7 @@
 package de.michiruf.control_server.client_java.ui;
 
+import de.michiruf.control_server.client.comm.Client;
+import de.michiruf.control_server.client.qualifier.ForDirectConnection;
 import de.michiruf.control_server.client_java.capture.Capture;
 import de.michiruf.control_server.client_java.config.JavaClientConfiguration;
 import de.michiruf.control_server.client_java.ui.language.LanguageAdoptingController;
@@ -17,6 +19,10 @@ public class StartDirectConnectionWindowController extends LanguageAdoptingContr
 
     @Inject
     protected static JavaClientConfiguration configuration;
+
+    @Inject
+    @ForDirectConnection
+    protected static Client directConnectionClient;
 
     @Inject
     protected static Capture capture;
@@ -55,6 +61,7 @@ public class StartDirectConnectionWindowController extends LanguageAdoptingContr
 
     @FXML
     protected void onConnectClick() {
+        directConnectionClient.connect();
         capture.start();
     }
 }

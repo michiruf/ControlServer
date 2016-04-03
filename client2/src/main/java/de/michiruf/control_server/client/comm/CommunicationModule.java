@@ -2,9 +2,9 @@ package de.michiruf.control_server.client.comm;
 
 import dagger.Module;
 import dagger.Provides;
-import de.michiruf.control_server.client.dispatch.EventDispatcher;
 import de.michiruf.control_server.client.config.ClientConfiguration;
 import de.michiruf.control_server.client.convert.EventStringConverter;
+import de.michiruf.control_server.client.dispatch.EventDispatcher;
 import de.michiruf.control_server.client.qualifier.ForDirectConnection;
 import de.michiruf.control_server.client.qualifier.ForWebServer;
 import io.vertx.core.Vertx;
@@ -48,7 +48,8 @@ public class CommunicationModule {
     @Singleton
     @ForWebServer
     public Client provideWebServerClient(
-            Vertx vertx, ClientWebSocketVerticle clientWebSocketVerticle,
+            Vertx vertx,
+            @ForWebServer ClientWebSocketVerticle clientWebSocketVerticle,
             @ForWebServer ClientConfiguration configuration) {
         return new Client(vertx, clientWebSocketVerticle, configuration);
     }
@@ -69,7 +70,8 @@ public class CommunicationModule {
     @Singleton
     @ForDirectConnection
     public Client provideDirectConnectionClient(
-            Vertx vertx, ClientWebSocketVerticle clientWebSocketVerticle,
+            Vertx vertx,
+            @ForDirectConnection ClientWebSocketVerticle clientWebSocketVerticle,
             @ForDirectConnection ClientConfiguration configuration) {
         return new Client(vertx, clientWebSocketVerticle, configuration);
     }

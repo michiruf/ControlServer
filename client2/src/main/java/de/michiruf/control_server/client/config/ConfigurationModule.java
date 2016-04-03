@@ -17,11 +17,4 @@ import de.michiruf.control_server.client.qualifier.ForWebServer;
         complete = false
 )
 public class ConfigurationModule {
-
-    @SuppressWarnings("unused")
-    @Provides
-    @ForWebServer
-    public String provideHost() {
-        return "localhost";
-    }
 }
