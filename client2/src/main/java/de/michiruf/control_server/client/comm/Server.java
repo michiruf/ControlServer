@@ -39,6 +39,7 @@ public class Server {
     }
 
     public boolean isRunning() {
+        // TODO this gives always true after first start
         return serverWebSocketVerticle.deploymentID() != null;
     }
 

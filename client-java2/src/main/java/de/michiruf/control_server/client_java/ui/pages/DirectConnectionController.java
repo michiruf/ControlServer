@@ -1,5 +1,6 @@
 package de.michiruf.control_server.client_java.ui.pages;
 
+import de.michiruf.control_server.client.comm.Server;
 import de.michiruf.control_server.client.qualifier.ForDirectConnection;
 import de.michiruf.control_server.client_java.config.JavaClientConfiguration;
 import de.michiruf.control_server.client_java.ui.FxWindowPresenter;
@@ -17,6 +18,9 @@ public class DirectConnectionController {
 
     @Inject
     protected static JavaClientConfiguration configuration;
+
+    @Inject
+    protected static Server server;
 
     @Inject
     @ForDirectConnection
@@ -41,6 +45,11 @@ public class DirectConnectionController {
     @FXML
     protected void onChange() {
         configuration.setAutoStartEnabled(allowDirectConnection.isSelected());
+        if (allowDirectConnection.isSelected() && !server.isRunning()) {
+            server.start();
+        } else if (!allowDirectConnection.isSelected() && server.isRunning()) {
+            server.stop();
+        }
 
         try {
             int intPort = Integer.parseInt(directConnectionPort.getText());

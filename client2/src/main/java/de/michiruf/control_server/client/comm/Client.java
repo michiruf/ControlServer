@@ -38,6 +38,7 @@ public class Client {
     }
 
     public boolean isConnected() {
+        // TODO this gives always true after first start
         return clientWebSocketVerticle.deploymentID() != null;
     }
 
