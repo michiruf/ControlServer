@@ -36,9 +36,16 @@ public class ClientWebSocketVerticle extends AbstractVerticle {
                 configuration.getHost(),
                 "",
                 handler -> {
-                    eventDispatcher.registerListener(event ->
-                            handler.writeFinalTextFrame(converter.convert(event)));
-                    handler.handler(event -> System.out.println(new String(event.getBytes())));
+                    eventDispatcher.registerListener(event -> {
+                        if (configuration.isSendControlsEnabled()) {
+                            handler.writeFinalTextFrame(converter.convert(event));
+                        }
+                    });
+                    handler.handler(event -> {
+                        if (configuration.isControlListeningEnabled()) {
+                            eventExecutionHandler.handleStringEvent(new String(event.getBytes()));
+                        }
+                    });
                     handler.closeHandler(event -> handler.close());
                 });
     }
