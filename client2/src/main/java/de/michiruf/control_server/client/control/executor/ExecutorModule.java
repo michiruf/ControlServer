@@ -4,6 +4,8 @@ import dagger.Module;
 import dagger.Provides;
 
 import javax.inject.Singleton;
+import java.awt.AWTException;
+import java.awt.Robot;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +22,18 @@ import java.util.List;
         complete = false
 )
 public class ExecutorModule {
+
+    @SuppressWarnings("unused")
+    @Provides
+    @Singleton
+    public Robot provideRobot() {
+        try {
+            return new Robot();
+        } catch (AWTException e) {
+            e.printStackTrace(); // TODO Error
+        }
+        return null;
+    }
 
     @SuppressWarnings("unused")
     @Provides
