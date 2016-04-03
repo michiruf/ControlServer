@@ -1,7 +1,6 @@
-package de.michiruf.control_server.client.control;
+package de.michiruf.control_server.client.event;
 
-import de.michiruf.control_server.client.convert.StringEventParser;
-import de.michiruf.control_server.client.control.executor.ControlExecutor;
+import de.michiruf.control_server.client.control.ControlExecutor;
 import de.michiruf.control_server.common.Event;
 
 import javax.inject.Inject;
@@ -13,14 +12,14 @@ import java.util.List;
  * @since 2015-09-28
  */
 @Singleton
-public class EventHandler {
+public class EventExecutionHandler {
 
     private final List<ControlExecutor> controlExecutors;
     private final StringEventParser stringEventParser;
 
     @Inject
-    public EventHandler(List<ControlExecutor> controlExecutors,
-                        StringEventParser stringEventParser) {
+    public EventExecutionHandler(List<ControlExecutor> controlExecutors,
+                                 StringEventParser stringEventParser) {
         this.controlExecutors = controlExecutors;
         this.stringEventParser = stringEventParser;
     }

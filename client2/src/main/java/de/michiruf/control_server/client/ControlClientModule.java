@@ -4,7 +4,7 @@ import dagger.Module;
 import de.michiruf.control_server.client.comm.CommunicationModule;
 import de.michiruf.control_server.client.config.ConfigurationModule;
 import de.michiruf.control_server.client.control.ControlModule;
-import de.michiruf.control_server.client.convert.ConvertModule;
+import de.michiruf.control_server.client.event.EventModule;
 
 /**
  * @author Michael Ruf
@@ -15,7 +15,7 @@ import de.michiruf.control_server.client.convert.ConvertModule;
                 CommunicationModule.class,
                 ConfigurationModule.class,
                 ControlModule.class,
-                ConvertModule.class
+                EventModule.class,
         },
         complete = false,
         library = true

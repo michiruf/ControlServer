@@ -3,7 +3,7 @@ package de.michiruf.control_server.client;
 import dagger.Module;
 import dagger.ObjectGraph;
 import de.michiruf.control_server.client.comm.Client;
-import de.michiruf.control_server.client.dispatch.EventDispatcher;
+import de.michiruf.control_server.client.event.EventDispatcher;
 import de.michiruf.control_server.client.config.ClientConfiguration;
 import de.michiruf.control_server.client.qualifier.ForWebServer;
 import de.michiruf.control_server.common.ExampleEvents;

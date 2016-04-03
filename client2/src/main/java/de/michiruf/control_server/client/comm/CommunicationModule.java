@@ -3,8 +3,9 @@ package de.michiruf.control_server.client.comm;
 import dagger.Module;
 import dagger.Provides;
 import de.michiruf.control_server.client.config.ClientConfiguration;
-import de.michiruf.control_server.client.convert.EventStringConverter;
-import de.michiruf.control_server.client.dispatch.EventDispatcher;
+import de.michiruf.control_server.client.event.EventDispatcher;
+import de.michiruf.control_server.client.event.EventExecutionHandler;
+import de.michiruf.control_server.client.event.EventStringConverter;
 import de.michiruf.control_server.client.qualifier.ForDirectConnection;
 import de.michiruf.control_server.client.qualifier.ForWebServer;
 import io.vertx.core.Vertx;
@@ -39,8 +40,9 @@ public class CommunicationModule {
     public ClientWebSocketVerticle provideWebServerClientWebSocketVerticle(
             @ForWebServer ClientConfiguration configuration,
             EventStringConverter converter,
-            EventDispatcher eventDispatcher) {
-        return new ClientWebSocketVerticle(configuration, converter, eventDispatcher);
+            EventDispatcher eventDispatcher,
+            EventExecutionHandler eventExecutionHandler) {
+        return new ClientWebSocketVerticle(configuration, converter, eventDispatcher, eventExecutionHandler);
     }
 
     @SuppressWarnings("unused")
@@ -61,8 +63,9 @@ public class CommunicationModule {
     public ClientWebSocketVerticle provideDirectConnectionClientWebSocketVerticle(
             @ForDirectConnection ClientConfiguration configuration,
             EventStringConverter converter,
-            EventDispatcher eventDispatcher) {
-        return new ClientWebSocketVerticle(configuration, converter, eventDispatcher);
+            EventDispatcher eventDispatcher,
+            EventExecutionHandler eventExecutionHandler) {
+        return new ClientWebSocketVerticle(configuration, converter, eventDispatcher, eventExecutionHandler);
     }
 
     @SuppressWarnings("unused")

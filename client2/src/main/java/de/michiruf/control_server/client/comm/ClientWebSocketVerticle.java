@@ -1,8 +1,9 @@
 package de.michiruf.control_server.client.comm;
 
-import de.michiruf.control_server.client.dispatch.EventDispatcher;
 import de.michiruf.control_server.client.config.ClientConfiguration;
-import de.michiruf.control_server.client.convert.EventStringConverter;
+import de.michiruf.control_server.client.event.EventStringConverter;
+import de.michiruf.control_server.client.event.EventDispatcher;
+import de.michiruf.control_server.client.event.EventExecutionHandler;
 import io.vertx.core.AbstractVerticle;
 
 /**
@@ -14,13 +15,17 @@ public class ClientWebSocketVerticle extends AbstractVerticle {
     private final ClientConfiguration configuration;
     private final EventStringConverter converter;
     private final EventDispatcher eventDispatcher;
+    private final EventExecutionHandler eventExecutionHandler;
 
-    public ClientWebSocketVerticle(ClientConfiguration configuration, EventStringConverter converter,
-                                   EventDispatcher eventDispatcher) {
+    public ClientWebSocketVerticle(ClientConfiguration configuration,
+                                   EventStringConverter converter,
+                                   EventDispatcher eventDispatcher,
+                                   EventExecutionHandler eventExecutionHandler) {
         super();
         this.configuration = configuration;
         this.converter = converter;
         this.eventDispatcher = eventDispatcher;
+        this.eventExecutionHandler = eventExecutionHandler;
     }
 
     @Override

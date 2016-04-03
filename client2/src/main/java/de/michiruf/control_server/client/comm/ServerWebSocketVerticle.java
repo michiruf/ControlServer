@@ -1,7 +1,7 @@
 package de.michiruf.control_server.client.comm;
 
 import de.michiruf.control_server.client.config.ServerConfiguration;
-import de.michiruf.control_server.client.control.EventHandler;
+import de.michiruf.control_server.client.event.EventExecutionHandler;
 import io.vertx.core.AbstractVerticle;
 
 import javax.inject.Inject;
@@ -14,13 +14,13 @@ import javax.inject.Singleton;
 @Singleton
 public class ServerWebSocketVerticle extends AbstractVerticle {
 
-    private final EventHandler eventHandler;
+    private final EventExecutionHandler eventExecutionHandler;
     private final ServerConfiguration configuration;
 
     @Inject
-    public ServerWebSocketVerticle(EventHandler eventHandler, ServerConfiguration configuration) {
+    public ServerWebSocketVerticle(EventExecutionHandler eventExecutionHandler, ServerConfiguration configuration) {
         super();
-        this.eventHandler = eventHandler;
+        this.eventExecutionHandler = eventExecutionHandler;
         this.configuration = configuration;
     }
 
@@ -28,7 +28,7 @@ public class ServerWebSocketVerticle extends AbstractVerticle {
     public void start() throws Exception {
         super.start();
         vertx.createHttpServer().websocketHandler(handler -> {
-            handler.handler(event -> eventHandler.handleStringEvent(new String(event.getBytes())));
+            handler.handler(event -> eventExecutionHandler.handleStringEvent(new String(event.getBytes())));
             handler.closeHandler(event -> handler.close());
         }).listen(configuration.getHostPort());
     }

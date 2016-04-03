@@ -1,32 +1,33 @@
-package de.michiruf.control_server.client.convert;
+package de.michiruf.control_server.client.event;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.michiruf.control_server.common.Event;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import java.io.IOException;
 
 /**
  * @author Michael Ruf
- * @since 2015-11-30
+ * @since 2015-09-30
  */
 @Singleton
-public class EventStringConverter {
+public class StringEventParser {
 
     private final ObjectMapper objectMapper;
 
     @Inject
-    public EventStringConverter(ObjectMapper objectMapper) {
+    public StringEventParser(ObjectMapper objectMapper) {
         this.objectMapper = objectMapper;
     }
 
-    public String convert(Event event) {
+    public Event parse(String eventString) {
         System.out.println(String.format(
-                "[Client] EventStringConverter got event: %s", event));
+                "[Server] StringEventParser got string event: %s", eventString));
+
         try {
-            return objectMapper.writeValueAsString(event);
-        } catch (JsonProcessingException e) {
+            return objectMapper.readValue(eventString, Event.class);
+        } catch (IOException e) {
             e.printStackTrace(); // TODO Error
         }
 

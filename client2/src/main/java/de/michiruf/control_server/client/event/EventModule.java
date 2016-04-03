@@ -1,4 +1,4 @@
-package de.michiruf.control_server.client.convert;
+package de.michiruf.control_server.client.event;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dagger.Module;
@@ -8,16 +8,19 @@ import javax.inject.Singleton;
 
 /**
  * @author Michael Ruf
- * @since 2015-11-30
+ * @since 2015-09-28
  */
 @Module(
         injects = {
+                EventExecutionHandler.class,
+                EventDispatcher.class,
                 EventStringConverter.class,
                 StringEventParser.class
         },
-        library = true
+        library = true,
+        complete = false
 )
-public class ConvertModule {
+public class EventModule {
 
     @SuppressWarnings("unused")
     @Provides

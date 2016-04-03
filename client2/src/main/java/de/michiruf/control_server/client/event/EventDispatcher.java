@@ -1,4 +1,4 @@
-package de.michiruf.control_server.client.dispatch;
+package de.michiruf.control_server.client.event;
 
 import de.michiruf.control_server.common.Event;
 

@@ -2,7 +2,7 @@ package de.michiruf.control_server.client_java.capture.control;
 
 import dagger.Module;
 import dagger.Provides;
-import de.michiruf.control_server.client.dispatch.EventDispatcher;
+import de.michiruf.control_server.client.event.EventDispatcher;
 import org.jnativehook.GlobalScreen;
 import org.jnativehook.NativeHookException;
 

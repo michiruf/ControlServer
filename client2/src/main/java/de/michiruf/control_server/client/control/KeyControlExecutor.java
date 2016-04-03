@@ -1,4 +1,4 @@
-package de.michiruf.control_server.client.control.executor;
+package de.michiruf.control_server.client.control;
 
 import de.michiruf.control_server.common.Event;
 import de.michiruf.control_server.common.data.KeyData;
