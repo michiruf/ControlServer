@@ -17,8 +17,11 @@ import org.jnativehook.mouse.NativeMouseWheelListener;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import java.awt.MouseInfo;
+import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -37,6 +40,9 @@ public class JNativeKeyListener implements ControlListener, NativeKeyListener, N
     private int cancelMask;
     private int cancelKey;
     private Runnable cancelAction;
+
+    private int startMousePositionX;
+    private int startMousePositionY;
 
     @Inject
     public JNativeKeyListener(EventDispatcher dispatcher) {
@@ -62,6 +68,10 @@ public class JNativeKeyListener implements ControlListener, NativeKeyListener, N
         GlobalScreen.addNativeMouseListener(this);
         GlobalScreen.addNativeMouseMotionListener(this);
         GlobalScreen.addNativeMouseWheelListener(this);
+
+        Point p = MouseInfo.getPointerInfo().getLocation();
+        startMousePositionX = (int) p.getX();
+        startMousePositionY = (int) p.getY();
     }
 
     @Override
@@ -74,10 +84,11 @@ public class JNativeKeyListener implements ControlListener, NativeKeyListener, N
 
     @Override
     public void nativeKeyPressed(NativeKeyEvent e) {
-        if (KeyEvent.getKeyText(cancelKey).equals(NativeKeyEvent.getKeyText(e.getKeyCode()))) {
+        int keyCode = resolveKeyCodeForNativeKeyCode(e.getKeyCode());
+        if (cancelKey == keyCode) {
             cancelAction.run();
         } else {
-            dispatchKeyEvent(Direction.DOWN, e);
+            dispatchKeyEvent(Direction.DOWN, keyCode);
         }
         consume(e);
     }
@@ -131,16 +142,21 @@ public class JNativeKeyListener implements ControlListener, NativeKeyListener, N
     }
 
     private void dispatchKeyEvent(Direction direction, NativeKeyEvent e) {
+        dispatchKeyEvent(direction, e.getKeyCode());
+    }
+
+    private void dispatchKeyEvent(Direction direction, int keyCode) {
         dispatcher.dispatch(new Event(
                 direction,
-                new KeyData(e.getKeyCode()),
+                new KeyData(keyCode),
                 new Date(System.currentTimeMillis())));
     }
 
     private void dispatchMouseEvent(Direction direction, NativeMouseEvent e) {
         dispatcher.dispatch(new Event(
                 direction,
-                new MouseData(e.getX(), e.getY(), e.getButton(), MouseData.CoordinateType.ABSOLUTE),
+                new MouseData(startMousePositionX - e.getX(), startMousePositionY - e.getY(),
+                        e.getButton(), MouseData.CoordinateType.RELATIVE),
                 new Date(System.currentTimeMillis())));
     }
 
@@ -152,6 +168,45 @@ public class JNativeKeyListener implements ControlListener, NativeKeyListener, N
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+    }
+
+    private int resolveKeyCodeForNativeKeyCode(int nativeKeyCode) {
+        return resolveKeyCodeForFieldName(resolveKeyFieldNameForNativeKeyCode(nativeKeyCode));
+    }
+
+    private String resolveKeyFieldNameForNativeKeyCode(int nativeKeyCode) {
+        for (Field f : NativeKeyEvent.class.getDeclaredFields()) {
+            if (Modifier.isStatic(f.getModifiers()) && Modifier.isPublic(f.getModifiers())) {
+                if (!f.getName().startsWith("VC_")) {
+                    continue;
+                }
+                try {
+                    if (f.getInt(null) == nativeKeyCode) {
+                        return f.getName().replace("VC_", "VK_");
+                    }
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return null;
+    }
+
+    private int resolveKeyCodeForFieldName(String fieldName) {
+        if (fieldName != null) {
+            for (Field f : KeyEvent.class.getDeclaredFields()) {
+                if (Modifier.isStatic(f.getModifiers()) && Modifier.isPublic(f.getModifiers())) {
+                    if (fieldName.equals(f.getName())) {
+                        try {
+                            return f.getInt(null);
+                        } catch (IllegalAccessException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+        }
+        return KeyEvent.VK_UNDEFINED;
     }
 
     @SuppressWarnings("NullableProblems")
@@ -191,6 +246,7 @@ public class JNativeKeyListener implements ControlListener, NativeKeyListener, N
 
         @Override
         public void execute(Runnable r) {
+            // This is essential to be not asynchronous!
             r.run();
         }
     }
