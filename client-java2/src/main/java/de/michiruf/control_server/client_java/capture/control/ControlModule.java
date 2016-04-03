@@ -39,7 +39,7 @@ public class ControlModule {
                     // Do nothing
                 }
             }));
-            return new JNativeKeyListener(dispatcher);
+            return new JNativeHookKeyListener(dispatcher);
         } catch (NativeHookException e) {
             e.printStackTrace();
         }

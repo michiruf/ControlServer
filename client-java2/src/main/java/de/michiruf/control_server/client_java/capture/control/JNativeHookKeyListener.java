@@ -34,7 +34,7 @@ import java.util.concurrent.TimeUnit;
  * @since 2016-04-02
  */
 @Singleton
-public class JNativeKeyListener implements ControlListener, NativeKeyListener, NativeMouseInputListener, NativeMouseWheelListener {
+public class JNativeHookKeyListener implements ControlListener, NativeKeyListener, NativeMouseInputListener, NativeMouseWheelListener {
 
     private EventDispatcher dispatcher;
     private int cancelMask;
@@ -45,7 +45,7 @@ public class JNativeKeyListener implements ControlListener, NativeKeyListener, N
     private int startMousePositionY;
 
     @Inject
-    public JNativeKeyListener(EventDispatcher dispatcher) {
+    public JNativeHookKeyListener(EventDispatcher dispatcher) {
         this.dispatcher = dispatcher;
     }
 
