@@ -8,6 +8,9 @@ sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
 javafx {
+    // TODO Compiling with openjdk still does not work without setting a path to fx.
+    // Try the self-containing deployment mode!
+    // @see http://stackoverflow.com/questions/18547362/javafx-and-openjdk
     mainClass 'de.michiruf.control_server.client_java.JavaControlClient'
 }
 
