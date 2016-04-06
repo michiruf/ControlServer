@@ -1,10 +1,15 @@
 apply plugin: 'java'
 apply plugin: 'nebula.provided-base'
+apply from: 'http://dl.bintray.com/content/shemnon/javafx-gradle/8.1.1/javafx.plugin'
 
 version = '1.0.' + version
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
+
+javafx {
+    mainClass 'de.michiruf.control_server.client_java.JavaControlClient'
+}
 
 dependencies {
     testCompile 'junit:junit:4.12'
