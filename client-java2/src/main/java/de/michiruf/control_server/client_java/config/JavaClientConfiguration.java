@@ -20,8 +20,9 @@ public class JavaClientConfiguration implements ClientConfiguration, ServerConfi
     @JsonProperty
     private boolean sendControlsEnabled;
 
+    // Initially the computer shell be controllable in general
     @JsonProperty
-    private boolean controlListeningEnabled;
+    private boolean controlListeningEnabled = true;
 
     @JsonProperty
     private int hostPort;
