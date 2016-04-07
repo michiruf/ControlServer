@@ -32,17 +32,11 @@ dependencies {
     compile 'com.1stleg:jnativehook:2.0.2'
 }
 
-jar {
-    manifest {
-        attributes 'Main-Class': mainClass
-    }
-}
+jar.manifest.attributes 'Main-Class': mainClass
 
 task fatJar(type: Jar) {
     version += '-release'
-    manifest {
-        attributes 'Main-Class': mainClass
-    }
+    manifest.attributes 'Main-Class': mainClass
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
     with jar
 }
