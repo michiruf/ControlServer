@@ -1,25 +1,21 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.3.3.RELEASE")
+    }
+}
 apply plugin: 'java'
-apply plugin: 'nebula.provided-base' // TODO remove?
+apply plugin: 'spring-boot'
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
-
-def mainClass = 'de.michiruf.control_server.client_java.JavaControlClient'
 
 dependencies {
     testCompile 'junit:junit:4.12'
 
     compile project(':common')
 
-    compile 'org.springframework:spring-context:4.2.5.RELEASE'
-    compile 'org.springframework:spring-web:4.2.5.RELEASE'
-}
-
-jar.manifest.attributes 'Main-Class': mainClass
-
-task fatJar(type: Jar) {
-    version += '-release'
-    manifest.attributes 'Main-Class': mainClass
-    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
-    with jar
+    compile 'org.springframework.boot:spring-boot-starter-web'
 }

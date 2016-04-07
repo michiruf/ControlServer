@@ -1,20 +1,17 @@
 package de.michiruf.control_server.server;
 
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * @author Michael Ruf
  * @since 2016-04-06
  */
-@Configuration
-@ComponentScan
+@SpringBootApplication
 public class ControlServer {
 
     public static void main(String[] args) {
-        ApplicationContext context = new AnnotationConfigApplicationContext(ControlServer.class);
+        SpringApplication.run(ControlServer.class, args);
     }
 }
