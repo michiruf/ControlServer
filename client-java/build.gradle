@@ -17,7 +17,7 @@ def mainClass = 'de.michiruf.control_server.client_java.JavaControlClient'
 dependencies {
     testCompile 'junit:junit:4.12'
 
-    compile project(':client2')
+    compile project(':client')
 
     compile 'org.apache.logging.log4j:log4j-api:2.5'
     compile 'org.apache.logging.log4j:log4j-core:2.5'
