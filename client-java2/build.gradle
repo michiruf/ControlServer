@@ -1,18 +1,26 @@
 apply plugin: 'java'
 apply plugin: 'nebula.provided-base'
-apply from: 'http://dl.bintray.com/content/shemnon/javafx-gradle/8.1.1/javafx.plugin'
+//apply from: 'http://dl.bintray.com/content/shemnon/javafx-gradle/8.1.1/javafx.plugin'
 
 version = '1.0.' + version
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
-javafx {
-    // TODO Compiling with openjdk still does not work without setting a path to fx.
-    // Try the self-containing deployment mode!
-    // @see http://stackoverflow.com/questions/18547362/javafx-and-openjdk
-    mainClass 'de.michiruf.control_server.client_java.JavaControlClient'
+//javafx {
+//    // TODO Compiling with openjdk still does not work without setting a path to fx.
+//    // Try the self-containing deployment mode!
+//    // @see http://stackoverflow.com/questions/18547362/javafx-and-openjdk
+//    mainClass 'de.michiruf.control_server.client_java.JavaControlClient'
+//}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'de.michiruf.control_server.client_java.JavaControlClient'
+    }
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
 }
+
 
 dependencies {
     testCompile 'junit:junit:4.12'
@@ -27,12 +35,4 @@ dependencies {
     }
 
     compile 'com.1stleg:jnativehook:2.0.2'
-}
-
-task runJar(type: Jar) {
-    manifest {
-        attributes 'Main-Class': 'de.michiruf.control_server.client_java.JavaControlClient'
-    }
-    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
-    with jar
 }
