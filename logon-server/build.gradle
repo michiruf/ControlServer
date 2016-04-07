@@ -18,8 +18,11 @@ dependencies {
     compile project(':common')
 
     compile 'org.springframework.boot:spring-boot-starter-web'
+    compile 'org.springframework.boot:spring-boot-starter-websocket'
     compile 'org.springframework.boot:spring-boot-starter-data-jpa'
-    compile 'com.h2database:h2'
+    compile 'com.h2database:h2' // Database type (cur.: mem)
+    compile 'org.springframework.boot:spring-boot-starter-security'
+    compile 'org.springframework.boot:spring-boot-starter-thymeleaf' // template
 
     compile 'org.springframework.boot:spring-boot-devtools'
 }

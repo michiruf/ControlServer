@@ -1,4 +1,4 @@
-package de.michiruf.control_server.server.helper;
+package de.michiruf.control_server.server.web.helper;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
