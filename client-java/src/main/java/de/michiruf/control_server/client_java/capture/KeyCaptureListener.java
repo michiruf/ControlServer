@@ -15,7 +15,6 @@ import java.util.Date;
  * @author Michael Ruf
  * @since 2016-03-01
  */
-// TODO
 // NOTE we want to exit capturing when pressing CTRL + ESC
 // everything else shell be captured including key combinations
 @Singleton

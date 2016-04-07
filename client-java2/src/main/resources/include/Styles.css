@@ -19,10 +19,6 @@ Hyperlink {
     -fx-padding: 15px 12px;
     -fx-background-color: #369;
 }
-#header {
-    /* TODO currently unused */
-    /*-fx-spacing: 10px;*/
-}
 
 #left-content {
     -fx-background-color: #fff;

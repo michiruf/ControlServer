@@ -30,7 +30,7 @@ public class Capture {
         this.active = active;
         captureFrame.setVisible(active);
 
-        // TODO move this anywhere else?!
+        // NOTE move this anywhere else?!
         if (active)
             client.connect();
         else

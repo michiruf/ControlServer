@@ -35,6 +35,7 @@
     </HBox>
     <Pane prefHeight="25"/>
 
-    <!-- TODO center this: -->
-    <Button text="_start_direct_connection_connect" onAction="#onConnectClick"/>
+    <HBox alignment="CENTER">
+        <Button text="_start_direct_connection_connect" onAction="#onConnectClick"/>
+    </HBox>
 </VBox>

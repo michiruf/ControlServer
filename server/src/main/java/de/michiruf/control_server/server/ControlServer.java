@@ -15,7 +15,7 @@ import javax.inject.Singleton;
  */
 public class ControlServer {
 
-    // TODO the main method should not exist in the server module, but the server ui module!
+    // NOTE the main method should not exist in the server module, but the server ui module!
     // (which also shell provide the configuration)
     public static void main(String[] args) {
         ObjectGraph appGraph = ObjectGraph.create(new ControlServerRunModule());

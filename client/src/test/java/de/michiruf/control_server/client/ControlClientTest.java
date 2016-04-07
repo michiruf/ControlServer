@@ -60,7 +60,7 @@ public class ControlClientTest {
         async.complete();
     }
 
-    // TODO testMouseEvent()
+    // testMouseEvent()
 
     @Module(
             injects = ControlClientTest.class,

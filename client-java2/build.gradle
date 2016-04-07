@@ -12,18 +12,15 @@ targetCompatibility = JavaVersion.VERSION_1_8
 //    mainClass 'de.michiruf.control_server.client_java.JavaControlClient'
 //}
 
-jar {
-    manifest {
-        attributes 'Main-Class': 'de.michiruf.control_server.client_java.JavaControlClient'
-    }
-    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
-}
-
+def mainClass = 'de.michiruf.control_server.client_java.JavaControlClient'
 
 dependencies {
     testCompile 'junit:junit:4.12'
 
     compile project(':client2')
+
+    compile 'org.apache.logging.log4j:log4j-api:2.5'
+    compile 'org.apache.logging.log4j:log4j-core:2.5'
 
     compile 'com.squareup.dagger:dagger:1.2.2'
     provided('com.squareup.dagger:dagger-compiler:1.2.2') {
@@ -33,4 +30,19 @@ dependencies {
     }
 
     compile 'com.1stleg:jnativehook:2.0.2'
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': mainClass
+    }
+}
+
+task fatJar(type: Jar) {
+    version += '-release'
+    manifest {
+        attributes 'Main-Class': mainClass
+    }
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
 }
