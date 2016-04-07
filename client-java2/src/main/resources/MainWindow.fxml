@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import java.net.URL?>
+<BorderPane
+        xmlns="http://javafx.com/javafx/8"
+        xmlns:fx="http://javafx.com/fxml/1"
+        fx:controller="de.michiruf.control_server.client_java.ui.MainWindowController"
+        fx:id="root"
+        styleClass="root"
+        id="main">
+    <stylesheets>
+        <URL value="@include/Styles.css"/>
+    </stylesheets>
+
+    <top>
+        <fx:include source="include/Logo.fxml"/>
+    </top>
+
+    <center>
+        <GridPane>
+            <columnConstraints>
+                <ColumnConstraints percentWidth="50"/>
+                <ColumnConstraints percentWidth="50"/>
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints percentHeight="100"/>
+            </rowConstraints>
+
+            <!-- Contents needs to be BorderPanes because full width and height are only provided by those -->
+
+            <BorderPane id="left-content" GridPane.columnIndex="0" GridPane.rowIndex="0">
+                <!-- TODO would a stack pane also be good?! -->
+                <center>
+                    <fx:include source="pages/Devices.fxml"/>
+                    <fx:include source="pages/Login.fxml"/>
+                </center>
+            </BorderPane>
+
+            <BorderPane id="right-content" GridPane.columnIndex="1" GridPane.rowIndex="0" centerShape="">
+                <top>
+                    <fx:include source="pages/DirectConnection.fxml"/>
+                </top>
+                <center>
+                    <Separator orientation="HORIZONTAL" BorderPane.alignment="BOTTOM_LEFT"/>
+                </center>
+                <bottom>
+                    <fx:include source="pages/Options.fxml"/>
+                </bottom>
+            </BorderPane>
+        </GridPane>
+    </center>
+
+    <bottom>
+        <HBox id="footer" alignment="CENTER">
+            <Hyperlink text="_github_label" onAction="#onGithubClick"/>
+        </HBox>
+    </bottom>
+</BorderPane>

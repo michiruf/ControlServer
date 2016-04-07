@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+
+    <string name="login_hint">If you are logged in you can simply choose one of your registered online devices. You
+        don't need to login to use direct connection!
+    </string>
+    <string name="login_username">Username</string>
+    <string name="login_password">Password</string>
+    <string name="login_login">Login</string>
+    <string name="login_register">Register</string>
+    <string name="login_forgot_password">Forgot password?</string>
+
+    <string name="direct_connection_hint">Direct connections let you use the service quick and without registration,
+        but needs the port to be accessible (by your firewall). Use this if you want to use the tool in your local area
+        network and your internet connection is not fast enough to get a expected performance.
+    </string>
+    <string name="direct_connection_start">Start direct connection</string>
+    <string name="direct_connection_allow_for_port">Allow direct connection for port</string>
+
+    <string name="start_direct_connection_host">Host</string>
+    <string name="start_direct_connection_port">Port</string>
+    <string name="start_direct_connection_connect">Connect</string>
+
+    <string name="options_allow_controllable">Computer can be controlled in general (-> security)</string>
+    <string name="options_relative_positioning">Relative positioning</string>
+    <string name="options_absolute_positioning">Absolute positioning</string>
+
+    <string name="github_label">Github @michiruf</string>
+</resources>

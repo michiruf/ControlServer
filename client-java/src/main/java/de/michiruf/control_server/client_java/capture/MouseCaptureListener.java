@@ -16,7 +16,6 @@ import java.util.Date;
  * @author Michael Ruf
  * @since 2016-03-01
  */
-// TODO
 @Singleton
 public class MouseCaptureListener extends MouseAdapter {
 

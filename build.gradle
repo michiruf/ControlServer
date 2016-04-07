@@ -28,10 +28,12 @@ def configureMaven(Project project) {
 }
 
 def configureGitRevision(Project project) {
-    project.version = ('git rev-list --count HEAD ' + getRelativeProjectPath(project, rootDir))
+    String gitVersion = ('git rev-list --count HEAD ' + getRelativeProjectPath(project, rootDir))
             .execute((List) null, rootDir)
             .text
             .trim()
+    // NOTE separate the major version into a variable
+    project.version = '1.0.' + gitVersion;
 }
 
 def getRelativeProjectPath(Project project, File relativeTo) {

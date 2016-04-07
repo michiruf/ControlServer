@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<VBox
+        xmlns="http://javafx.com/javafx/8"
+        xmlns:fx="http://javafx.com/fxml/1"
+        fx:controller="de.michiruf.control_server.client_java.ui.pages.LoginController">
+    <padding>
+        <Insets bottom="25" left="25" right="25" top="25"/>
+    </padding>
+
+    <Label text="_login_hint" wrapText="true"/>
+    <Pane prefHeight="25"/>
+
+    <Label text="_login_username" labelFor="$usernameInput"/>
+    <TextField fx:id="usernameInput"/>
+    <Pane prefHeight="15"/>
+
+    <Label text="_login_password" labelFor="$passwordInput"/>
+    <PasswordField fx:id="passwordInput"/>
+    <Pane prefHeight="25"/>
+
+    <BorderPane>
+        <left>
+            <Button text="_login_login" onAction="#onLoginClick"/>
+        </left>
+
+        <right>
+            <HBox>
+                <Button text="_login_register" onAction="#onRegisterClick"/>
+                <Pane prefWidth="15"/>
+                <Button text="_login_forgot_password" onAction="#onForgotPasswordClick"/>
+            </HBox>
+        </right>
+    </BorderPane>
+</VBox>
