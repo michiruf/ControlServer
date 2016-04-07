@@ -2,19 +2,29 @@ package de.michiruf.control_server.client_java.ui;
 
 import dagger.Module;
 import dagger.Provides;
+import de.michiruf.control_server.client.qualifier.ForDirectConnection;
+import de.michiruf.control_server.client_java.ui.language.LanguageModule;
+import de.michiruf.control_server.client_java.ui.pages.PagesModule;
+import de.michiruf.control_server.client_java.ui.tray.TrayModule;
 
-import javax.inject.Named;
+import javax.inject.Singleton;
+import javax.swing.WindowConstants;
 
 /**
  * @author Michael Ruf
  * @since 2016-03-01
  */
 @Module(
+        includes = {
+                LanguageModule.class,
+                PagesModule.class,
+                TrayModule.class
+        },
         injects = {
-                SettingsController.class,
-                SettingsPresenter.class,
-                TrayControl.class,
-                TrayControlIconFactory.class
+                FxWindowPresenter.class
+        },
+        staticInjections = {
+                StartDirectConnectionWindowController.class,
         },
         library = true,
         complete = false
@@ -23,15 +33,19 @@ public class UiModule {
 
     @SuppressWarnings("unused")
     @Provides
-    @Named("iconPath")
-    public String provideIconPath() {
-        return "TrayControlIcon.png";
+    @Singleton
+    public FxWindowPresenter provideMainWindowPresenter() {
+        return new FxWindowPresenter("MainWindow.fxml", true) {{
+            setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        }};
     }
 
     @SuppressWarnings("unused")
     @Provides
-    @Named("settingsFxml")
-    public String provideSettingsFxml() {
-        return "Settings.fxml";
+    @Singleton
+    @ForDirectConnection
+    public FxWindowPresenter provideDirectConnectionWindowPresenter() {
+        // TODO we could also implement this using a StackPane to make a "Dialog"
+        return new FxWindowPresenter("StartDirectConnectionWindow.fxml");
     }
 }

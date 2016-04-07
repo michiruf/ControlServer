@@ -1,7 +1,7 @@
 package de.michiruf.control_server.client_java;
 
 import dagger.ObjectGraph;
-import de.michiruf.control_server.client_java.ui.TrayControl;
+import de.michiruf.control_server.client_java.ui.tray.TrayControl;
 import javafx.application.Application;
 import javafx.stage.Stage;
 

@@ -1,9 +1,10 @@
 package de.michiruf.control_server.client_java.capture;
 
-import de.michiruf.control_server.client.comm.Client;
+import de.michiruf.control_server.client_java.capture.control.ControlListener;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import java.awt.event.KeyEvent;
 
 /**
  * @author Michael Ruf
@@ -13,31 +14,27 @@ import javax.inject.Singleton;
 public class Capture {
 
     private final CaptureFrame captureFrame;
-    private final Client client;
-
-    private boolean active;
+    private final ControlListener controlListener;
 
     @Inject
-    public Capture(CaptureFrame captureFrame, Client client) {
+    public Capture(CaptureFrame captureFrame, ControlListener controlListener) {
         this.captureFrame = captureFrame;
-        this.client = client;
+        this.controlListener = controlListener;
 
         // Initially the frame shell not be active
-        setActive(false);
+        captureFrame.setVisible(false);
+
+        controlListener.setCancelParameters(KeyEvent.CTRL_DOWN_MASK, KeyEvent.VK_ESCAPE, this::stop);
+        controlListener.setMayRequiredCaptureFrame(captureFrame);
     }
 
-    public void setActive(boolean active) {
-        this.active = active;
-        captureFrame.setVisible(active);
-
-        // NOTE move this anywhere else?!
-        if (active)
-            client.connect();
-        else
-            client.disconnect();
+    public void start() {
+        captureFrame.setVisible(true);
+        controlListener.start();
     }
 
-    public boolean isActive() {
-        return active;
+    public void stop() {
+        captureFrame.setVisible(false);
+        controlListener.stop();
     }
 }

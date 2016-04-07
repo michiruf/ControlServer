@@ -3,7 +3,11 @@ package de.michiruf.control_server.client_java.config;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dagger.Module;
 import dagger.Provides;
-import de.michiruf.control_server.client.config.Configuration;
+import de.michiruf.control_server.Constants;
+import de.michiruf.control_server.client.config.ClientConfiguration;
+import de.michiruf.control_server.client.config.ServerConfiguration;
+import de.michiruf.control_server.client.qualifier.ForDirectConnection;
+import de.michiruf.control_server.client.qualifier.ForWebServer;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -27,7 +31,6 @@ public class JavaClientConfigurationModule {
 
     @SuppressWarnings("unused")
     @Provides
-    @Singleton
     @Named("configurationPath")
     public Path provideConfigurationPath() {
         return Paths.get("settings.json");
@@ -44,6 +47,7 @@ public class JavaClientConfigurationModule {
             byte[] data = Files.readAllBytes(path);
             configuration = objectMapper.readValue(data, JavaClientConfiguration.class);
         } catch (IOException e) {
+            // TODO Error (only as logging)
             configuration = new JavaClientConfiguration();
         }
 
@@ -51,11 +55,70 @@ public class JavaClientConfigurationModule {
         return configuration;
     }
 
+
     @SuppressWarnings("unused")
     @Provides
     @Singleton
-    public Configuration provideConfiguration(JavaClientConfiguration configuration) {
-        // For the client project
+    @ForWebServer
+    public ClientConfiguration provideWebServerClientConfiguration(JavaClientConfiguration configuration) {
+        // For the client module
+        return new ClientConfiguration() {
+            @Override
+            public String getHost() {
+                return Constants.LOGON_SERVER_HOST;
+            }
+
+            @Override
+            public int getPort() {
+                return Constants.LOGON_SERVER_PORT;
+            }
+
+            @Override
+            public boolean isSendControlsEnabled() {
+                return configuration.isSendControlsEnabled();
+            }
+
+            @Override
+            public boolean isControlListeningEnabled() {
+                return configuration.isControlListeningEnabled();
+            }
+        };
+    }
+
+    @SuppressWarnings("unused")
+    @Provides
+    @Singleton
+    @ForDirectConnection
+    public ClientConfiguration provideDirectConnectionClientConfiguration(JavaClientConfiguration configuration) {
+        // For the client module
+        return new ClientConfiguration() {
+            @Override
+            public String getHost() {
+                return configuration.getHost();
+            }
+
+            @Override
+            public int getPort() {
+                return configuration.getPort();
+            }
+
+            @Override
+            public boolean isSendControlsEnabled() {
+                return !configuration.isSendControlsEnabled();
+            }
+
+            @Override
+            public boolean isControlListeningEnabled() {
+                return false;
+            }
+        };
+    }
+
+    @SuppressWarnings("unused")
+    @Provides
+    @Singleton
+    public ServerConfiguration provideServerConfiguration(JavaClientConfiguration configuration) {
+        // For the client module
         return configuration;
     }
 }

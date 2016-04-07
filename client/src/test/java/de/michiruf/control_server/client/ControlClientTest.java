@@ -3,8 +3,9 @@ package de.michiruf.control_server.client;
 import dagger.Module;
 import dagger.ObjectGraph;
 import de.michiruf.control_server.client.comm.Client;
-import de.michiruf.control_server.client.config.Configuration;
-import de.michiruf.control_server.client.dispatch.EventDispatcher;
+import de.michiruf.control_server.client.event.EventDispatcher;
+import de.michiruf.control_server.client.config.ClientConfiguration;
+import de.michiruf.control_server.client.qualifier.ForWebServer;
 import de.michiruf.control_server.common.ExampleEvents;
 import io.vertx.core.Vertx;
 import io.vertx.core.http.HttpServer;
@@ -28,7 +29,8 @@ public class ControlClientTest {
     @Inject
     protected Vertx vertx;
     @Inject
-    protected Configuration configuration;
+    @ForWebServer
+    protected ClientConfiguration configuration;
     @Inject
     protected Client client;
     @Inject
@@ -60,7 +62,7 @@ public class ControlClientTest {
         async.complete();
     }
 
-    // testMouseEvent()
+    // TODO testMouseEvent()
 
     @Module(
             injects = ControlClientTest.class,

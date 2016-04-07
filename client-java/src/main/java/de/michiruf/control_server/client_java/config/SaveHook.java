@@ -1,7 +1,6 @@
 package de.michiruf.control_server.client_java.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import de.michiruf.control_server.client.config.Configuration;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -26,17 +25,15 @@ public class SaveHook {
         this.configurationPath = configurationPath;
     }
 
-    public void register(Configuration configuration) {
-        Runtime.getRuntime().addShutdownHook(new Thread() {
-            public void run() {
-                try {
-                    byte[] data = objectMapper.writeValueAsBytes(configuration);
-                    Files.write(configurationPath, data, StandardOpenOption.CREATE, StandardOpenOption.WRITE,
-                            StandardOpenOption.TRUNCATE_EXISTING);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+    public void register(JavaClientConfiguration configuration) {
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            try {
+                byte[] data = objectMapper.writeValueAsBytes(configuration);
+                Files.write(configurationPath, data, StandardOpenOption.CREATE, StandardOpenOption.WRITE,
+                        StandardOpenOption.TRUNCATE_EXISTING);
+            } catch (IOException e) {
+                e.printStackTrace(); // TODO Error
             }
-        });
+        }));
     }
 }

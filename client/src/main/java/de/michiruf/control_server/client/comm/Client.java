@@ -1,32 +1,29 @@
 package de.michiruf.control_server.client.comm;
 
-import de.michiruf.control_server.client.config.Configuration;
+import de.michiruf.control_server.client.config.ClientConfiguration;
 import io.vertx.core.Vertx;
-
-import javax.inject.Inject;
-import javax.inject.Singleton;
 
 /**
  * @author Michael Ruf
  * @since 2015-11-14
  */
-@Singleton
+// TODO we need to not send data or listen data if the configuration is not enabled (maybe in better verticle?)
+// TODO automatically reconnect!
 public class Client {
 
     private final Vertx vertx;
-    private final WebSocketVerticle webSocketVerticle;
-    private final Configuration configuration;
+    private final ClientWebSocketVerticle clientWebSocketVerticle;
+    private final ClientConfiguration configuration;
 
-    @Inject
-    public Client(Vertx vertx, WebSocketVerticle webSocketVerticle, Configuration configuration) {
+    public Client(Vertx vertx, ClientWebSocketVerticle clientWebSocketVerticle, ClientConfiguration configuration) {
         this.vertx = vertx;
-        this.webSocketVerticle = webSocketVerticle;
+        this.clientWebSocketVerticle = clientWebSocketVerticle;
         this.configuration = configuration;
     }
 
     @SuppressWarnings("ThrowableResultOfMethodCallIgnored")
     public void connect() {
-        vertx.deployVerticle(webSocketVerticle, event -> {
+        vertx.deployVerticle(clientWebSocketVerticle, event -> {
             if (event.succeeded()) {
                 System.out.println(String.format(
                         "[Client] CONNECTED on %s:%d",
@@ -35,22 +32,23 @@ public class Client {
                 System.err.println(String.format(
                         "[Client] NOT CONNECTED on port %s:%d",
                         configuration.getHost(), configuration.getPort()));
-                event.cause().printStackTrace();
+                event.cause().printStackTrace(); // TODO Error
             }
         });
     }
 
     public boolean isConnected() {
-        return webSocketVerticle.deploymentID() != null;
+        // TODO this gives always true after first start
+        return clientWebSocketVerticle.deploymentID() != null;
     }
 
     public void disconnect() {
         try {
-            webSocketVerticle.stop();
+            clientWebSocketVerticle.stop();
             System.out.println("[Client] DISCONNECTED");
         } catch (Exception e) {
             System.err.println("[Client] NOT DISCONNECTED");
-            e.printStackTrace();
+            e.printStackTrace(); // TODO Error
         }
     }
 }

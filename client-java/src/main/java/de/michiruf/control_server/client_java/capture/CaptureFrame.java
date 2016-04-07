@@ -12,22 +12,19 @@ import java.awt.Graphics2D;
  * @author Michael Ruf
  * @since 2016-03-01
  */
+// TODO Add a description of how to cancel this in this frame
 @Singleton
 public class CaptureFrame extends JFrame {
 
     @Inject
-    public CaptureFrame(KeyCaptureListener keyCaptureListener, MouseCaptureListener mouseCaptureListener) {
+    public CaptureFrame() {
+        super();
         setUndecorated(true);
         setAlwaysOnTop(true);
         setBackground(new Color(0, 0, 0, 0));
         setLocationRelativeTo(null);
         setExtendedState(getExtendedState() | JFrame.MAXIMIZED_BOTH);
         setContentPane(new TranslucentPane());
-
-        addKeyListener(keyCaptureListener);
-        addMouseListener(mouseCaptureListener);
-        addMouseMotionListener(mouseCaptureListener);
-        addMouseWheelListener(mouseCaptureListener);
     }
 
     @Override
@@ -35,6 +32,7 @@ public class CaptureFrame extends JFrame {
         super.setVisible(visible);
 
         if (visible) {
+            // Bring to front
             requestFocus();
         }
     }
