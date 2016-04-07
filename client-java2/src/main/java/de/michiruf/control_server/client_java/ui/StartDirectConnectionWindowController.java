@@ -14,7 +14,6 @@ import javax.inject.Inject;
  * @author Michael Ruf
  * @since 2016-04-01
  */
-// TODO we could may embed this into the main stage?
 public class StartDirectConnectionWindowController extends LanguageAdoptingController {
 
     @Inject
@@ -23,6 +22,10 @@ public class StartDirectConnectionWindowController extends LanguageAdoptingContr
     @Inject
     @ForDirectConnection
     protected static Client directConnectionClient;
+
+    @Inject
+    @ForDirectConnection
+    protected static FxWindowPresenter directConnectionWindowPresenter;
 
     @Inject
     protected static Capture capture;
@@ -63,5 +66,6 @@ public class StartDirectConnectionWindowController extends LanguageAdoptingContr
     protected void onConnectClick() {
         directConnectionClient.connect();
         capture.start();
+        directConnectionWindowPresenter.setVisible(false);
     }
 }

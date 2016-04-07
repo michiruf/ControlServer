@@ -45,6 +45,7 @@ public class UiModule {
     @Singleton
     @ForDirectConnection
     public FxWindowPresenter provideDirectConnectionWindowPresenter() {
+        // TODO we could also implement this using a StackPane to make a "Dialog"
         return new FxWindowPresenter("StartDirectConnectionWindow.fxml");
     }
 }
