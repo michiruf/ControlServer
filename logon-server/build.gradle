@@ -1,0 +1,14 @@
+apply plugin: 'java'
+apply plugin: 'nebula.provided-base' // TODO remove?
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+dependencies {
+    testCompile 'junit:junit:4.12'
+
+    compile project(':common')
+
+    compile 'org.springframework:spring-context:4.2.5.RELEASE'
+    compile 'org.springframework:spring-web:4.2.5.RELEASE'
+}
