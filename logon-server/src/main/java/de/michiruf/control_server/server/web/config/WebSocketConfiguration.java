@@ -17,6 +17,6 @@ public class WebSocketConfiguration implements WebSocketConfigurer {
 
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-        registry.addHandler(new WebSocketHandler(), "/");
+        registry.addHandler(new WebSocketHandler(), "/ws"); // TODO change this to / anyhow
     }
 }

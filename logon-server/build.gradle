@@ -22,7 +22,7 @@ dependencies {
     compile 'org.springframework.boot:spring-boot-starter-data-jpa'
     compile 'com.h2database:h2' // Database type (cur.: mem)
     compile 'org.springframework.boot:spring-boot-starter-security'
-    compile 'org.springframework.boot:spring-boot-starter-thymeleaf' // template
+    compile 'org.springframework.boot:spring-boot-starter-thymeleaf' // Template
 
     compile 'org.springframework.boot:spring-boot-devtools'
 }
