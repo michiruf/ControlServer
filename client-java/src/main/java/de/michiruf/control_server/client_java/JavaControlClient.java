@@ -18,7 +18,8 @@ import javax.swing.UIManager;
  */
 public class JavaControlClient {
 
-    private ObjectGraph appGraph;
+    @Inject
+    protected TrayControl trayControl;
 
     @Inject
     @ForWebServer
@@ -26,12 +27,11 @@ public class JavaControlClient {
 
     @Inject
     protected ServerConfiguration serverConfiguration;
-
     @Inject
     protected Server server;
 
     public JavaControlClient() {
-        appGraph = ObjectGraph.create(new JavaControlClientModule());
+        ObjectGraph appGraph = ObjectGraph.create(new JavaControlClientModule());
         appGraph.injectStatics();
         appGraph.inject(this);
 
@@ -41,7 +41,7 @@ public class JavaControlClient {
     }
 
     public void init() {
-        appGraph.get(TrayControl.class).show();
+        trayControl.show();
 
         webServerClient.connect();
         if (serverConfiguration.isAutoStartEnabled()) {
