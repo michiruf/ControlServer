@@ -7,4 +7,5 @@ captures/
 .vertx/
 *.iml
 *.properties
+!gradle-wrapper.properties
 settings.json
