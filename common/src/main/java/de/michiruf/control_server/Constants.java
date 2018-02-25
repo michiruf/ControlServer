@@ -20,7 +20,7 @@ public class Constants {
 
     static {
         LOGON_SERVER_HOST = "localhost";
-        LOGON_SERVER_PORT = 80;
+        LOGON_SERVER_PORT = 8080;
 
         try {
             REGISTRATION_URI = new URL("https://" + LOGON_SERVER_HOST + "/register").toURI();
