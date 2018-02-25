@@ -1,32 +1,32 @@
-package de.michiruf.control_server.client.event;
+package de.michiruf.control_server.client.auth;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.michiruf.control_server.client.ErrorHandler;
 import de.michiruf.control_server.client.Logger;
-import de.michiruf.control_server.common.Event;
+import de.michiruf.control_server.common.Authentication;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
 /**
  * @author Michael Ruf
- * @since 2015-11-30
+ * @since 2018-02-25
  */
 @Singleton
-public class EventStringConverter {
+public class StringAuthenticationConverter {
 
     private final ObjectMapper objectMapper;
 
     @Inject
-    public EventStringConverter(ObjectMapper objectMapper) {
+    public StringAuthenticationConverter(ObjectMapper objectMapper) {
         this.objectMapper = objectMapper;
     }
 
-    public String convert(Event event) {
-        Logger.log("[Client] EventStringConverter got event: %s", event);
+    public String convert(Authentication authentication) {
+        Logger.log("[Client] StringAuthenticationConverter got event: %s", authentication);
         try {
-            return objectMapper.writeValueAsString(event);
+            return objectMapper.writeValueAsString(authentication);
         } catch (JsonProcessingException e) {
             ErrorHandler.handle(e);
         }

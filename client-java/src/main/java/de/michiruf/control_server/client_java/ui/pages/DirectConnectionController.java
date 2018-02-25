@@ -1,6 +1,6 @@
 package de.michiruf.control_server.client_java.ui.pages;
 
-import de.michiruf.control_server.client.comm.Server;
+import de.michiruf.control_server.client.comm.DirectConnectionServer;
 import de.michiruf.control_server.client.qualifier.ForDirectConnection;
 import de.michiruf.control_server.client_java.config.JavaClientConfiguration;
 import de.michiruf.control_server.client_java.ui.FxWindowPresenter;
@@ -20,7 +20,7 @@ public class DirectConnectionController {
     protected static JavaClientConfiguration configuration;
 
     @Inject
-    protected static Server server;
+    protected static DirectConnectionServer server;
 
     @Inject
     @ForDirectConnection

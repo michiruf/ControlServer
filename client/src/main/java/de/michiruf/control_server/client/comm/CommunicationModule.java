@@ -2,7 +2,7 @@ package de.michiruf.control_server.client.comm;
 
 import dagger.Module;
 import dagger.Provides;
-import de.michiruf.control_server.client.config.ClientConfiguration;
+import de.michiruf.control_server.client.config.WebServerClientConfiguration;
 import de.michiruf.control_server.client.event.EventDispatcher;
 import de.michiruf.control_server.client.event.EventExecutionHandler;
 import de.michiruf.control_server.client.event.EventStringConverter;
@@ -18,8 +18,8 @@ import javax.inject.Singleton;
  */
 @Module(
         injects = {
-                Server.class,
-                ServerWebSocketVerticle.class
+                DirectConnectionServer.class,
+                DirectConnectionServerVerticle.class
         },
         library = true,
         complete = false
@@ -36,13 +36,12 @@ public class CommunicationModule {
     @SuppressWarnings("unused")
     @Provides
     @Singleton
-    @ForWebServer
-    public ClientWebSocketVerticle provideWebServerClientWebSocketVerticle(
-            @ForWebServer ClientConfiguration configuration,
+    public WebServerClientVerticle provideWebServerClientVerticle(
+            @ForWebServer WebServerClientConfiguration configuration,
             EventStringConverter converter,
             EventDispatcher eventDispatcher,
             EventExecutionHandler eventExecutionHandler) {
-        return new ClientWebSocketVerticle(configuration, converter, eventDispatcher, eventExecutionHandler);
+        return new WebServerClientVerticle(configuration, converter, eventDispatcher, eventExecutionHandler);
     }
 
     @SuppressWarnings("unused")
@@ -51,21 +50,20 @@ public class CommunicationModule {
     @ForWebServer
     public Client provideWebServerClient(
             Vertx vertx,
-            @ForWebServer ClientWebSocketVerticle clientWebSocketVerticle,
-            @ForWebServer ClientConfiguration configuration) {
-        return new Client(vertx, clientWebSocketVerticle, configuration);
+            WebServerClientVerticle verticle,
+            @ForWebServer WebServerClientConfiguration configuration) {
+        return new Client(vertx, verticle, configuration);
     }
 
     @SuppressWarnings("unused")
     @Provides
     @Singleton
-    @ForDirectConnection
-    public ClientWebSocketVerticle provideDirectConnectionClientWebSocketVerticle(
-            @ForDirectConnection ClientConfiguration configuration,
+    public DirectConnectionClientVerticle provideDirectConnectionClientVerticle(
+            @ForDirectConnection WebServerClientConfiguration configuration,
             EventStringConverter converter,
             EventDispatcher eventDispatcher,
             EventExecutionHandler eventExecutionHandler) {
-        return new ClientWebSocketVerticle(configuration, converter, eventDispatcher, eventExecutionHandler);
+        return new DirectConnectionClientVerticle(configuration, converter, eventDispatcher, eventExecutionHandler);
     }
 
     @SuppressWarnings("unused")
@@ -74,8 +72,8 @@ public class CommunicationModule {
     @ForDirectConnection
     public Client provideDirectConnectionClient(
             Vertx vertx,
-            @ForDirectConnection ClientWebSocketVerticle clientWebSocketVerticle,
-            @ForDirectConnection ClientConfiguration configuration) {
-        return new Client(vertx, clientWebSocketVerticle, configuration);
+            DirectConnectionClientVerticle verticle,
+            @ForDirectConnection WebServerClientConfiguration configuration) {
+        return new Client(vertx, verticle, configuration);
     }
 }

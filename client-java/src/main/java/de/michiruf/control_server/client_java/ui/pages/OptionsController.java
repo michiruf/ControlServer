@@ -29,16 +29,16 @@ public class OptionsController {
     protected void initialize() {
         allowControllable.setSelected(configuration.isControlListeningEnabled());
 
-        int positionSelection = Arrays.asList(MouseData.CoordinateType.values())
-                .indexOf(configuration.getCoordinateType());
-        positioningType.getToggles().get(positionSelection).setSelected(true);
+//        int positionSelection = Arrays.asList(MouseData.CoordinateType.values())
+//                .indexOf(configuration.getCoordinateType());
+//        positioningType.getToggles().get(positionSelection).setSelected(true);
     }
 
     @FXML
     protected void onChange() {
         configuration.setControlListeningEnabled(allowControllable.isSelected());
 
-        int positionSelection = positioningType.getToggles().indexOf(positioningType.getSelectedToggle());
-        configuration.setCoordinateType(MouseData.CoordinateType.values()[positionSelection]);
+//        int positionSelection = positioningType.getToggles().indexOf(positioningType.getSelectedToggle());
+//        configuration.setCoordinateType(MouseData.CoordinateType.values()[positionSelection]);
     }
 }

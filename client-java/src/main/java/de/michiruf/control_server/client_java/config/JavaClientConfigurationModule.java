@@ -4,8 +4,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import dagger.Module;
 import dagger.Provides;
 import de.michiruf.control_server.Constants;
-import de.michiruf.control_server.client.config.ClientConfiguration;
-import de.michiruf.control_server.client.config.ServerConfiguration;
+import de.michiruf.control_server.client.config.WebServerClientConfiguration;
+import de.michiruf.control_server.client.config.DirectConnectionServerConfiguration;
 import de.michiruf.control_server.client.qualifier.ForDirectConnection;
 import de.michiruf.control_server.client.qualifier.ForWebServer;
 
@@ -60,9 +60,9 @@ public class JavaClientConfigurationModule {
     @Provides
     @Singleton
     @ForWebServer
-    public ClientConfiguration provideWebServerClientConfiguration(JavaClientConfiguration configuration) {
+    public WebServerClientConfiguration provideWebServerClientConfiguration(JavaClientConfiguration configuration) {
         // For the client module
-        return new ClientConfiguration() {
+        return new WebServerClientConfiguration() {
             @Override
             public String getHost() {
                 return Constants.LOGON_SERVER_HOST;
@@ -89,9 +89,9 @@ public class JavaClientConfigurationModule {
     @Provides
     @Singleton
     @ForDirectConnection
-    public ClientConfiguration provideDirectConnectionClientConfiguration(JavaClientConfiguration configuration) {
+    public WebServerClientConfiguration provideDirectConnectionClientConfiguration(JavaClientConfiguration configuration) {
         // For the client module
-        return new ClientConfiguration() {
+        return new WebServerClientConfiguration() {
             @Override
             public String getHost() {
                 return configuration.getHost();
@@ -117,7 +117,7 @@ public class JavaClientConfigurationModule {
     @SuppressWarnings("unused")
     @Provides
     @Singleton
-    public ServerConfiguration provideServerConfiguration(JavaClientConfiguration configuration) {
+    public DirectConnectionServerConfiguration provideServerConfiguration(JavaClientConfiguration configuration) {
         // For the client module
         return configuration;
     }

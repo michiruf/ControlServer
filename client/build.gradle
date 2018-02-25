@@ -10,11 +10,11 @@ dependencies {
     compile project(':common')
     testCompile project(':common-example-events')
 
-    compile 'io.vertx:vertx-core:3.0.0'
-    testCompile 'io.vertx:vertx-unit:3.0.0'
+    compile 'io.vertx:vertx-core:3.5.1'
+    testCompile 'io.vertx:vertx-unit:3.5.1'
 
-    compile 'com.squareup.dagger:dagger:1.2.2'
-    provided('com.squareup.dagger:dagger-compiler:1.2.2') {
+    compile 'com.squareup.dagger:dagger:1.2.5'
+    provided('com.squareup.dagger:dagger-compiler:1.2.5') {
         // Due to dagger itself shell not be provided
         // (at least IntelliJ IDEA displays this as provided if not excluded)
         exclude group: 'com.squareup.dagger', module: 'dagger'

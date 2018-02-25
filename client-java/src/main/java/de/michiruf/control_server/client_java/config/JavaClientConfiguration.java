@@ -1,15 +1,14 @@
 package de.michiruf.control_server.client_java.config;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import de.michiruf.control_server.client.config.ClientConfiguration;
-import de.michiruf.control_server.client.config.ServerConfiguration;
-import de.michiruf.control_server.common.data.MouseData;
+import de.michiruf.control_server.client.config.WebServerClientConfiguration;
+import de.michiruf.control_server.client.config.DirectConnectionServerConfiguration;
 
 /**
  * @author Michael Ruf
  * @since 2016-03-08
  */
-public class JavaClientConfiguration implements ClientConfiguration, ServerConfiguration {
+public class JavaClientConfiguration implements WebServerClientConfiguration, DirectConnectionServerConfiguration {
 
     @JsonProperty
     private String host;
@@ -31,7 +30,7 @@ public class JavaClientConfiguration implements ClientConfiguration, ServerConfi
     private boolean autoStartEnabled;
 
     @JsonProperty
-    private MouseData.CoordinateType coordinateType = MouseData.CoordinateType.RELATIVE;
+    private String hostPassword;
 
     @Override
     public String getHost() {
@@ -70,6 +69,15 @@ public class JavaClientConfiguration implements ClientConfiguration, ServerConfi
     }
 
     @Override
+    public boolean isAutoStartEnabled() {
+        return autoStartEnabled;
+    }
+
+    public void setAutoStartEnabled(boolean autoStartEnabled) {
+        this.autoStartEnabled = autoStartEnabled;
+    }
+
+    @Override
     public int getHostPort() {
         return hostPort;
     }
@@ -79,20 +87,11 @@ public class JavaClientConfiguration implements ClientConfiguration, ServerConfi
     }
 
     @Override
-    public boolean isAutoStartEnabled() {
-        return autoStartEnabled;
+    public String getHostPassword() {
+        return hostPassword;
     }
 
-    public void setAutoStartEnabled(boolean autoStartEnabled) {
-        this.autoStartEnabled = autoStartEnabled;
-    }
-
-    // TODO Should remove the coordinate type
-    public MouseData.CoordinateType getCoordinateType() {
-        return coordinateType;
-    }
-
-    public void setCoordinateType(MouseData.CoordinateType coordinateType) {
-        this.coordinateType = coordinateType;
+    public void getHostPassword(String hostPassword) {
+        this.hostPassword = hostPassword;
     }
 }
