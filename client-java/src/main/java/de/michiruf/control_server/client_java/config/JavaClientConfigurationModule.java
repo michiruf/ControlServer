@@ -3,6 +3,9 @@ package de.michiruf.control_server.client_java.config;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dagger.Module;
 import dagger.Provides;
+import de.michiruf.control_server.client.config.DirectConnectionClientConfiguration;
+import de.michiruf.control_server.client.config.DirectConnectionServerConfiguration;
+import de.michiruf.control_server.client.config.WebServerClientConfiguration;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -26,76 +29,50 @@ public class JavaClientConfigurationModule {
 
     @SuppressWarnings("unused")
     @Provides
-    @Named("DirectConnectionClientConfigurationPath")
+    @Named("ConfigurationPath")
     public Path provideDirectConnectionClientConfigurationPath() {
-        return Paths.get("settings-direct-client.json");
+        return Paths.get("settings.json");
     }
 
     @SuppressWarnings("unused")
     @Provides
     @Singleton
-    public JavaClientDirectConnectionClientConfiguration provideDirectConnectionClientConfiguration(
+    public JavaClientConfiguration provideJavaDirectConnectionClientConfiguration(
             ObjectMapper objectMapper,
-            @Named("DirectConnectionClientConfigurationPath") Path path,
+            @Named("ConfigurationPath") Path path,
             SaveHook saveHook) {
-        JavaClientDirectConnectionClientConfiguration configuration;
+        JavaClientConfiguration configuration;
         try {
             byte[] data = Files.readAllBytes(path);
-            configuration = objectMapper.readValue(data, JavaClientDirectConnectionClientConfiguration.class);
+            configuration = objectMapper.readValue(data, JavaClientConfiguration.class);
         } catch (IOException e) {
-            configuration = new JavaClientDirectConnectionClientConfiguration();
+            configuration = new JavaClientConfiguration().reset();
         }
-        saveHook.register(configuration);
+        saveHook.register(configuration, path);
         return configuration;
     }
 
     @SuppressWarnings("unused")
     @Provides
-    @Named("DirectConnectionServerConfigurationPath")
-    public Path provideDirectConnectionServerConfigurationPath() {
-        return Paths.get("settings-direct-server.json");
+    public DirectConnectionClientConfiguration provideDirectConnectionClientConfiguration(
+            JavaClientConfiguration configuration) {
+        // Provide to satisfy the client module
+        return configuration.getDirectConnectionClient();
     }
 
     @SuppressWarnings("unused")
     @Provides
-    @Singleton
-    public JavaClientDirectConnectionServerConfiguration provideDirectConnectionServerConfiguration(
-            ObjectMapper objectMapper,
-            @Named("DirectConnectionServerConfigurationPath") Path path,
-            SaveHook saveHook) {
-        JavaClientDirectConnectionServerConfiguration configuration;
-        try {
-            byte[] data = Files.readAllBytes(path);
-            configuration = objectMapper.readValue(data, JavaClientDirectConnectionServerConfiguration.class);
-        } catch (IOException e) {
-            configuration = new JavaClientDirectConnectionServerConfiguration();
-        }
-        saveHook.register(configuration);
-        return configuration;
+    public DirectConnectionServerConfiguration provideDirectConnectionServerConfiguration(
+            JavaClientConfiguration configuration) {
+        // Provide to satisfy the client module
+        return configuration.getDirectConnectionServer();
     }
 
     @SuppressWarnings("unused")
     @Provides
-    @Named("WebServerClientConfigurationPath")
-    public Path provideWebServerClientConfigurationPath() {
-        return Paths.get("settings-web-client.json");
-    }
-
-    @SuppressWarnings("unused")
-    @Provides
-    @Singleton
-    public JavaClientWebServerClientConfiguration provideConfiguration(
-            ObjectMapper objectMapper,
-            @Named("WebServerClientConfigurationPath") Path path,
-            SaveHook saveHook) {
-        JavaClientWebServerClientConfiguration configuration;
-        try {
-            byte[] data = Files.readAllBytes(path);
-            configuration = objectMapper.readValue(data, JavaClientWebServerClientConfiguration.class);
-        } catch (IOException e) {
-            configuration = new JavaClientWebServerClientConfiguration();
-        }
-        saveHook.register(configuration);
-        return configuration;
+    public WebServerClientConfiguration provideWebServerConfiguration(
+            JavaClientConfiguration configuration) {
+        // Provide to satisfy the client module
+        return configuration.getWebServerClient();
     }
 }

@@ -15,25 +15,24 @@ public class Client {
 
     private final Vertx vertx;
     private final AbstractVerticle verticle;
-    private final WebServerClientConfiguration configuration;
 
-    public Client(Vertx vertx, AbstractVerticle verticle, WebServerClientConfiguration configuration) {
+    public Client(Vertx vertx, AbstractVerticle verticle) {
         this.vertx = vertx;
         this.verticle = verticle;
-        this.configuration = configuration;
     }
 
     public void connect() {
         vertx.deployVerticle(verticle, event -> {
-            if (event.succeeded()) {
-                Logger.log("[Client] CONNECTED on %s:%d",
-                        configuration.getHost(), configuration.getPort());
-            } else if (event.cause() != null) {
-                Logger.log(
-                        "[Client] NOT CONNECTED on port %s:%d",
-                        configuration.getHost(), configuration.getPort());
-                ErrorHandler.handle(event.cause());
-            }
+            // TODO Logging with different option classes impossible now
+//            if (event.succeeded()) {
+//                Logger.log("[Client] CONNECTED on %s:%d",
+//                        configuration.getHost(), configuration.getPort());
+//            } else if (event.cause() != null) {
+//                Logger.log(
+//                        "[Client] NOT CONNECTED on port %s:%d",
+//                        configuration.getHost(), configuration.getPort());
+//                ErrorHandler.handle(event.cause());
+//            }
         });
     }
 

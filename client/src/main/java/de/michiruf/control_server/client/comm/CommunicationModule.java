@@ -2,7 +2,6 @@ package de.michiruf.control_server.client.comm;
 
 import dagger.Module;
 import dagger.Provides;
-import de.michiruf.control_server.client.config.WebServerClientConfiguration;
 import de.michiruf.control_server.client.qualifier.ForDirectConnection;
 import de.michiruf.control_server.client.qualifier.ForWebServer;
 import io.vertx.core.Vertx;
@@ -36,22 +35,20 @@ public class CommunicationModule {
     @SuppressWarnings("unused")
     @Provides
     @Singleton
-    @ForWebServer
-    public Client provideWebServerClient(
+    @ForDirectConnection
+    public Client provideDirectConnectionClient(
             Vertx vertx,
-            WebServerClientVerticle verticle,
-            @ForWebServer WebServerClientConfiguration configuration) {
-        return new Client(vertx, verticle, configuration);
+            DirectConnectionClientVerticle verticle) {
+        return new Client(vertx, verticle);
     }
 
     @SuppressWarnings("unused")
     @Provides
     @Singleton
-    @ForDirectConnection
-    public Client provideDirectConnectionClient(
+    @ForWebServer
+    public Client provideWebServerClient(
             Vertx vertx,
-            DirectConnectionClientVerticle verticle,
-            @ForDirectConnection WebServerClientConfiguration configuration) {
-        return new Client(vertx, verticle, configuration);
+            WebServerClientVerticle verticle) {
+        return new Client(vertx, verticle);
     }
 }

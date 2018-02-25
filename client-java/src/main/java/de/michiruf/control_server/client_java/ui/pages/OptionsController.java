@@ -1,5 +1,6 @@
 package de.michiruf.control_server.client_java.ui.pages;
 
+import de.michiruf.control_server.client_java.config.JavaClientConfiguration;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ToggleGroup;
@@ -24,7 +25,7 @@ public class OptionsController {
     @SuppressWarnings("unused") // due to FXML
     @FXML
     protected void initialize() {
-        allowControllable.setSelected(configuration.isControlListeningEnabled());
+        allowControllable.setSelected(configuration.getWebServerClient().isControlListeningEnabled());
 
 //        int positionSelection = Arrays.asList(MouseData.CoordinateType.values())
 //                .indexOf(configuration.getCoordinateType());
@@ -33,7 +34,7 @@ public class OptionsController {
 
     @FXML
     protected void onChange() {
-        configuration.setControlListeningEnabled(allowControllable.isSelected());
+        configuration.getWebServerClient().setControlListeningEnabled(allowControllable.isSelected());
 
 //        int positionSelection = positioningType.getToggles().indexOf(positioningType.getSelectedToggle());
 //        configuration.setCoordinateType(MouseData.CoordinateType.values()[positionSelection]);
