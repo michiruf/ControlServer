@@ -1,7 +1,5 @@
 package de.michiruf.control_server.client_java.ui.pages;
 
-import de.michiruf.control_server.client_java.config.JavaClientConfiguration;
-
 import javax.inject.Inject;
 
 /**

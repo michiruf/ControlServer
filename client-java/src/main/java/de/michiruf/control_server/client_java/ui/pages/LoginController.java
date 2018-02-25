@@ -1,7 +1,6 @@
 package de.michiruf.control_server.client_java.ui.pages;
 
 import de.michiruf.control_server.Constants;
-import de.michiruf.control_server.client_java.config.JavaClientConfiguration;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;

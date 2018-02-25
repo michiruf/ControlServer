@@ -29,7 +29,7 @@ public class DirectConnectionServer {
     }
 
     public void startIfAutoStartEnabled() {
-        if (configuration.isAutoStartEnabled()) {
+        if (configuration.isHostAutoStartEnabled()) {
             start();
         }
     }

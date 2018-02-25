@@ -3,11 +3,6 @@ package de.michiruf.control_server.client_java.config;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dagger.Module;
 import dagger.Provides;
-import de.michiruf.control_server.Constants;
-import de.michiruf.control_server.client.config.WebServerClientConfiguration;
-import de.michiruf.control_server.client.config.DirectConnectionServerConfiguration;
-import de.michiruf.control_server.client.qualifier.ForDirectConnection;
-import de.michiruf.control_server.client.qualifier.ForWebServer;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -31,94 +26,76 @@ public class JavaClientConfigurationModule {
 
     @SuppressWarnings("unused")
     @Provides
-    @Named("configurationPath")
-    public Path provideConfigurationPath() {
-        return Paths.get("settings.json");
+    @Named("DirectConnectionClientConfigurationPath")
+    public Path provideDirectConnectionClientConfigurationPath() {
+        return Paths.get("settings-direct-client.json");
     }
 
     @SuppressWarnings("unused")
     @Provides
     @Singleton
-    public JavaClientConfiguration provideConfiguration(ObjectMapper objectMapper,
-                                                        @Named("configurationPath") Path path,
-                                                        SaveHook saveHook) {
-        JavaClientConfiguration configuration;
+    public JavaClientDirectConnectionClientConfiguration provideDirectConnectionClientConfiguration(
+            ObjectMapper objectMapper,
+            @Named("DirectConnectionClientConfigurationPath") Path path,
+            SaveHook saveHook) {
+        JavaClientDirectConnectionClientConfiguration configuration;
         try {
             byte[] data = Files.readAllBytes(path);
-            configuration = objectMapper.readValue(data, JavaClientConfiguration.class);
+            configuration = objectMapper.readValue(data, JavaClientDirectConnectionClientConfiguration.class);
         } catch (IOException e) {
-            // TODO Error (only as logging)
-            configuration = new JavaClientConfiguration();
+            configuration = new JavaClientDirectConnectionClientConfiguration();
         }
-
         saveHook.register(configuration);
         return configuration;
     }
 
-
     @SuppressWarnings("unused")
     @Provides
-    @Singleton
-    @ForWebServer
-    public WebServerClientConfiguration provideWebServerClientConfiguration(JavaClientConfiguration configuration) {
-        // For the client module
-        return new WebServerClientConfiguration() {
-            @Override
-            public String getHost() {
-                return Constants.LOGON_SERVER_HOST;
-            }
-
-            @Override
-            public int getPort() {
-                return Constants.LOGON_SERVER_PORT;
-            }
-
-            @Override
-            public boolean isSendControlsEnabled() {
-                return configuration.isSendControlsEnabled();
-            }
-
-            @Override
-            public boolean isControlListeningEnabled() {
-                return configuration.isControlListeningEnabled();
-            }
-        };
+    @Named("DirectConnectionServerConfigurationPath")
+    public Path provideDirectConnectionServerConfigurationPath() {
+        return Paths.get("settings-direct-server.json");
     }
 
     @SuppressWarnings("unused")
     @Provides
     @Singleton
-    @ForDirectConnection
-    public WebServerClientConfiguration provideDirectConnectionClientConfiguration(JavaClientConfiguration configuration) {
-        // For the client module
-        return new WebServerClientConfiguration() {
-            @Override
-            public String getHost() {
-                return configuration.getHost();
-            }
+    public JavaClientDirectConnectionServerConfiguration provideDirectConnectionServerConfiguration(
+            ObjectMapper objectMapper,
+            @Named("DirectConnectionServerConfigurationPath") Path path,
+            SaveHook saveHook) {
+        JavaClientDirectConnectionServerConfiguration configuration;
+        try {
+            byte[] data = Files.readAllBytes(path);
+            configuration = objectMapper.readValue(data, JavaClientDirectConnectionServerConfiguration.class);
+        } catch (IOException e) {
+            configuration = new JavaClientDirectConnectionServerConfiguration();
+        }
+        saveHook.register(configuration);
+        return configuration;
+    }
 
-            @Override
-            public int getPort() {
-                return configuration.getPort();
-            }
-
-            @Override
-            public boolean isSendControlsEnabled() {
-                return !configuration.isSendControlsEnabled();
-            }
-
-            @Override
-            public boolean isControlListeningEnabled() {
-                return false;
-            }
-        };
+    @SuppressWarnings("unused")
+    @Provides
+    @Named("WebServerClientConfigurationPath")
+    public Path provideWebServerClientConfigurationPath() {
+        return Paths.get("settings-web-client.json");
     }
 
     @SuppressWarnings("unused")
     @Provides
     @Singleton
-    public DirectConnectionServerConfiguration provideServerConfiguration(JavaClientConfiguration configuration) {
-        // For the client module
+    public JavaClientWebServerClientConfiguration provideConfiguration(
+            ObjectMapper objectMapper,
+            @Named("WebServerClientConfigurationPath") Path path,
+            SaveHook saveHook) {
+        JavaClientWebServerClientConfiguration configuration;
+        try {
+            byte[] data = Files.readAllBytes(path);
+            configuration = objectMapper.readValue(data, JavaClientWebServerClientConfiguration.class);
+        } catch (IOException e) {
+            configuration = new JavaClientWebServerClientConfiguration();
+        }
+        saveHook.register(configuration);
         return configuration;
     }
 }

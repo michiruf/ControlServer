@@ -1,8 +1,8 @@
 package de.michiruf.control_server.client.control;
 
 import de.michiruf.control_server.client.Logger;
-import de.michiruf.control_server.common.Event;
-import de.michiruf.control_server.common.data.KeyData;
+import de.michiruf.control_server.common.event.Event;
+import de.michiruf.control_server.common.event.KeyData;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;

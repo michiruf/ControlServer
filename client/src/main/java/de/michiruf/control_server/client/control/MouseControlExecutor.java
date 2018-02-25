@@ -1,9 +1,9 @@
 package de.michiruf.control_server.client.control;
 
 import de.michiruf.control_server.client.Logger;
-import de.michiruf.control_server.common.Direction;
-import de.michiruf.control_server.common.Event;
-import de.michiruf.control_server.common.data.MouseData;
+import de.michiruf.control_server.common.event.Direction;
+import de.michiruf.control_server.common.event.Event;
+import de.michiruf.control_server.common.event.MouseData;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;

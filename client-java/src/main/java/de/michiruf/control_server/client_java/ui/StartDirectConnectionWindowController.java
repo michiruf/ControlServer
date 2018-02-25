@@ -3,7 +3,6 @@ package de.michiruf.control_server.client_java.ui;
 import de.michiruf.control_server.client.comm.Client;
 import de.michiruf.control_server.client.qualifier.ForDirectConnection;
 import de.michiruf.control_server.client_java.capture.Capture;
-import de.michiruf.control_server.client_java.config.JavaClientConfiguration;
 import de.michiruf.control_server.client_java.ui.language.LanguageAdoptingController;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;

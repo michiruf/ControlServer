@@ -2,8 +2,10 @@ package de.michiruf.control_server.common;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import de.michiruf.control_server.common.data.KeyData;
-import de.michiruf.control_server.common.data.MouseData;
+import de.michiruf.control_server.common.event.KeyData;
+import de.michiruf.control_server.common.event.MouseData;
+import de.michiruf.control_server.common.event.Direction;
+import de.michiruf.control_server.common.event.Event;
 
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;

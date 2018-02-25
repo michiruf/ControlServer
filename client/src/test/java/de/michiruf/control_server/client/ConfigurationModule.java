@@ -93,7 +93,7 @@ public class ConfigurationModule {
             }
 
             @Override
-            public boolean isAutoStartEnabled() {
+            public boolean isHostAutoStartEnabled() {
                 return true;
             }
         };

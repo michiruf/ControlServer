@@ -6,7 +6,7 @@ package de.michiruf.control_server.client.config;
  */
 public interface DirectConnectionServerConfiguration {
 
-    boolean isAutoStartEnabled();
+    boolean isHostAutoStartEnabled();
 
     int getHostPort();
 

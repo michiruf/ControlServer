@@ -3,7 +3,7 @@ package de.michiruf.control_server.client.auth;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.michiruf.control_server.client.ErrorHandler;
 import de.michiruf.control_server.client.Logger;
-import de.michiruf.control_server.common.Authentication;
+import de.michiruf.control_server.common.auth.Authentication;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;

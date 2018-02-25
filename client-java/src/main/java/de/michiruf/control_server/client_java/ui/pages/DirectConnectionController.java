@@ -2,7 +2,6 @@ package de.michiruf.control_server.client_java.ui.pages;
 
 import de.michiruf.control_server.client.comm.DirectConnectionServer;
 import de.michiruf.control_server.client.qualifier.ForDirectConnection;
-import de.michiruf.control_server.client_java.config.JavaClientConfiguration;
 import de.michiruf.control_server.client_java.ui.FxWindowPresenter;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
@@ -35,7 +34,7 @@ public class DirectConnectionController {
     @SuppressWarnings("unused") // due to FXML
     @FXML
     protected void initialize() {
-        allowDirectConnection.setSelected(configuration.isAutoStartEnabled());
+        allowDirectConnection.setSelected(configuration.isHostAutoStartEnabled());
 
         if (configuration.getHostPort() != 0) {
             directConnectionPort.setText(Integer.toString(configuration.getHostPort()));

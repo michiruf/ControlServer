@@ -3,6 +3,7 @@ package de.michiruf.control_server.common;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import de.michiruf.control_server.common.event.Event;
 import org.junit.Before;
 import org.junit.Test;
 
