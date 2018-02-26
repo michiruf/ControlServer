@@ -1,8 +1,9 @@
 package de.michiruf.control_server.client.control;
 
-import de.michiruf.control_server.common.Direction;
-import de.michiruf.control_server.common.Event;
-import de.michiruf.control_server.common.data.MouseData;
+import de.michiruf.control_server.client.Logger;
+import de.michiruf.control_server.common.event.Direction;
+import de.michiruf.control_server.common.event.Event;
+import de.michiruf.control_server.common.event.MouseData;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -29,9 +30,7 @@ public class MouseControlExecutor implements ControlExecutor {
         }
 
         MouseData data = event.getDataAs(MouseData.class);
-        System.out.println(String.format(
-                "[Server] MouseControlExecutor got x: %s, y: %s",
-                data.getMouseX(), data.getMouseY()));
+        Logger.log("[Server] MouseControlExecutor got x: %s, y: %s", data.getMouseX(), data.getMouseY());
 
         // TODO CoordinateType!
 

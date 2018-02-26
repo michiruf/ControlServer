@@ -1,54 +1,53 @@
 package de.michiruf.control_server.client.comm;
 
-import de.michiruf.control_server.client.config.ClientConfiguration;
+import de.michiruf.control_server.client.ErrorHandler;
+import de.michiruf.control_server.client.Logger;
+import de.michiruf.control_server.client.config.WebServerClientConfiguration;
+import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Vertx;
 
 /**
  * @author Michael Ruf
  * @since 2015-11-14
  */
-// TODO we need to not send data or listen data if the configuration is not enabled (maybe in better verticle?)
 // TODO automatically reconnect!
 public class Client {
 
     private final Vertx vertx;
-    private final ClientWebSocketVerticle clientWebSocketVerticle;
-    private final ClientConfiguration configuration;
+    private final AbstractVerticle verticle;
 
-    public Client(Vertx vertx, ClientWebSocketVerticle clientWebSocketVerticle, ClientConfiguration configuration) {
+    public Client(Vertx vertx, AbstractVerticle verticle) {
         this.vertx = vertx;
-        this.clientWebSocketVerticle = clientWebSocketVerticle;
-        this.configuration = configuration;
+        this.verticle = verticle;
     }
 
-    @SuppressWarnings("ThrowableResultOfMethodCallIgnored")
     public void connect() {
-        vertx.deployVerticle(clientWebSocketVerticle, event -> {
-            if (event.succeeded()) {
-                System.out.println(String.format(
-                        "[Client] CONNECTED on %s:%d",
-                        configuration.getHost(), configuration.getPort()));
-            } else if (event.cause() != null) {
-                System.err.println(String.format(
-                        "[Client] NOT CONNECTED on port %s:%d",
-                        configuration.getHost(), configuration.getPort()));
-                event.cause().printStackTrace(); // TODO Error
-            }
+        vertx.deployVerticle(verticle, event -> {
+            // TODO Logging with different option classes impossible now
+//            if (event.succeeded()) {
+//                Logger.log("[Client] CONNECTED on %s:%d",
+//                        configuration.getHost(), configuration.getPort());
+//            } else if (event.cause() != null) {
+//                Logger.log(
+//                        "[Client] NOT CONNECTED on port %s:%d",
+//                        configuration.getHost(), configuration.getPort());
+//                ErrorHandler.handle(event.cause());
+//            }
         });
     }
 
     public boolean isConnected() {
         // TODO this gives always true after first start
-        return clientWebSocketVerticle.deploymentID() != null;
+        return verticle.deploymentID() != null;
     }
 
     public void disconnect() {
         try {
-            clientWebSocketVerticle.stop();
-            System.out.println("[Client] DISCONNECTED");
+            verticle.stop();
+            Logger.log("[Client] DISCONNECTED");
         } catch (Exception e) {
-            System.err.println("[Client] NOT DISCONNECTED");
-            e.printStackTrace(); // TODO Error
+            Logger.log("[Client] NOT DISCONNECTED");
+            ErrorHandler.handle(e);
         }
     }
 }

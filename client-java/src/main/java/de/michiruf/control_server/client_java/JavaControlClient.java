@@ -2,8 +2,7 @@ package de.michiruf.control_server.client_java;
 
 import dagger.ObjectGraph;
 import de.michiruf.control_server.client.comm.Client;
-import de.michiruf.control_server.client.comm.Server;
-import de.michiruf.control_server.client.config.ServerConfiguration;
+import de.michiruf.control_server.client.comm.DirectConnectionServer;
 import de.michiruf.control_server.client.qualifier.ForWebServer;
 import de.michiruf.control_server.client_java.ui.FxWindowPresenter;
 import de.michiruf.control_server.client_java.ui.tray.TrayControl;
@@ -26,9 +25,7 @@ public class JavaControlClient {
     protected Client webServerClient;
 
     @Inject
-    protected ServerConfiguration serverConfiguration;
-    @Inject
-    protected Server server;
+    protected DirectConnectionServer server;
 
     public JavaControlClient() {
         ObjectGraph appGraph = ObjectGraph.create(new JavaControlClientModule());
@@ -44,9 +41,7 @@ public class JavaControlClient {
         trayControl.show();
 
         webServerClient.connect();
-        if (serverConfiguration.isAutoStartEnabled()) {
-            server.start();
-        }
+        server.startIfAutoStartEnabled();
     }
 
     public static void main(String[] args) {

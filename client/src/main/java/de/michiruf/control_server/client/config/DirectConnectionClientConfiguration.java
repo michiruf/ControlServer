@@ -4,13 +4,11 @@ package de.michiruf.control_server.client.config;
  * @author Michael Ruf
  * @since 2016-03-11
  */
-public interface ClientConfiguration {
+public interface DirectConnectionClientConfiguration {
 
     String getHost();
 
     int getPort();
 
-    boolean isSendControlsEnabled();
-
-    boolean isControlListeningEnabled();
+    String getPassword();
 }

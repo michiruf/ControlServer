@@ -1,7 +1,8 @@
 package de.michiruf.control_server.client.control;
 
-import de.michiruf.control_server.common.Event;
-import de.michiruf.control_server.common.data.KeyData;
+import de.michiruf.control_server.client.Logger;
+import de.michiruf.control_server.common.event.Event;
+import de.michiruf.control_server.common.event.KeyData;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -27,8 +28,7 @@ public class KeyControlExecutor implements ControlExecutor {
         }
 
         KeyData data = event.getDataAs(KeyData.class);
-        System.out.println(String.format(
-                "[Server] KeyControlExecutor got key: %s", data.getKey()));
+        Logger.log("[Server] KeyControlExecutor got key: %s", data.getKey());
 
         switch (event.getDirection()) {
             case DOWN:

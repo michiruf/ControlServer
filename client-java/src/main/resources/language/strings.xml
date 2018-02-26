@@ -12,7 +12,7 @@
 
     <string name="direct_connection_hint">Direct connections let you use the service quick and without registration,
         but needs the port to be accessible (by your firewall). Use this if you want to use the tool in your local area
-        network and your internet connection is not fast enough to get a expected performance.
+        network and your internet connection is not fast enough to get an expected performance.
     </string>
     <string name="direct_connection_start">Start direct connection</string>
     <string name="direct_connection_allow_for_port">Allow direct connection for port</string>

@@ -1,4 +1,4 @@
-package de.michiruf.control_server.common;
+package de.michiruf.control_server.common.event;
 
 /**
  * @author Michael Ruf

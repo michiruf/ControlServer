@@ -1,7 +1,8 @@
 package de.michiruf.control_server.client.event;
 
+import de.michiruf.control_server.client.Logger;
 import de.michiruf.control_server.client.control.ControlExecutor;
-import de.michiruf.control_server.common.Event;
+import de.michiruf.control_server.common.event.Event;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -29,7 +30,7 @@ public class EventExecutionHandler {
     }
 
     public void handleEvent(Event event) {
-        System.out.println(String.format("[Server] EventHandler got event: %s", event));
+        Logger.log("[Server] EventHandler got event: %s", event);
         for (ControlExecutor controlExecutor : controlExecutors) {
             if (controlExecutor.perform(event)) {
                 break;

@@ -1,6 +1,6 @@
 package de.michiruf.control_server.client.control;
 
-import de.michiruf.control_server.common.Event;
+import de.michiruf.control_server.common.event.Event;
 
 /**
  * @author Michael Ruf

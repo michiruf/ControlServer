@@ -3,11 +3,9 @@ package de.michiruf.control_server.client_java.config;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dagger.Module;
 import dagger.Provides;
-import de.michiruf.control_server.Constants;
-import de.michiruf.control_server.client.config.ClientConfiguration;
-import de.michiruf.control_server.client.config.ServerConfiguration;
-import de.michiruf.control_server.client.qualifier.ForDirectConnection;
-import de.michiruf.control_server.client.qualifier.ForWebServer;
+import de.michiruf.control_server.client.config.DirectConnectionClientConfiguration;
+import de.michiruf.control_server.client.config.DirectConnectionServerConfiguration;
+import de.michiruf.control_server.client.config.WebServerClientConfiguration;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -31,94 +29,50 @@ public class JavaClientConfigurationModule {
 
     @SuppressWarnings("unused")
     @Provides
-    @Named("configurationPath")
-    public Path provideConfigurationPath() {
+    @Named("ConfigurationPath")
+    public Path provideDirectConnectionClientConfigurationPath() {
         return Paths.get("settings.json");
     }
 
     @SuppressWarnings("unused")
     @Provides
     @Singleton
-    public JavaClientConfiguration provideConfiguration(ObjectMapper objectMapper,
-                                                        @Named("configurationPath") Path path,
-                                                        SaveHook saveHook) {
+    public JavaClientConfiguration provideJavaDirectConnectionClientConfiguration(
+            ObjectMapper objectMapper,
+            @Named("ConfigurationPath") Path path,
+            SaveHook saveHook) {
         JavaClientConfiguration configuration;
         try {
             byte[] data = Files.readAllBytes(path);
             configuration = objectMapper.readValue(data, JavaClientConfiguration.class);
         } catch (IOException e) {
-            // TODO Error (only as logging)
-            configuration = new JavaClientConfiguration();
+            configuration = new JavaClientConfiguration().reset();
         }
-
-        saveHook.register(configuration);
+        saveHook.register(configuration, path);
         return configuration;
     }
 
-
     @SuppressWarnings("unused")
     @Provides
-    @Singleton
-    @ForWebServer
-    public ClientConfiguration provideWebServerClientConfiguration(JavaClientConfiguration configuration) {
-        // For the client module
-        return new ClientConfiguration() {
-            @Override
-            public String getHost() {
-                return Constants.LOGON_SERVER_HOST;
-            }
-
-            @Override
-            public int getPort() {
-                return Constants.LOGON_SERVER_PORT;
-            }
-
-            @Override
-            public boolean isSendControlsEnabled() {
-                return configuration.isSendControlsEnabled();
-            }
-
-            @Override
-            public boolean isControlListeningEnabled() {
-                return configuration.isControlListeningEnabled();
-            }
-        };
+    public DirectConnectionClientConfiguration provideDirectConnectionClientConfiguration(
+            JavaClientConfiguration configuration) {
+        // Provide to satisfy the client module
+        return configuration.getDirectConnectionClient();
     }
 
     @SuppressWarnings("unused")
     @Provides
-    @Singleton
-    @ForDirectConnection
-    public ClientConfiguration provideDirectConnectionClientConfiguration(JavaClientConfiguration configuration) {
-        // For the client module
-        return new ClientConfiguration() {
-            @Override
-            public String getHost() {
-                return configuration.getHost();
-            }
-
-            @Override
-            public int getPort() {
-                return configuration.getPort();
-            }
-
-            @Override
-            public boolean isSendControlsEnabled() {
-                return !configuration.isSendControlsEnabled();
-            }
-
-            @Override
-            public boolean isControlListeningEnabled() {
-                return false;
-            }
-        };
+    public DirectConnectionServerConfiguration provideDirectConnectionServerConfiguration(
+            JavaClientConfiguration configuration) {
+        // Provide to satisfy the client module
+        return configuration.getDirectConnectionServer();
     }
 
     @SuppressWarnings("unused")
     @Provides
-    @Singleton
-    public ServerConfiguration provideServerConfiguration(JavaClientConfiguration configuration) {
-        // For the client module
-        return configuration;
+    public WebServerClientConfiguration provideWebServerConfiguration(
+            JavaClientConfiguration configuration) {
+        // Provide to satisfy the client module
+        return configuration.getWebServerClient();
     }
 }

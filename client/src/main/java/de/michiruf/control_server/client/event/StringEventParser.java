@@ -1,7 +1,9 @@
 package de.michiruf.control_server.client.event;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import de.michiruf.control_server.common.Event;
+import de.michiruf.control_server.client.ErrorHandler;
+import de.michiruf.control_server.client.Logger;
+import de.michiruf.control_server.common.event.Event;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -22,15 +24,12 @@ public class StringEventParser {
     }
 
     public Event parse(String eventString) {
-        System.out.println(String.format(
-                "[Server] StringEventParser got string event: %s", eventString));
-
+        Logger.log("[Server] StringEventParser got string event: %s", eventString);
         try {
             return objectMapper.readValue(eventString, Event.class);
         } catch (IOException e) {
-            e.printStackTrace(); // TODO Error
+            ErrorHandler.handle(e);
         }
-
         return null;
     }
 }

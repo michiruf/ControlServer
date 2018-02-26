@@ -4,9 +4,11 @@ package de.michiruf.control_server.client.config;
  * @author Michael Ruf
  * @since 2016-03-11
  */
-public interface ServerConfiguration {
+public interface DirectConnectionServerConfiguration {
+
+    boolean isHostAutoStartEnabled();
 
     int getHostPort();
 
-    boolean isAutoStartEnabled();
+    String getHostPassword();
 }

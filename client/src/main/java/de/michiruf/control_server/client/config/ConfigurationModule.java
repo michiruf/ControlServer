@@ -1,8 +1,6 @@
 package de.michiruf.control_server.client.config;
 
 import dagger.Module;
-import dagger.Provides;
-import de.michiruf.control_server.client.qualifier.ForWebServer;
 
 /**
  * @author Michael Ruf
@@ -10,8 +8,9 @@ import de.michiruf.control_server.client.qualifier.ForWebServer;
  */
 @Module(
         injects = {
-                ClientConfiguration.class,
-                ServerConfiguration.class
+                DirectConnectionClientConfiguration.class,
+                DirectConnectionServerConfiguration.class,
+                WebServerClientConfiguration.class
         },
         library = true,
         complete = false

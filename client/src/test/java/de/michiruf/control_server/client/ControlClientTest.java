@@ -4,7 +4,7 @@ import dagger.Module;
 import dagger.ObjectGraph;
 import de.michiruf.control_server.client.comm.Client;
 import de.michiruf.control_server.client.event.EventDispatcher;
-import de.michiruf.control_server.client.config.ClientConfiguration;
+import de.michiruf.control_server.client.config.WebServerClientConfiguration;
 import de.michiruf.control_server.client.qualifier.ForWebServer;
 import de.michiruf.control_server.common.ExampleEvents;
 import io.vertx.core.Vertx;
@@ -30,7 +30,7 @@ public class ControlClientTest {
     protected Vertx vertx;
     @Inject
     @ForWebServer
-    protected ClientConfiguration configuration;
+    protected WebServerClientConfiguration configuration;
     @Inject
     protected Client client;
     @Inject

@@ -9,7 +9,7 @@ import dagger.Module;
 @Module(
         staticInjections = {
                 DevicesController.class,
-                DirectConnectionController.class,
+                DirectConnectionServerController.class,
                 LoginController.class,
                 OptionsController.class
         },
