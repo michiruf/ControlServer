@@ -2,6 +2,7 @@ package de.michiruf.control_server.client.control;
 
 import dagger.Module;
 import dagger.Provides;
+import de.michiruf.control_server.client.ErrorHandler;
 
 import javax.inject.Singleton;
 import java.awt.AWTException;
@@ -31,7 +32,7 @@ public class ControlModule {
         try {
             return new Robot();
         } catch (AWTException e) {
-            e.printStackTrace(); // TODO Error
+            ErrorHandler.handle(e);
         }
         return null;
     }

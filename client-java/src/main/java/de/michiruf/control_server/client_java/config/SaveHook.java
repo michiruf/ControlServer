@@ -1,9 +1,9 @@
 package de.michiruf.control_server.client_java.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import de.michiruf.control_server.client.ErrorHandler;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -16,24 +16,23 @@ import java.nio.file.StandardOpenOption;
 public class SaveHook {
 
     private final ObjectMapper objectMapper;
-    private final Path configurationPath;
 
     @Inject
-    public SaveHook(ObjectMapper objectMapper,
-                    @Named("configurationPath") Path configurationPath) {
+    public SaveHook(ObjectMapper objectMapper) {
         this.objectMapper = objectMapper;
-        this.configurationPath = configurationPath;
     }
 
-    public void register(JavaClientConfiguration configuration) {
-        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-            try {
-                byte[] data = objectMapper.writeValueAsBytes(configuration);
-                Files.write(configurationPath, data, StandardOpenOption.CREATE, StandardOpenOption.WRITE,
-                        StandardOpenOption.TRUNCATE_EXISTING);
-            } catch (IOException e) {
-                e.printStackTrace(); // TODO Error
-            }
-        }));
+    public void register(Object configuration, Path path) {
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> save(configuration, path)));
+    }
+
+    private void save(Object configuration, Path path) {
+        try {
+            byte[] data = objectMapper.writeValueAsBytes(configuration);
+            Files.write(path, data, StandardOpenOption.CREATE, StandardOpenOption.WRITE,
+                    StandardOpenOption.TRUNCATE_EXISTING);
+        } catch (IOException e) {
+            ErrorHandler.handle(e);
+        }
     }
 }

@@ -2,8 +2,8 @@ package de.michiruf.control_server.client;
 
 import dagger.Module;
 import dagger.Provides;
-import de.michiruf.control_server.client.config.ClientConfiguration;
-import de.michiruf.control_server.client.config.ServerConfiguration;
+import de.michiruf.control_server.client.config.DirectConnectionServerConfiguration;
+import de.michiruf.control_server.client.config.WebServerClientConfiguration;
 import de.michiruf.control_server.client.qualifier.ForDirectConnection;
 import de.michiruf.control_server.client.qualifier.ForWebServer;
 
@@ -23,10 +23,10 @@ public class ConfigurationModule {
     @Provides
     @Singleton
     @ForWebServer
-    public ClientConfiguration provideWebServerClientConfiguration(
+    public WebServerClientConfiguration provideWebServerClientConfiguration(
             @ForWebServer String host,
-            @ForDirectConnection ClientConfiguration directConnectionClientConfiguration) {
-        return new ClientConfiguration() {
+            @ForDirectConnection WebServerClientConfiguration directConnectionClientConfiguration) {
+        return new WebServerClientConfiguration() {
             @Override
             public String getHost() {
                 return host;
@@ -53,8 +53,8 @@ public class ConfigurationModule {
     @Provides
     @Singleton
     @ForDirectConnection
-    public ClientConfiguration provideDirectConnectionClientConfiguration() {
-        return new ClientConfiguration() {
+    public WebServerClientConfiguration provideDirectConnectionClientConfiguration() {
+        return new WebServerClientConfiguration() {
             @Override
             public String getHost() {
                 return "localhost";
@@ -80,15 +80,20 @@ public class ConfigurationModule {
     @SuppressWarnings("unused")
     @Provides
     @Singleton
-    public ServerConfiguration provideServerConfiguration() {
-        return new ServerConfiguration() {
+    public DirectConnectionServerConfiguration provideServerConfiguration() {
+        return new DirectConnectionServerConfiguration() {
             @Override
             public int getHostPort() {
                 return 12345;
             }
 
             @Override
-            public boolean isAutoStartEnabled() {
+            public String getHostPassword() {
+                return "HelloWorld!";
+            }
+
+            @Override
+            public boolean isHostAutoStartEnabled() {
                 return true;
             }
         };

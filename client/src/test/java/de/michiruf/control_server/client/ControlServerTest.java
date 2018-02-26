@@ -4,8 +4,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import dagger.Module;
 import dagger.ObjectGraph;
-import de.michiruf.control_server.client.comm.Server;
-import de.michiruf.control_server.client.config.ServerConfiguration;
+import de.michiruf.control_server.client.comm.DirectConnectionServer;
+import de.michiruf.control_server.client.config.DirectConnectionServerConfiguration;
 import de.michiruf.control_server.common.ExampleEvents;
 import io.vertx.core.Vertx;
 import io.vertx.core.buffer.Buffer;
@@ -30,9 +30,9 @@ public class ControlServerTest {
     @Inject
     protected Vertx vertx;
     @Inject
-    protected ServerConfiguration configuration;
+    protected DirectConnectionServerConfiguration configuration;
     @Inject
-    protected Server server;
+    protected DirectConnectionServer server;
     @Inject
     protected ObjectMapper objectMapper;
 

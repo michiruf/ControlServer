@@ -1,98 +1,36 @@
 package de.michiruf.control_server.client_java.config;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import de.michiruf.control_server.client.config.ClientConfiguration;
-import de.michiruf.control_server.client.config.ServerConfiguration;
-import de.michiruf.control_server.common.data.MouseData;
 
 /**
  * @author Michael Ruf
- * @since 2016-03-08
+ * @since 2018-02-25
  */
-public class JavaClientConfiguration implements ClientConfiguration, ServerConfiguration {
+public class JavaClientConfiguration {
 
     @JsonProperty
-    private String host;
-
+    private JavaClientDirectConnectionClientConfiguration directConnectionClient;
     @JsonProperty
-    private int port;
-
+    private JavaClientDirectConnectionServerConfiguration directConnectionServer;
     @JsonProperty
-    private boolean sendControlsEnabled;
+    private JavaClientWebServerClientConfiguration webServerClient;
 
-    // Initially the computer shell be controllable in general
-    @JsonProperty
-    private boolean controlListeningEnabled = true;
-
-    @JsonProperty
-    private int hostPort;
-
-    @JsonProperty
-    private boolean autoStartEnabled;
-
-    @JsonProperty
-    private MouseData.CoordinateType coordinateType = MouseData.CoordinateType.RELATIVE;
-
-    @Override
-    public String getHost() {
-        return host;
+    public JavaClientConfiguration reset() {
+        directConnectionClient = new JavaClientDirectConnectionClientConfiguration();
+        directConnectionServer = new JavaClientDirectConnectionServerConfiguration();
+        webServerClient = new JavaClientWebServerClientConfiguration();
+        return this;
     }
 
-    public void setHost(String host) {
-        this.host = host;
+    public JavaClientDirectConnectionClientConfiguration getDirectConnectionClient() {
+        return directConnectionClient;
     }
 
-    @Override
-    public int getPort() {
-        return port;
+    public JavaClientDirectConnectionServerConfiguration getDirectConnectionServer() {
+        return directConnectionServer;
     }
 
-    public void setPort(int port) {
-        this.port = port;
-    }
-
-    @Override
-    public boolean isSendControlsEnabled() {
-        return sendControlsEnabled;
-    }
-
-    public void setSendControlsEnabled(boolean sendControlsEnabled) {
-        this.sendControlsEnabled = sendControlsEnabled;
-    }
-
-    @Override
-    public boolean isControlListeningEnabled() {
-        return controlListeningEnabled;
-    }
-
-    public void setControlListeningEnabled(boolean controlListeningEnabled) {
-        this.controlListeningEnabled = controlListeningEnabled;
-    }
-
-    @Override
-    public int getHostPort() {
-        return hostPort;
-    }
-
-    public void setHostPort(int hostPort) {
-        this.hostPort = hostPort;
-    }
-
-    @Override
-    public boolean isAutoStartEnabled() {
-        return autoStartEnabled;
-    }
-
-    public void setAutoStartEnabled(boolean autoStartEnabled) {
-        this.autoStartEnabled = autoStartEnabled;
-    }
-
-    // TODO Should remove the coordinate type
-    public MouseData.CoordinateType getCoordinateType() {
-        return coordinateType;
-    }
-
-    public void setCoordinateType(MouseData.CoordinateType coordinateType) {
-        this.coordinateType = coordinateType;
+    public JavaClientWebServerClientConfiguration getWebServerClient() {
+        return webServerClient;
     }
 }

@@ -1,6 +1,6 @@
 package de.michiruf.control_server.client.event;
 
-import de.michiruf.control_server.common.Event;
+import de.michiruf.control_server.common.event.Event;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;

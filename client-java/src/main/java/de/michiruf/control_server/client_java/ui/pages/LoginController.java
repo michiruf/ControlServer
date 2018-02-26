@@ -2,6 +2,7 @@ package de.michiruf.control_server.client_java.ui.pages;
 
 import de.michiruf.control_server.Constants;
 import de.michiruf.control_server.client_java.config.JavaClientConfiguration;
+import de.michiruf.control_server.client_java.config.JavaClientDirectConnectionClientConfiguration;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
@@ -17,12 +18,12 @@ import java.io.IOException;
  */
 public class LoginController {
 
+    // TODO Remove, must be there because of static injections... wtf
     @Inject
     protected static JavaClientConfiguration configuration;
 
     @FXML
     private TextField usernameInput;
-
     @FXML
     private PasswordField passwordInput;
 

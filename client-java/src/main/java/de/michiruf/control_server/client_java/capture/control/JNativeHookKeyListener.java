@@ -2,10 +2,10 @@ package de.michiruf.control_server.client_java.capture.control;
 
 import de.michiruf.control_server.client.event.EventDispatcher;
 import de.michiruf.control_server.client_java.capture.CaptureFrame;
-import de.michiruf.control_server.common.Direction;
-import de.michiruf.control_server.common.Event;
-import de.michiruf.control_server.common.data.KeyData;
-import de.michiruf.control_server.common.data.MouseData;
+import de.michiruf.control_server.common.event.Direction;
+import de.michiruf.control_server.common.event.Event;
+import de.michiruf.control_server.common.event.KeyData;
+import de.michiruf.control_server.common.event.MouseData;
 import org.jnativehook.GlobalScreen;
 import org.jnativehook.NativeInputEvent;
 import org.jnativehook.keyboard.NativeKeyEvent;

@@ -1,6 +1,7 @@
 package de.michiruf.control_server.client_java.ui.pages;
 
 import de.michiruf.control_server.client_java.config.JavaClientConfiguration;
+import de.michiruf.control_server.client_java.config.JavaClientDirectConnectionClientConfiguration;
 
 import javax.inject.Inject;
 
@@ -10,6 +11,7 @@ import javax.inject.Inject;
  */
 public class DevicesController {
 
+    // TODO Remove, must be there because of static injections... wtf
     @Inject
     protected static JavaClientConfiguration configuration;
 

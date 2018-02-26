@@ -1,10 +1,6 @@
 package de.michiruf.control_server.client.event;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import dagger.Module;
-import dagger.Provides;
-
-import javax.inject.Singleton;
 
 /**
  * @author Michael Ruf
@@ -12,8 +8,8 @@ import javax.inject.Singleton;
  */
 @Module(
         injects = {
-                EventExecutionHandler.class,
                 EventDispatcher.class,
+                EventExecutionHandler.class,
                 EventStringConverter.class,
                 StringEventParser.class
         },
@@ -21,11 +17,4 @@ import javax.inject.Singleton;
         complete = false
 )
 public class EventModule {
-
-    @SuppressWarnings("unused")
-    @Provides
-    @Singleton
-    public ObjectMapper provideObjectMapper() {
-        return new ObjectMapper();
-    }
 }

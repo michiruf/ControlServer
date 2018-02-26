@@ -1,4 +1,4 @@
-package de.michiruf.control_server.common.data;
+package de.michiruf.control_server.common.event;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

@@ -1,0 +1,32 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.3.3.RELEASE")
+    }
+}
+apply plugin: 'java'
+apply plugin: 'spring-boot'
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+dependencies {
+    testCompile 'junit:junit:4.12'
+
+    compile project(':common')
+
+    compile 'org.springframework.boot:spring-boot-starter-web'
+    compile 'org.springframework.boot:spring-boot-starter-websocket'
+    compile 'org.springframework.boot:spring-boot-starter-data-jpa'
+    compile 'com.h2database:h2' // Database type (cur.: mem)
+    compile 'org.springframework.boot:spring-boot-starter-security'
+    compile 'org.springframework.boot:spring-boot-starter-thymeleaf' // Template
+
+    compile 'org.springframework.boot:spring-boot-devtools'
+}
+
+bootRun {
+    addResources = true
+}

@@ -1,11 +1,9 @@
-package de.michiruf.control_server.common;
+package de.michiruf.control_server.common.event;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import de.michiruf.control_server.common.data.KeyData;
-import de.michiruf.control_server.common.data.MouseData;
 
 import java.util.Date;
 
