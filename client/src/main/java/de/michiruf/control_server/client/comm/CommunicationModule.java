@@ -6,6 +6,7 @@ import de.michiruf.control_server.client.qualifier.ForDirectConnection;
 import de.michiruf.control_server.client.qualifier.ForWebServer;
 import io.vertx.core.Vertx;
 
+import javax.inject.Named;
 import javax.inject.Singleton;
 
 /**
@@ -30,6 +31,13 @@ public class CommunicationModule {
     @Singleton
     public Vertx provideVertx() {
         return Vertx.vertx();
+    }
+
+    @SuppressWarnings("unused")
+    @Provides
+    @Named("WebServerCertificatePath")
+    public String provideWebServerCertificatePath() {
+        return "certificates/dev-server.crt";
     }
 
     @SuppressWarnings("unused")

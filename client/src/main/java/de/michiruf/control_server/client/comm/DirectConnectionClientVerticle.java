@@ -45,7 +45,11 @@ public class DirectConnectionClientVerticle extends AbstractVerticle {
     }
 
     private void handleSocket(WebSocket socket) {
-        // TODO Authentication
+        // TODO Security / authentication:
+        // Encrypt the data send with the pw available for the client and
+        // decrypt it with the password configured in the host.
+        // Valid data -> authenticated
+        // TODO -> Use a symmetric encryption like AES 256!
 
 //        // Register the listener for dispatched events to be sent
 //        eventDispatcher.registerListener(event -> {
