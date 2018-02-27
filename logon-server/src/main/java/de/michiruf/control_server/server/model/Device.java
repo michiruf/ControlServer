@@ -1,6 +1,4 @@
-package de.michiruf.control_server.server.web.model;
-
-import de.michiruf.control_server.server.web.helper.IdModel;
+package de.michiruf.control_server.server.model;
 
 import javax.persistence.ManyToOne;
 

@@ -40,6 +40,7 @@ public class WebServerClientHttpOptions extends HttpClientOptions {
         }
         return new BufferedReader(new InputStreamReader(certResource.openStream()))
                 .lines()
+                .parallel()
                 .collect(Collectors.joining("\n"));
     }
 }

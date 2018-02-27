@@ -1,10 +1,9 @@
-package de.michiruf.control_server.server.web.config;
+package de.michiruf.control_server.server.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
-@SuppressWarnings("unused")
 @Configuration
 public class MvcConfiguration extends WebMvcConfigurerAdapter {
 

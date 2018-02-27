@@ -1,4 +1,4 @@
-package de.michiruf.control_server.server.web.config.thymeleaf;
+package de.michiruf.control_server.server.config.thymeleaf;
 
 import org.springframework.util.Assert;
 import org.springframework.web.method.HandlerMethod;
@@ -13,26 +13,43 @@ import javax.servlet.http.HttpServletResponse;
  * @see <a href="http://blog.codeleak.pl/2013/11/thymeleaf-template-layouts-in-spring.html">Thymeleaf layouts in spring</a>
  * @see <a href="https://github.com/kolorobot/thymeleaf-custom-layout">Github</a>
  */
-class ThymeleafLayoutInterceptor extends HandlerInterceptorAdapter {
+public class ThymeleafLayoutInterceptor extends HandlerInterceptorAdapter {
 
-    private static final String DEFAULT_LAYOUT = "layout";
     private static final String DEFAULT_VIEW_ATTRIBUTE_NAME = "view";
 
-    private String defaultLayout = DEFAULT_LAYOUT;
+    private final String defaultLayout;
     private String viewAttributeName = DEFAULT_VIEW_ATTRIBUTE_NAME;
 
-    public void setDefaultLayout(String defaultLayout) {
-        Assert.hasLength(defaultLayout);
+    public ThymeleafLayoutInterceptor(String defaultLayout) {
         this.defaultLayout = defaultLayout;
     }
 
-    public void setViewAttributeName(String viewAttributeName) {
-        Assert.hasLength(defaultLayout);
+    public ThymeleafLayoutInterceptor setViewAttributeName(String viewAttributeName) {
+        Assert.hasLength(viewAttributeName, "View attribute name must have a length!");
         this.viewAttributeName = viewAttributeName;
+        return this;
     }
 
     @Override
-    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+    public void postHandle(HttpServletRequest request, HttpServletResponse response,
+                           Object handler, ModelAndView modelAndView) throws Exception {
+//        if (modelAndView == null || !modelAndView.hasView()) {
+//            return;
+//        }
+//
+//        String originalViewName = modelAndView.getViewName();
+//        if (isRedirectOrForward(originalViewName)) {
+//            return;
+//        }
+//
+//        String layoutName = getLayoutName(handler);
+//        if (Layout.NONE.equals(layoutName)) {
+//            return;
+//        }
+//
+//        modelAndView.setViewName(layoutName);
+//        modelAndView.addObject(this.viewAttributeName, originalViewName);
+
         if (modelAndView == null || !modelAndView.hasView()) {
             return;
         }
@@ -50,6 +67,15 @@ class ThymeleafLayoutInterceptor extends HandlerInterceptorAdapter {
     }
 
     private String getLayoutName(Object handler) {
+//        if (handler instanceof HandlerMethod) {
+//            HandlerMethod handlerMethod = (HandlerMethod) handler;
+//            Layout layout = getMethodOrTypeAnnotation(handlerMethod);
+//            if (layout != null) {
+//                return layout.value();
+//            }
+//        }
+//        return this.defaultLayout;
+
         HandlerMethod handlerMethod = (HandlerMethod) handler;
         Layout layout = getMethodOrTypeAnnotation(handlerMethod);
         if (layout == null) {
@@ -59,7 +85,7 @@ class ThymeleafLayoutInterceptor extends HandlerInterceptorAdapter {
         }
     }
 
-    private Layout getMethodOrTypeAnnotation(HandlerMethod handlerMethod) {
+    private static Layout getMethodOrTypeAnnotation(HandlerMethod handlerMethod) {
         Layout layout = handlerMethod.getMethodAnnotation(Layout.class);
         if (layout == null) {
             return handlerMethod.getBeanType().getAnnotation(Layout.class);

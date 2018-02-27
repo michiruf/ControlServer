@@ -1,4 +1,4 @@
-package de.michiruf.control_server.server.web.config;
+package de.michiruf.control_server.server.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -11,33 +11,34 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
  * @author Michael Ruf
  * @since 2016-04-07
  */
-@SuppressWarnings("unused")
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
+    // TODO We need this to disable basic auth?!
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser("roy")
-                .password("spring")
-                .roles("USER");
+        //auth.inMemoryAuthentication()
+        //        .withUser("admin")
+        //        .password("admin")
+        //        .roles("ADMIN");
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .antMatchers("/**")
-                .hasRole("USER")
-                .and()
-                .httpBasic();
+        //http.authorizeRequests()
+        //        .antMatchers("/**")
+        //        .hasRole("USER")
+        //        .and()
+        //        .httpBasic();
     }
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser("user")
-                .password("password")
-                .roles("USER");
+        //auth.inMemoryAuthentication()
+        //        .withUser("user")
+        //        .password("password")
+        //        .roles("USER");
     }
 }

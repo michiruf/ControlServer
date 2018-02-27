@@ -19,5 +19,5 @@
         </websocket:handshake-interceptors>
     </websocket:handlers>
 
-    <bean id="webSocketHandler" class="de.michiruf.control_server.server.web.controller.WebSocketHandler"/>
+    <bean id="webSocketHandler" class="de.michiruf.control_server.server.controller.WebSocketHandler"/>
 </beans>

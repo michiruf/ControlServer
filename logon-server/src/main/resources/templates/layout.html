@@ -1,14 +1,20 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
     <head>
-        <title>Spring Security Example</title>
+        <title>Layout example</title>
+        <meta charset="utf-8"/>
+        <link rel="stylesheet" th:href="@{/css/main.css}"/>
     </head>
     <body>
-        <h1>Welcome!</h1>
-
-        <p>Click <a th:href="@{/hello}">here</a> to see a greeting.</p>
-
-        <div th:replace="${view} :: content"></div>
+        <header>
+            <h1>Welcome!</h1>
+        </header>
+        <!--/*@thymesVar id="view" type="org.thymeleaf.dom.Element"*/-->
+        <div th:replace="${view}::content">
+            Content
+        </div>
+        <footer>
+            Footer
+        </footer>
     </body>
 </html>

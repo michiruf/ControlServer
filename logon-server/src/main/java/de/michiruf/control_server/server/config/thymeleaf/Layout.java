@@ -1,4 +1,6 @@
-package de.michiruf.control_server.server.web.config.thymeleaf;
+package de.michiruf.control_server.server.config.thymeleaf;
+
+import org.springframework.web.bind.annotation.ValueConstants;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -17,5 +19,8 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface Layout {
-    String value() default "";
+
+    String NONE = ValueConstants.DEFAULT_NONE;
+
+    String value() default NONE;
 }

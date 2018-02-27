@@ -1,7 +1,5 @@
-package de.michiruf.control_server.server.web.model;
+package de.michiruf.control_server.server.model;
 
-
-import de.michiruf.control_server.server.web.helper.IdModel;
 
 import javax.persistence.OneToMany;
 import java.util.List;
