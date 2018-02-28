@@ -1,5 +1,5 @@
 task wrapper(type: Wrapper) {
-    gradleVersion = '2.7'
+    gradleVersion = '4.5.1'
 }
 
 buildscript {
@@ -9,7 +9,7 @@ buildscript {
         maven { url 'https://plugins.gradle.org/m2/' }
     }
     dependencies {
-        classpath 'com.netflix.nebula:gradle-extra-configurations-plugin:3.0.2'
+        classpath 'com.netflix.nebula:gradle-extra-configurations-plugin:3.0.3'
     }
 }
 
@@ -19,24 +19,28 @@ allprojects {
         mavenCentral()
     }
     configureMaven(project)
-    configureGitRevision(project)
+    configureGitRevision(project, rootDir)
 }
 
-def configureMaven(Project project) {
+static def configureMaven(Project project) {
     project.apply plugin: 'maven'
     project.group = 'com.github.michiruf'
 }
 
-def configureGitRevision(Project project) {
-    String gitVersion = ('git rev-list --count HEAD ' + getRelativeProjectPath(project, rootDir))
+static def configureGitRevision(Project project, File rootDir) {
+    String latestTag = ('git describe --abbrev=0')
             .execute((List) null, rootDir)
             .text
             .trim()
-    // NOTE separate the major version into a variable
-    project.version = '1.0.' + gitVersion
+    String module = getRelativeProjectPath(project, rootDir)
+    String commitCount = ('git rev-list --count HEAD ' + module)
+            .execute((List) null, rootDir)
+            .text
+            .trim()
+    project.version = latestTag + '.' + commitCount
 }
 
-def getRelativeProjectPath(Project project, File relativeTo) {
+static def getRelativeProjectPath(Project project, File relativeTo) {
     String relativePath = project.getProjectDir().getCanonicalPath()
             .replace(relativeTo.getCanonicalPath(), '')
             .replace('\\', '/')

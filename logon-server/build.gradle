@@ -1,49 +1,73 @@
-buildscript {
-    repositories {
-        mavenCentral()
+repositories {
+    jcenter()
+    maven {
+        name 'lightbend-maven-release'
+        url 'https://repo.lightbend.com/lightbend/maven-releases'
     }
-    dependencies {
-        classpath 'org.springframework.boot:spring-boot-gradle-plugin:1.5.10.RELEASE'
-        classpath 'org.springframework:springloaded:1.2.6.RELEASE'
+    ivy {
+        name 'lightbend-ivy-release'
+        url 'https://repo.lightbend.com/lightbend/ivy-releases'
+        layout 'ivy'
     }
 }
-apply plugin: 'java'
-apply plugin: 'eclipse'
-apply plugin: 'idea'
-apply plugin: 'org.springframework.boot'
 
-sourceCompatibility = JavaVersion.VERSION_1_8
-targetCompatibility = JavaVersion.VERSION_1_8
+apply plugin: 'play'
+apply plugin: 'java'
+apply plugin: 'nebula.provided-base'
+
+def playVersion = '2.6.11'
+def scalaVersion = '2.12'
 
 dependencies {
-    testCompile 'junit:junit:4.12'
+    // Take all play dependencies and fake them as provided to have proper IDE support
+    // This also makes java and provided required
+    provided configurations.play
+    // Provide generated classes by play to the IDE too
+    provided files('build/libs/temporaryBuildFiles.jar')
 
-    compile project(':common')
+    play project(':common')
 
-    compile 'org.springframework.boot:spring-boot-starter-web'
-    compile 'org.springframework.boot:spring-boot-starter-websocket'
-    compile 'org.springframework.boot:spring-boot-starter-data-jpa'
-    compile 'com.h2database:h2' // Database type (cur.: mem)
-    compile 'org.springframework.boot:spring-boot-starter-security'
-    compile 'org.springframework.boot:spring-boot-starter-thymeleaf' // Template
-    compile 'org.webjars:webjars-locator'
-    compile 'org.webjars:sockjs-client:1.0.2'
-    compile 'org.webjars:stomp-websocket:2.3.3'
-    compile 'org.webjars:bootstrap:3.3.7'
-    compile 'org.webjars:jquery:3.1.0'
-    testCompile('org.springframework.boot:spring-boot-starter-test')
+    // Dependency injection
+    play "com.typesafe.play:play-guice_$scalaVersion:$playVersion"
 
-    // Enables live reload (hot swap)
-    // To profit from this create hotkey (like STRG-S) to "build module"
-    // Or try this: https://dzone.com/articles/spring-boot-application-live-reload-hot-swap-with
-    compile 'org.springframework.boot:spring-boot-devtools'
+    // TODO Comes from a sample
+    // Test stuff
+    playTest 'org.assertj:assertj-core:3.8.0'
+    playTest 'org.awaitility:awaitility:3.0.0'
+
+    // Frontend stuff
+    play "org.webjars:webjars-play_$scalaVersion:2.6.2"
+    play 'org.webjars:bootstrap:4.0.0'
+    play 'org.webjars:jquery:3.3.1'
 }
 
-jar {
-    baseName = 'logon-server'
-    version = project.version
+// Playframework configuration
+model {
+    components.play {
+        platform play: playVersion, scala: scalaVersion, java: JavaVersion.VERSION_1_8
+        injectedRoutesGenerator = true
+
+        sources {
+            twirlTemplates {
+                defaultImports = TwirlImports.JAVA
+            }
+        }
+    }
 }
 
-bootRun {
-    addResources = true
+// Java directory configuration (for the IDE)
+sourceSets {
+    main.java.srcDirs += file('app')
+    main.resources.srcDirs += file('app/javascripts') // NOTE This is not applying yet
+    test.java.srcDirs += file('test')
 }
+
+// Pack generated class files by play into a jar to get included as dependency (see at 'dependencies')
+task makeTemporaryBuildFilesJar(type: Jar) {
+    archiveName = 'temporaryBuildFiles.jar'
+    from { fileTree('build/playBinary/classes') }
+    with jar
+}
+tasks.getByName("dependencies").dependsOn(makeTemporaryBuildFilesJar)
+// TODO compilePlayBinaryScala is not available
+tasks.getByName("compileJava").dependsOn(makeTemporaryBuildFilesJar)
