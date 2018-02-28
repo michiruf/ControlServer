@@ -9,7 +9,8 @@ import de.michiruf.control_server.client.config.DirectConnectionServerConfigurat
 import de.michiruf.control_server.common.ExampleEvents;
 import io.vertx.core.Vertx;
 import io.vertx.core.buffer.Buffer;
-import io.vertx.core.http.WebSocketStream;
+import io.vertx.core.http.WebSocket;
+import io.vertx.core.streams.ReadStream;
 import io.vertx.ext.unit.Async;
 import io.vertx.ext.unit.TestContext;
 import io.vertx.ext.unit.junit.VertxUnitRunner;
@@ -50,13 +51,13 @@ public class ControlServerTest {
         }
     }
 
-    private WebSocketStream createStream() {
+    private ReadStream<WebSocket> createStream() {
         return vertx.createHttpClient().websocketStream(configuration.getHostPort(), "127.0.0.1", "/");
     }
 
     @Test
     public void testClient(TestContext context) {
-        WebSocketStream stream = createStream();
+        ReadStream<WebSocket> stream = createStream();
         stream.exceptionHandler(err -> {
             System.out.println("[Test] ExceptionHandler got event");
             context.fail(err.getMessage());
@@ -69,7 +70,7 @@ public class ControlServerTest {
     @Test
     public void testKeyEvent(TestContext context) {
         Async async = context.async();
-        WebSocketStream stream = createStream();
+        ReadStream<WebSocket> stream = createStream();
         stream.handler(webSocketHandler -> {
             webSocketHandler.handler(event -> {
                 String eventLog = String.format("[Test] Handler got event: %s",
@@ -87,7 +88,7 @@ public class ControlServerTest {
     @Test
     public void testMouseEvent(TestContext context) {
         Async async = context.async();
-        WebSocketStream stream = createStream();
+        ReadStream<WebSocket> stream = createStream();
         stream.handler(webSocketHandler -> {
             webSocketHandler.handler(event -> {
                 String eventLog = String.format("[Test] Handler got event: %s",

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Layout example</title>
+        <meta charset="utf-8"/>
+        <link rel="stylesheet" th:href="@{/css/main.css}"/>
+    </head>
+    <body>
+        <header>
+            <h1>Welcome!</h1>
+        </header>
+        <!--/*@thymesVar id="view" type="org.thymeleaf.dom.Element"*/-->
+        <div th:replace="${view}::content">
+            Content
+        </div>
+        <footer>
+            Footer
+        </footer>
+    </body>
+</html>
