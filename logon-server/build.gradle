@@ -1,3 +1,7 @@
+// TODO Give another try to:
+// https://github.com/ia-toki/gradle-play-idea
+
+
 repositories {
     jcenter()
     maven {

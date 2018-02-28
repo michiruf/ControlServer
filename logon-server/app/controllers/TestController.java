@@ -1,7 +1,7 @@
 package controllers;
 
 import play.mvc.Controller;
-import play.twirl.api.Content;
+import views.html.pages.home;
 
 /**
  * @author Michael Ruf
@@ -10,8 +10,6 @@ import play.twirl.api.Content;
 public class TestController extends Controller {
 
     public play.mvc.Result foo() {
-//        Content html = views.html.layout.render();
-//        return ok(html.body());
-        return ok("Test");
+        return ok(home.render());
     }
 }
