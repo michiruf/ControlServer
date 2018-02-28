@@ -1,16 +1,22 @@
 package de.michiruf.control_server.server.config.websocket;
 
+import groovy.util.logging.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.socket.client.standard.WebSocketContainerFactoryBean;
 import org.springframework.web.socket.config.annotation.EnableWebSocket;
 import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
 import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
+import org.springframework.web.socket.server.jetty.JettyRequestUpgradeStrategy;
+import org.springframework.web.socket.server.support.DefaultHandshakeHandler;
 
 /**
  * @author Michael Ruf
  * @since 2016-04-07
  */
+@Controller
 @Configuration
 @EnableWebSocket
 public class WebSocketConfiguration implements WebSocketConfigurer {
@@ -20,17 +26,27 @@ public class WebSocketConfiguration implements WebSocketConfigurer {
         registry.addHandler(createHandler(), "/ws");
     }
 
-    /**
-     * For Tomcat, WildFly, and Glassfish
-     * @see <a href="https://docs.spring.io/spring/docs/4.0.1.RELEASE/spring-framework-reference/html/websocket.html">Found here</a>
-     */
-//    @Bean
-    public WebSocketContainerFactoryBean createWebSocketContainer() {
-        WebSocketContainerFactoryBean container = new WebSocketContainerFactoryBean();
-        container.setMaxTextMessageBufferSize(8192);
-        container.setMaxBinaryMessageBufferSize(8192);
-        return container;
+    @Bean
+    public WebSocketHandler createHandler() {
+        return new WebSocketHandler();
     }
+
+//    /**
+//     * For Tomcat, WildFly, and Glassfish
+//     * @see <a href="https://docs.spring.io/spring/docs/4.0.1.RELEASE/spring-framework-reference/html/websocket.html">Found here</a>
+//     */
+//    @Bean
+//    public WebSocketContainerFactoryBean createWebSocketContainer() {
+//        WebSocketContainerFactoryBean container = new WebSocketContainerFactoryBean();
+//        container.setMaxTextMessageBufferSize(8192);
+//        container.setMaxBinaryMessageBufferSize(8192);
+//        return container;
+//    }
+
+//    @Bean
+//    public DefaultHandshakeHandler handshakeHandler() {
+//        return new DefaultHandshakeHandler();
+//    }
 
 //    /**
 //     * For Jetty
@@ -43,9 +59,4 @@ public class WebSocketConfiguration implements WebSocketConfigurer {
 //        return new DefaultHandshakeHandler(
 //                new JettyRequestUpgradeStrategy(new WebSocketServerFactory(policy)));
 //    }
-
-    @Bean
-    public WebSocketHandler createHandler() {
-        return new WebSocketHandler();
-    }
 }
