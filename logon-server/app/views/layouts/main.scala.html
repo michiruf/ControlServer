@@ -1,0 +1,96 @@
+@(title: String)(content: Html)
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>@title</title>
+        @* NOTE In production take minified stuff *@
+        @* JQuery *@
+        <script type="text/javascript" src="@routes.Assets.at("lib/jquery/jquery.js")"></script>
+        @* Bootstrap *@
+        <link rel="stylesheet" href="@routes.Assets.at("lib/bootstrap/css/bootstrap.css")">
+        <link rel="stylesheet" href="@routes.Assets.at("lib/bootstrap/css/bootstrap-theme.css")">
+        <script type="text/javascript" src="@routes.Assets.at("lib/bootstrap/js/bootstrap.js")"></script>
+        @* Site stuff *@
+        <link rel="stylesheet/less" href="@routes.Assets.at("stylesheets/style.less")">
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")" >
+        @* Less *@
+        <script type="text/javascript" src="@routes.Assets.at("lib/less/less.js")"></script>
+    </head>
+    <body>
+        <div class="container">
+            <header class="page-header">
+                <h1>
+                    <span class="glyphicon glyphicon-blackboard" aria-hidden="true"></span>
+                    <a href="@routes.PageController.index()">WebQuiz</a>
+                </h1>
+            </header>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 fill-height">
+                    <div id="mainPanel" class="panel panel-primary fill-height">
+                        <section class="panel-body">
+                            <h3 class="hidden">Login</h3>
+                            <form action="http://localhost:8080/login" method="post" id="loginForm">
+                                <div class="input-group">
+                                    <label for="username" class="input-group-addon">Username</label>
+                                    <input id="username" name="username" type="text" class="form-control">
+                                </div>
+                                <div class="btn-group top-buffer" role="group">
+                                    <button id="loginSubmit" type="submit" class="btn btn-primary">Login</button>
+                                </div>
+                            </form>
+                        </section>
+                        <section id="startPanel" class="panel-body hidden">
+                            <h3 class="hidden">Start</h3>
+                            <div class="btn-group" role="group">
+                                <button id="startSubmit" type="submit" class="btn btn-danger">Start</button>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="panel panel-success">
+                        <section class="panel-body">
+                            <h3>
+                                <span class="glyphicon glyphicon-book" aria-hidden="true"></span>
+                                Catalogs
+                            </h3>
+                            <ul id="catalogList" class="list-group">
+                            </ul>
+                        </section>
+                    </div>
+                    <div class="panel panel-success">
+                        <section class="panel-body">
+                            <h3>
+                                <span class="glyphicon glyphicon-usd" aria-hidden="true"></span>
+                                Highscore
+                            </h3>
+                            <table id="playerTable" class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Player</th>
+                                        <th>Score</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </section>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <footer class="panel-body">
+                            <span>Bli bla bleu</span>
+                        </footer>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

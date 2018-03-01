@@ -1,0 +1,7 @@
+Move compilable stuff into
+* /app/assets/javascripts
+* /app/assets/stylesheets -> less
+to reduce traffic and (I hope so) to be minified
+
+Since this did not work immediately, just go on with other stuff...
+By that, the gradle/sbt stuff for webjars was disabled

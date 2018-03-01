@@ -18,14 +18,16 @@ libraryDependencies += "com.h2database" % "h2" % "1.4.196"
 
 
 // Testing libraries for dealing with CompletionStage...
-libraryDependencies += "org.assertj" % "assertj-core" % "3.6.2" % Test
-
-libraryDependencies += "org.awaitility" % "awaitility" % "2.0.0" % Test
+libraryDependencies ++= Seq(
+  "org.assertj" % "assertj-core" % "3.6.2" % Test,
+  "org.awaitility" % "awaitility" % "2.0.0" % Test
+)
 
 
 // Frontend stuff
-libraryDependencies ++= Seq(
-  "org.webjars" %% "webjars-play" % "2.6.3",
-  "org.webjars" % "bootstrap" % "4.0.0",
-  "org.webjars" % "jquery" % "3.3.1"
-)
+// NOTE Disabled because did not work immediately
+//libraryDependencies ++= Seq(
+//  "org.webjars" %% "webjars-play" % "2.6.3",
+//  "org.webjars" % "bootstrap" % "4.0.0",
+//  "org.webjars" % "jquery" % "3.3.1"
+//)
