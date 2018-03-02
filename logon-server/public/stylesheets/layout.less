@@ -1,0 +1,42 @@
+@navbar-height: 56px;
+
+body {
+  padding-top: @navbar-height;
+  position: relative; // For scrollspy
+}
+
+header.banner {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+  position: relative;
+  background: #343a40 url(../images/banner.jpg) no-repeat center center;
+  background-size: cover;
+
+  h1 {
+    font-size: 2rem;
+
+    @media (min-width: 768px) {
+      font-size: 3rem
+    }
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  p {
+    font-size: 1.1em;
+  }
+}
+
+hr.divider {
+  height: 2px;
+  padding: 0;
+  margin: 0;
+  background: #333;
+}
+
+footer {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}

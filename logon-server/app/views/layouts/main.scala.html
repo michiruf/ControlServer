@@ -1,96 +1,83 @@
-@(title: String)(content: Html)
+@(title: String)(showTopDivider: Boolean = true)(content: Html)
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>@title</title>
+        <title> @if(title != null) { Control Tool - @title } else { Control Tool }</title>
         @* NOTE In production take minified stuff *@
         @* JQuery *@
         <script type="text/javascript" src="@routes.Assets.at("lib/jquery/jquery.js")"></script>
         @* Bootstrap *@
         <link rel="stylesheet" href="@routes.Assets.at("lib/bootstrap/css/bootstrap.css")">
-        <link rel="stylesheet" href="@routes.Assets.at("lib/bootstrap/css/bootstrap-theme.css")">
+        <link rel="stylesheet" href="@routes.Assets.at("lib/bootstrap/css/bootstrap-grid.css")">
+        <link rel="stylesheet" href="@routes.Assets.at("lib/bootstrap/css/bootstrap-reboot.css")">
         <script type="text/javascript" src="@routes.Assets.at("lib/bootstrap/js/bootstrap.js")"></script>
+        @* Font awesome (taken by CDN because of caches ) *@
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
         @* Site stuff *@
-        <link rel="stylesheet/less" href="@routes.Assets.at("stylesheets/style.less")">
         <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")" >
-        @* Less *@
+        <link rel="stylesheet/less" href="@routes.Assets.at("stylesheets/style.less")">
+        @* Less (JS compiler) *@
         <script type="text/javascript" src="@routes.Assets.at("lib/less/less.js")"></script>
     </head>
     <body>
-        <div class="container">
-            <header class="page-header">
-                <h1>
-                    <span class="glyphicon glyphicon-blackboard" aria-hidden="true"></span>
-                    <a href="@routes.PageController.index()">WebQuiz</a>
-                </h1>
-            </header>
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 fill-height">
-                    <div id="mainPanel" class="panel panel-primary fill-height">
-                        <section class="panel-body">
-                            <h3 class="hidden">Login</h3>
-                            <form action="http://localhost:8080/login" method="post" id="loginForm">
-                                <div class="input-group">
-                                    <label for="username" class="input-group-addon">Username</label>
-                                    <input id="username" name="username" type="text" class="form-control">
-                                </div>
-                                <div class="btn-group top-buffer" role="group">
-                                    <button id="loginSubmit" type="submit" class="btn btn-primary">Login</button>
-                                </div>
-                            </form>
-                        </section>
-                        <section id="startPanel" class="panel-body hidden">
-                            <h3 class="hidden">Start</h3>
-                            <div class="btn-group" role="group">
-                                <button id="startSubmit" type="submit" class="btn btn-danger">Start</button>
-                            </div>
-                        </section>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="panel panel-success">
-                        <section class="panel-body">
-                            <h3>
-                                <span class="glyphicon glyphicon-book" aria-hidden="true"></span>
-                                Catalogs
-                            </h3>
-                            <ul id="catalogList" class="list-group">
-                            </ul>
-                        </section>
-                    </div>
-                    <div class="panel panel-success">
-                        <section class="panel-body">
-                            <h3>
-                                <span class="glyphicon glyphicon-usd" aria-hidden="true"></span>
-                                Highscore
-                            </h3>
-                            <table id="playerTable" class="table">
-                                <thead>
-                                    <tr>
-                                        <th>Player</th>
-                                        <th>Score</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                </tbody>
-                            </table>
-                        </section>
-                    </div>
+        <a name="top" id="top"></a>
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+            <div class="container">
+                <a class="navbar-brand" href="@routes.PageController.index()">
+                    <img src="@routes.Assets.at("images/favicon.png")" width="30" height="30" class="d-inline-block align-top" alt="">
+                    Control Tool
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarToggler">
+                    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                        <li><a class="nav-link" href="@routes.PageController.index()#top">Home</a></li>
+                        <li><a class="nav-link" href="@routes.PageController.index()#test">Test</a></li>
+                    </ul>
+                    @* TODO Should wrap lines on mobile *@
+                    <ul class="list-inline my-2 my-lg-0">
+                        <li class="list-inline-item"><a class="btn btn-primary" href="#">Register</a></li>
+                        <li class="list-inline-item"><a class="btn btn-primary" href="#">Forgot password?</a></li>
+                    </ul>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="panel panel-default">
-                        <footer class="panel-body">
-                            <span>Bli bla bleu</span>
-                        </footer>
-                    </div>
-                </div>
+        </nav>
+
+        @if(showTopDivider) {
+            <hr class="divider">
+        }
+
+        @content
+
+        <hr class="divider">
+
+        <footer class="footer bg-light">
+                <!-- Not left when lg -->
+            <div class="container h-100 text-center text-lg-left my-auto">
+                <ul class="list-inline mb-2">
+                    <li class="list-inline-item">
+                        <a href="#">About</a>
+                    </li>
+                    <li class="list-inline-item">&sdot;</li>
+                    <li class="list-inline-item">
+                        <a href="#">Contact</a>
+                    </li>
+                    <li class="list-inline-item">&sdot;</li>
+                    <li class="list-inline-item">
+                        <a href="#">Terms of Use</a>
+                    </li>
+                    <li class="list-inline-item">&sdot;</li>
+                    <li class="list-inline-item">
+                        <a href="#">Privacy Policy</a>
+                    </li>
+                </ul>
+                <p class="text-muted small mb-4 mb-lg-0">&copy; Your Website 2018. All Rights Reserved.</p>
             </div>
-        </div>
+        </footer>
+
     </body>
 </html>

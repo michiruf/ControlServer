@@ -1,4 +1,59 @@
-@layouts.main("Home") {
-    <h1>Index</h1>
-    <p>Index site</p>
+@banner = {
+    <header class="banner text-white text-center">
+        <div class="container">
+            <div class="mx-auto mb-4">
+                <h1>Control Tool</h1>
+                <h2>
+                    control your computer remotely by another or by smartphone
+                    without the overhead of screen transmission
+                </h2>
+            </div>
+            <div class="col-lg-8 mx-auto">
+                <div class="row">
+                    <div class="col-lg-3 mx-auto mb-3">
+                        <a href="TODO" class="d-block text-center">
+                            <span class="fas fa-desktop fa-3x"></span>
+                            <p class="mt-2 mb-0">PC</p>
+                        </a>
+                    </div>
+                    <div class="col-lg-3 mx-auto mb-3">
+                        <a href="TODO" class="d-block text-center">
+                            <span class="fab fa-google-play fa-3x"></span>
+                            <p class="mt-2 mb-0">Play Store</p>
+                        </a>
+                    </div>
+                    <div class="col-lg-3 mx-auto mb-3">
+                        <div class="text-center">
+                            <span class="fab fa-app-store-ios fa-3x"></span>
+                            <p class="mt-2 mb-0">App Store (not yet available)</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 mx-auto mb-3">
+                        <a href="TODO" class="d-block text-center">
+                            <span class="fas fa-list-ul fa-3x"></span>
+                            <p class="mt-2 mb-0">More</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+}
+
+@layouts.main(null)(false) {
+    @banner
+
+    <a name="test"></a>
+    <div class="container">
+        Contents:
+        @* TODO content... *@
+        <ul>
+            <li>Use-cases</li>
+            <li>Artifacts description (java client is client/host)</li>
+            <li>Download client java / android</li>
+            <li>Dev -> open source (github)</li>
+            <li>Security</li>
+            <li>Automatic updates (maybe?)</li>
+        </ul>
+    </div>
 }
