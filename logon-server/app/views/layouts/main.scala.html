@@ -1,11 +1,11 @@
-@(title: String)(showTopDivider: Boolean = true)(content: Html)
+@(title: String)(content: Html)
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title> @if(title != null) { Control Tool - @title } else { Control Tool }</title>
-        @* NOTE In production take minified stuff *@
+        <title>@if(title != null) { Control Tool - @title } else { Control Tool }</title>
+        @* NOTE In production take CDN stuff *@
         @* JQuery *@
         <script type="text/javascript" src="@routes.Assets.at("lib/jquery/jquery.js")"></script>
         @* Bootstrap *@
@@ -14,7 +14,10 @@
         <link rel="stylesheet" href="@routes.Assets.at("lib/bootstrap/css/bootstrap-reboot.css")">
         <script type="text/javascript" src="@routes.Assets.at("lib/bootstrap/js/bootstrap.js")"></script>
         @* Font awesome (taken by CDN because of caches ) *@
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+        @*<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">*@
+        <link rel="stylesheet" href="@routes.Assets.at("lib/fontawesome/css/fontawesome-all.css")">
+        @* Custom font *@
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic">
         @* Site stuff *@
         <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")" >
         <link rel="stylesheet/less" href="@routes.Assets.at("stylesheets/style.less")">
@@ -22,58 +25,56 @@
         <script type="text/javascript" src="@routes.Assets.at("lib/less/less.js")"></script>
     </head>
     <body>
-        <a name="top" id="top"></a>
 
-        <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-            <div class="container">
-                <a class="navbar-brand" href="@routes.PageController.index()">
-                    <img src="@routes.Assets.at("images/favicon.png")" width="30" height="30" class="d-inline-block align-top" alt="">
-                    Control Tool
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarToggler">
-                    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-                        <li><a class="nav-link" href="@routes.PageController.index()#top">Home</a></li>
-                        <li><a class="nav-link" href="@routes.PageController.index()#test">Test</a></li>
-                    </ul>
-                    @* TODO Should wrap lines on mobile *@
-                    <ul class="list-inline my-2 my-lg-0">
-                        <li class="list-inline-item"><a class="btn btn-primary" href="#">Register</a></li>
-                        <li class="list-inline-item"><a class="btn btn-primary" href="#">Forgot password?</a></li>
-                    </ul>
+        <nav class="fixed-top">
+            <div class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container">
+                    <a class="navbar-brand" href="@routes.PagesController.index()#top">
+                        <img src="@routes.Assets.at("images/favicon.png")" width="30" height="30" class="d-inline-block align-top" alt="">
+                        Control Tool
+                    </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarToggler">
+                        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                            <li><a class="nav-link" href="@routes.PagesController.index#download">Download</a></li>
+                            <li><a class="nav-link" href="@routes.PagesController.index#about">About</a></li>
+                            <li><a class="nav-link" href="@routes.PagesController.index#security">Security</a></li>
+                            <li><a class="nav-link" href="@routes.PagesController.index#additional-information">
+                                Additional information</a></li>
+                        </ul>
+                        @* TODO Should wrap lines on mobile *@
+                        @* -> lists with columns *@
+                        <ul class="list-inline my-2 my-lg-0">
+                            <li class="list-inline-item"><a class="btn btn-primary" href="@routes.UserController.register">
+                                Register</a></li>
+                            <li class="list-inline-item"><a class="btn btn-primary" href="@routes.UserController.forgotPassword">
+                                Forgot password?</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
+            <hr class="divider">
         </nav>
 
-        @if(showTopDivider) {
-            <hr class="divider">
-        }
+        <a name="top" id="top"></a>
 
         @content
 
         <hr class="divider">
 
         <footer class="footer bg-light">
-                <!-- Not left when lg -->
-            <div class="container h-100 text-center text-lg-left my-auto">
+            <div class="container h-100 text-center my-auto">
                 <ul class="list-inline mb-2">
-                    <li class="list-inline-item">
-                        <a href="#">About</a>
-                    </li>
+                    <li class="list-inline-item"><a href="@routes.PagesController.show("imprint")">Imprint</a></li>
                     <li class="list-inline-item">&sdot;</li>
-                    <li class="list-inline-item">
-                        <a href="#">Contact</a>
-                    </li>
+                    <li class="list-inline-item"><a href="@routes.ContactController.index">Contact</a></li>
                     <li class="list-inline-item">&sdot;</li>
-                    <li class="list-inline-item">
-                        <a href="#">Terms of Use</a>
-                    </li>
+                    <li class="list-inline-item"><a href="@routes.PagesController.show("terms")">Terms of Use</a></li>
                     <li class="list-inline-item">&sdot;</li>
-                    <li class="list-inline-item">
-                        <a href="#">Privacy Policy</a>
-                    </li>
+                    <li class="list-inline-item"><a href="@routes.PagesController.show("licenses")">
+                        Open source licenses</a></li>
                 </ul>
                 <p class="text-muted small mb-4 mb-lg-0">&copy; Your Website 2018. All Rights Reserved.</p>
             </div>

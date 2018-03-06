@@ -1,2 +1,14 @@
-@import "general.less";
-@import "layout.less";
+@import "defines";
+
+body {
+  font-family: @font-default
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: @font-default;
+  font-weight: 700
+}
+
+@import "layout";
+@import "pages-index-download";
+@import "specific";

@@ -1,0 +1,55 @@
+@*
+* see Default template: https://github.com/playframework/playframework/blob/master/framework/src/play/src/main/scala/views/helper/defaultFieldConstructor.scala.html
+* see views.html.helper.FieldElements
+*@
+@(element: helper.FieldElements)
+@inputType = @{config.twirl.FormHelper.getType(element)}
+
+<div class="@if(element.hasErrors) {error}">
+    @if(element.label != null) {
+        <label for="@element.id">@element.label</label>
+    }
+
+    Element @element.toString
+    Field @element.field.toString
+
+    Name: @element.field.name
+    @element.args.map { arg =>
+        Arg: @arg._1
+    }
+    @element.field.format.map { any =>
+        Format: @any._1
+    }
+    @element.field.constraints.map { constraint =>
+        Constraint @constraint._1
+    }
+    Value @element.field.value
+    @element.field.errors.map { error =>
+        Error @error
+    }
+
+    Input @element.input
+
+    <span class="errors">@element.errors.mkString(", ")</span>
+    <span class="help">@element.infos.mkString(", ")</span>
+</div>
+
+
+@*
+
+
+case class FieldElements(
+    val id : _root_.scala.Predef.String,
+    val field : play.api.data.Field,
+    val input : play.twirl.api.Html,
+    val args : _root_.scala.Predef.Map[scala.Symbol, scala.Any],
+    val p : play.api.i18n.MessagesProvider
+) extends scala.AnyRef with scala.Product with scala.Serializable {
+    def infos : scala.Seq[_root_.scala.Predef.String] = { /* compiled code */ }
+    def errors : scala.Seq[_root_.scala.Predef.String] = { /* compiled code */ }
+    def hasErrors : scala.Boolean = { /* compiled code */ }
+    def label : scala.Any = { /* compiled code */ }
+    def hasName : scala.Boolean = { /* compiled code */ }
+    def name : scala.Any = { /* compiled code */ }
+}
+*@

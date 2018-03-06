@@ -8,52 +8,90 @@
                     without the overhead of screen transmission
                 </h2>
             </div>
-            <div class="col-lg-8 mx-auto">
-                <div class="row">
-                    <div class="col-lg-3 mx-auto mb-3">
-                        <a href="TODO" class="d-block text-center">
-                            <span class="fas fa-desktop fa-3x"></span>
-                            <p class="mt-2 mb-0">PC</p>
-                        </a>
-                    </div>
-                    <div class="col-lg-3 mx-auto mb-3">
-                        <a href="TODO" class="d-block text-center">
-                            <span class="fab fa-google-play fa-3x"></span>
-                            <p class="mt-2 mb-0">Play Store</p>
-                        </a>
-                    </div>
-                    <div class="col-lg-3 mx-auto mb-3">
-                        <div class="text-center">
-                            <span class="fab fa-app-store-ios fa-3x"></span>
-                            <p class="mt-2 mb-0">App Store (not yet available)</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 mx-auto mb-3">
-                        <a href="TODO" class="d-block text-center">
-                            <span class="fas fa-list-ul fa-3x"></span>
-                            <p class="mt-2 mb-0">More</p>
-                        </a>
-                    </div>
-                </div>
-            </div>
         </div>
     </header>
 }
 
-@layouts.main(null)(false) {
-    @banner
+@download = {
+    <a name="download" id="download"></a>
+    <section class="container my-5">
+        <h2 class="mb-5">
+            <span class="fas fa-download"></span>
+            Download
+        </h2>
+        <div class="row text-center">
+            <a href="TODO" class="col-lg-4 mx-auto mb-3 d-block download-item">
+                <div class="download-icon d-flex"><span class="fas fa-desktop m-auto"></span></div>
+                <p class="mt-2 mb-0">PC<br>(Java required)</p>
+            </a>
+            <a href="TODO" class="col-lg-4 mx-auto mb-3 d-block download-item">
+                <div class="download-icon d-flex"><span class="fab fa-google-play m-auto"></span></div>
+                <p class="mt-2 mb-0">Play Store</p>
+            </a>
+            <a href="#" class="col-lg-4 mx-auto mb-3 d-block download-item">
+                <div class="download-icon d-flex"><span class="fab fa-app-store-ios m-auto"></span></div>
+                <p class="mt-2 mb-0" style="color: #6c757d;">App Store<br>(not yet available)</p>
+            </a>
+        </div>
+        <p class="text-center">
+            Or browse the sources and releases on
+            <a href="TODO"><span class="fab fa-github"></span> Github</a>
+        </p>
+    </section>
+}
 
-    <a name="test"></a>
-    <div class="container">
-        Contents:
-        @* TODO content... *@
-        <ul>
-            <li>Use-cases</li>
-            <li>Artifacts description (java client is client/host)</li>
-            <li>Download client java / android</li>
-            <li>Dev -> open source (github)</li>
-            <li>Security</li>
-            <li>Automatic updates (maybe?)</li>
-        </ul>
-    </div>
+@about = {
+    <a name="about" id="about"></a>
+    <section class="container my-5">
+        <h2>
+            <span class="fas fa-question-circle"></span>
+            About
+        </h2>
+        <p>
+            About text:<br>
+            What?<br>
+            Use-cases
+        </p>
+    </section>
+}
+
+@security = {
+    <a name="security" id="security"></a>
+    <section class="container my-5">
+        <h2>
+            <span class="fas fa-lock"></span>
+            Security
+        </h2>
+        <p>
+            Security text
+        </p>
+    </section>
+}
+
+@additionalInformation = {
+    <a name="additional-information" id="additional-information"></a>
+    <section class="container my-5">
+        <h2>
+            <span class="fas fa-lock"></span>
+            Additional information
+        </h2>
+        <p>
+            Additional information text:<br>
+            Why open source<br>
+            github link<br>
+            github artifact description - link<br>
+            Automatic updates?
+        </p>
+    </section>
+}
+
+@layouts.main(null) {
+    @banner
+    @download
+    <hr class="divider">
+    @about
+    <hr class="divider">
+    @security
+    <hr class="divider">
+    @additionalInformation
 }

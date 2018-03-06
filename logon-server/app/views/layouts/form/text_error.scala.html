@@ -1,0 +1,30 @@
+@(element: helper.FieldElements)
+@if(element.label != null) {
+    <label for="@element.id">@element.label</label>
+}
+@input = {
+    <input
+    type="@config.twirl.FormHelper.getType(element)"
+    name="@element.name"
+        @if(element.id != null) {
+            id="@element.id"
+        }
+        @Html(config.twirl.FormHelper.toHtmlArgsWithFilter(element.args.asJava))
+    value="@element.field.value"
+        @if(element.args.contains('$help)) {
+            aria-describedby="@{
+                element.id
+            }Help"
+            }>
+}
+@Html(config.twirl.FormHelper.replaceNewlinesAndMultipleSpaces(input.body))
+@if(element.args.contains('$help)) {
+    <small id="@{
+        element.id
+    }Help" class="@element.args.getOrElse('$help_class, "")">
+    @element.args.getOrElse('$help, "")
+    </small>
+}
+
+<span class="errors">@element.errors.mkString(", ")</span>
+<span class="help">@element.infos.mkString(", ")</span>

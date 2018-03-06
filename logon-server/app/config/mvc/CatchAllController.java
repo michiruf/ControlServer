@@ -1,6 +1,7 @@
 package config.mvc;
 
 import play.mvc.Result;
+import play.mvc.Results;
 
 /**
  * @author Michael Ruf
@@ -8,7 +9,13 @@ import play.mvc.Result;
  */
 public class CatchAllController extends ControllerBase {
 
+    // TODO May implement a catch all route?
+
+    // # Call any controller
+    // GET     /*controller/*action        config.mvc.CatchAllController.invoke(controller: String, action: String)
+    // POST    /*controller/*action        config.mvc.CatchAllController.invoke(controller: String, action: String)
+
     public Result invoke(String controller, String method) {
-        return ok(); // TODO
+        return Results.TODO;
     }
 }
