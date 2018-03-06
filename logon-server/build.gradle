@@ -34,6 +34,8 @@ dependencies {
     // Dependency injection
     play "com.typesafe.play:play-guice_$scalaVersion:$playVersion"
 
+    // Database TODO (only added in sbt yet!)
+
     // TODO Comes from a sample
     // Test stuff
     playTest 'org.assertj:assertj-core:3.8.0'

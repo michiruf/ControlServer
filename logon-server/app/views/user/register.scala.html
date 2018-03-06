@@ -1,5 +1,6 @@
 @import config.template.{CheckboxFieldConstructor, InputFieldConstructor}
-@(form: play.data.Form[User])
+@import models.forms.UserForm
+@(form: play.data.Form[UserForm])
 @tosLabel = {
     I have read and accept the
     <a href="@routes.PagesController.show("terms")" target="_blank">Terms of Use</a>.
@@ -12,7 +13,9 @@
             Create an account
         </h2>
         <p>
-            You need to create an account to find your devices when you can not or do not want to use direct connection.
+            You need to create an account to find your devices when you do not want to use direct connection (which
+            requires a proper <a href="https://en.wikipedia.org/wiki/Network_address_translation" target="_blank">NAT</a>
+            configuration or a local area network).
         </p>
         @helper.form(action = routes.UserController.doRegister) {
             @helper.CSRF.formField
@@ -41,6 +44,7 @@
                 <label for="password">Password</label>
                 <div class="form-row">
                     <div class="col-md mb-2 mb-md-0">
+                        @* TODO Is not a password field *@
                         @helper.inputText(form("password"),
                             'class -> "form-control",
                             'placeholder -> "Enter your password",

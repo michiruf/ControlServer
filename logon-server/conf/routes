@@ -4,18 +4,19 @@
 # ~~~~~~~~~~~~~
 
 # Map static resources from the /public folder to the /assets URL path
-GET         /assets/*file           controllers.Assets.at(path="/public", file)
+GET         /assets/*file            controllers.Assets.at(path="/public", file)
 
 # Contact
-GET         /contact                controllers.ContactController.index
-POST        /contact                controllers.ContactController.send
+GET         /contact                 controllers.ContactController.index
+POST        /contact                 controllers.ContactController.send
 
 # User
-GET         /register               controllers.UserController.register
-POST        /register               controllers.UserController.doRegister()
-GET         /forgot-password        controllers.UserController.forgotPassword
-POST        /forgot-password        controllers.UserController.doForgotPassword()
+GET         /register                controllers.UserController.register
+POST        /register                controllers.UserController.doRegister()
+GET         /register-success        controllers.UserController.doneRegister()
+GET         /forgot-password         controllers.UserController.forgotPassword
+POST        /forgot-password         controllers.UserController.doForgotPassword()
 
 # Show the start page and catch all remaining requests to show pages
-GET         /                       controllers.PagesController.index
-GET         /*page                  controllers.PagesController.show(page: String)
+GET         /                        controllers.PagesController.index
+GET         /*page                   controllers.PagesController.show(page: String)
