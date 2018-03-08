@@ -39,6 +39,10 @@ public class UserForm implements Constraints.Validatable<ValidationError> {
         if (getCountForUsername() > 0) {
             return new ValidationError("username", "error.username_taken");
         }
+        // NOTE This should be disabled later, see comment in UserController.doRegister()
+        if (getCountForEmail() > 0) {
+            return new ValidationError("email", "error.email_taken");
+        }
         // We should not validate the email count since its a data privacy issue
         return null;
     }

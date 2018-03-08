@@ -18,4 +18,8 @@ public class ControllerBase extends Controller {
     public Result errorPage(int httpError) {
         return status(httpError, error.render(httpError));
     }
+
+    protected boolean isHttpGet() {
+        return request().method().equals("GET");
+    }
 }

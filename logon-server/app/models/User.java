@@ -5,6 +5,8 @@ import io.ebean.Model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.time.Instant;
+import java.util.Date;
 
 /**
  * @author Michael Ruf
@@ -24,9 +26,12 @@ public class User extends Model {
 
     public String password;
 
+    public Date registerDate;
+
     public User(String username, String email, String password) {
         this.username = username;
         this.email = email;
         this.password = password;
+        registerDate = Date.from(Instant.now());
     }
 }

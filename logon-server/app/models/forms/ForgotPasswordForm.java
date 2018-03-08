@@ -13,8 +13,7 @@ public class ForgotPasswordForm {
     @Constraints.Email
     public String email;
 
-    public User findModel() {
-        //User.find
-        return null;
+    public User findUser() {
+        return User.finder.query().where().eq("email", email).findOne();
     }
 }

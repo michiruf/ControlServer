@@ -13,6 +13,10 @@ import java.util.regex.Pattern;
  */
 public abstract class BaseConstructor implements FieldConstructor {
 
+    // NOTE Instead of creating the html, a template could have been loaded and a data object containing
+    // the information needed you have been passed to it
+    // -> Awesome!
+
     protected static final Symbol LABEL = Symbol.apply("$label");
     protected static final Symbol LABEL_CLASS = Symbol.apply("$label_class");
     protected static final Symbol HELP = Symbol.apply("$help");

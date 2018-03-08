@@ -1,12 +1,15 @@
 package controllers;
 
 import config.mvc.ControllerBase;
+import models.User;
 import models.forms.ForgotPasswordForm;
 import models.forms.UserForm;
 import play.data.Form;
 import play.data.FormFactory;
 import play.mvc.Result;
+import play.mvc.Results;
 import views.html.user.forgot_password;
+import views.html.user.forgot_password_done;
 import views.html.user.register;
 import views.html.user.register_done;
 
@@ -38,11 +41,17 @@ public class UserController extends ControllerBase {
         }
 
         UserForm userForm = data.get();
+        // NOTE This should be implemented later
         // Only save the user when the email not yet exists
         // By this we avoid brute forcing existing emails
-        if (userForm.getCountForEmail() == 0) {
-            userForm.createUser().save();
-        }
+        // To-do:
+        // * Send a confirmation mail when the address is provided
+        // * Validation the mail enables account login
+        // * A registration with an used address will still throw no error, but send a mail to the address
+        //if (userForm.getCountForEmail() == 0) {
+        //    userForm.createUser().save();
+        //}
+        userForm.createUser().save();
 
         return redirect(routes.UserController.doneRegister());
     }
@@ -61,9 +70,16 @@ public class UserController extends ControllerBase {
             return badRequest(forgot_password.render(data));
         }
 
-        String email = data.get().email;
-        // TODO Error when submitting
+        User user = data.get().findUser();
+        if (user != null) {
+            // TODO Send the email
+        }
 
-        return ok(email); // TODO
+        //return redirect(routes.UserController.doneForgotPassword());
+        return Results.TODO;
+    }
+
+    public Result doneForgotPassword() {
+        return ok(forgot_password_done.render());
     }
 }
