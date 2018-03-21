@@ -1,10 +1,27 @@
 package de.michiruf.control_server.common.user;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.util.List;
+
 /**
  * @author Michael Ruf
  * @since 2018-02-26
  */
 public class DeviceResult {
 
-    // TODO
+    @JsonProperty("devices")
+    List<Device> devices;
+
+    @SuppressWarnings("unused") // for jackson
+    public DeviceResult() {
+    }
+
+    public DeviceResult(List<Device> devices) {
+        this.devices = devices;
+    }
+
+    public List<Device> getDevices() {
+        return devices;
+    }
 }

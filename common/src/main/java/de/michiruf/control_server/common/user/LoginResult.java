@@ -5,4 +5,14 @@ package de.michiruf.control_server.common.user;
  * @since 2018-02-26
  */
 public class LoginResult {
+
+    private final boolean success;
+
+    public LoginResult(boolean success) {
+        this.success = success;
+    }
+
+    public boolean isSuccess() {
+        return success;
+    }
 }
