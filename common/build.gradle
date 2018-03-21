@@ -16,3 +16,10 @@ dependencies {
     testCompile 'com.fasterxml.jackson.core:jackson-annotations:2.6.2'
     testCompile 'com.fasterxml.jackson.core:jackson-databind:2.6.2'
 }
+
+// NOTE Remove when sbt is removed
+task playframeworkSbtDependencyJar(type: Jar) {
+    version = 'playframeworkSbtDependency'
+    from { configurations.runtime.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}

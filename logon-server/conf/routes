@@ -6,9 +6,8 @@
 # Map static resources from the /public folder to the /assets URL path
 GET         /assets/*file                   controllers.Assets.at(path="/public", file)
 
-# Contact
-GET         /contact                        controllers.ContactController.index
-POST        /contact                        controllers.ContactController.send
+# Websocket
+GET         /ws                             controllers.WebsocketController.socket
 
 # User
 GET         /register                       controllers.UserController.register
@@ -17,6 +16,10 @@ GET         /register-success               controllers.UserController.doneRegis
 GET         /forgot-password                controllers.UserController.forgotPassword
 POST        /forgot-password                controllers.UserController.doForgotPassword()
 GET         /forgot-password-success        controllers.UserController.doneForgotPassword
+
+# Contact
+GET         /contact                        controllers.ContactController.index
+POST        /contact                        controllers.ContactController.send
 
 # Show the start page and catch all remaining requests to show pages
 GET         /                               controllers.PagesController.index

@@ -1,0 +1,3 @@
+# Due to play gradle support we copy the gradle generated common module jar each build in this directory
+# So we need to ignore it
+common-playframeworkSbtDependency.jar
