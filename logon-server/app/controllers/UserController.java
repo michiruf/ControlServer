@@ -53,6 +53,8 @@ public class UserController extends ControllerBase {
         //}
         userForm.createUser().save();
 
+        // TODO Add a captcha?
+
         return redirect(routes.UserController.doneRegister());
     }
 

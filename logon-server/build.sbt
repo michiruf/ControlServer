@@ -14,6 +14,10 @@ routesGenerator := InjectedRoutesGenerator
 // Database driver (rest is applied by PlayEbean plugin)
 libraryDependencies += "com.h2database" % "h2" % "1.4.192"
 
+// Captcha for registration
+// TODO Maybe take this?
+//libraryDependencies += "com.nappin" %% "play-recaptcha" % "2.3"
+
 
 // Testing libraries for dealing with CompletionStage...
 //libraryDependencies ++= Seq(
