@@ -2,6 +2,7 @@ package controllers;
 
 import akka.actor.AbstractActor;
 import akka.actor.ActorRef;
+import de.michiruf.control_server.common.event.Event;
 import de.michiruf.control_server.common.user.DeviceRequest;
 import de.michiruf.control_server.common.user.LoginRequest;
 import de.michiruf.control_server.common.user.LoginResult;
@@ -28,6 +29,7 @@ public class WebsocketActor extends AbstractActor {
         return receiveBuilder()
                 .match(LoginRequest.class, this::onLogin)
                 .match(DeviceRequest.class, this::onDeviceRequest)
+                .match(Event.class, this::onEvent)
                 .match(String.class, this::onUnknownMessage)
                 .build();
     }
@@ -63,6 +65,9 @@ public class WebsocketActor extends AbstractActor {
         checkAuthentication();
 
         // TODO
+    }
+
+    private void onEvent(Event event) {
     }
 
     private void onUnknownMessage(String message) {

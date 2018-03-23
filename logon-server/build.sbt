@@ -21,11 +21,12 @@ libraryDependencies += "com.h2database" % "h2" % "1.4.192"
 //libraryDependencies += "com.nappin" %% "play-recaptcha" % "2.3"
 
 
-// Testing libraries for dealing with CompletionStage...
-//libraryDependencies ++= Seq(
-//  "org.assertj" % "assertj-core" % "3.6.2" % Test,
-//  "org.awaitility" % "awaitility" % "2.0.0" % Test
-//)
+// Testing libraries for dealing with CompletionStage and websockets
+libraryDependencies ++= Seq(
+  "org.assertj" % "assertj-core" % "3.6.2" % Test,
+  "org.awaitility" % "awaitility" % "2.0.0" % Test,
+  javaWs % Test
+)
 
 
 // Get common dependency by running the gradle command

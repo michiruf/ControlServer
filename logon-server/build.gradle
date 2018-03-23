@@ -1,6 +1,8 @@
 // TODO Give another try to:
 // https://github.com/ia-toki/gradle-play-idea
 
+// TODO CURRENTLY NOT MAINTAINED!
+
 
 repositories {
     jcenter()
