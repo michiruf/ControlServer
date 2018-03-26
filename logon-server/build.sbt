@@ -25,7 +25,7 @@ libraryDependencies += "com.h2database" % "h2" % "1.4.192"
 libraryDependencies ++= Seq(
   "org.assertj" % "assertj-core" % "3.6.2" % Test,
   "org.awaitility" % "awaitility" % "2.0.0" % Test,
-  javaWs % Test
+  "io.vertx" % "vertx-unit" % "3.5.1" % Test
 )
 
 

@@ -1,6 +1,7 @@
 package de.michiruf.control_server.common.user;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 /**
  * @author Michael Ruf

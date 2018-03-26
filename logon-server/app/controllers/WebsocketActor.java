@@ -1,7 +1,8 @@
 package controllers;
 
-import akka.actor.AbstractActor;
 import akka.actor.ActorRef;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import config.actor.MultiTypeAbstractActor;
 import de.michiruf.control_server.common.event.Event;
 import de.michiruf.control_server.common.user.DeviceRequest;
 import de.michiruf.control_server.common.user.LoginRequest;
@@ -10,28 +11,30 @@ import de.michiruf.control_server.common.user.UnauthenticatedError;
 import models.User;
 import play.Logger;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Consumer;
+
 /**
  * @author Michael Ruf
  * @since 2018-03-21
  */
-public class WebsocketActor extends AbstractActor {
-
-    private final ActorRef out;
+public class WebsocketActor extends MultiTypeAbstractActor {
 
     private boolean authenticated = false;
 
-    public WebsocketActor(ActorRef out) {
-        this.out = out;
+    public WebsocketActor(ActorRef out, ObjectMapper objectMapper) {
+        super(out, objectMapper);
     }
 
     @Override
-    public Receive createReceive() {
-        return receiveBuilder()
-                .match(LoginRequest.class, this::onLogin)
-                .match(DeviceRequest.class, this::onDeviceRequest)
-                .match(Event.class, this::onEvent)
-                .match(String.class, this::onUnknownMessage)
-                .build();
+    public Map<Class<?>, Consumer<Object>> onReceiveTypeDelegation() {
+        Map<Class<?>, Consumer<Object>> doByClass = new HashMap<>();
+        doByClass.put(LoginRequest.class, o -> onLogin((LoginRequest) o));
+        doByClass.put(DeviceRequest.class, o -> onDeviceRequest((DeviceRequest) o));
+        doByClass.put(Event.class, o -> onEvent((Event) o));
+        doByClass.put(String.class, o -> onUnknownMessage((String) o));
+        return doByClass;
     }
 
     // Killing a connection: self().tell(PoisonPill.getInstance(), self());
@@ -40,12 +43,12 @@ public class WebsocketActor extends AbstractActor {
     public void postStop() throws Exception {
         authenticated = false;
         super.postStop();
-        Logger.error("Websocket closed");
+        Logger.info("Websocket closed");
     }
 
     private void checkAuthentication() {
         if (!authenticated) {
-            out.tell(new UnauthenticatedError(), self());
+            tell(new UnauthenticatedError());
             throw new IllegalStateException("Not authenticated!");
             // TODO Do this better?
         }
@@ -58,7 +61,7 @@ public class WebsocketActor extends AbstractActor {
                 .and()
                 .eq("password", loginRequest.getEncryptedPassword())
                 .findCount() > 0;
-        out.tell(new LoginResult(authenticated), self());
+        tell(new LoginResult(authenticated));
     }
 
     private void onDeviceRequest(DeviceRequest deviceRequest) {
@@ -71,6 +74,6 @@ public class WebsocketActor extends AbstractActor {
     }
 
     private void onUnknownMessage(String message) {
-        out.tell(String.format("Could not interpret the message: %s", message), self());
+        tell(String.format("Could not interpret the message: %s", message));
     }
 }

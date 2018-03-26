@@ -1,11 +1,13 @@
 package de.michiruf.control_server.common.user;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 /**
  * @author Michael Ruf
  * @since 2018-02-26
  */
+@JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "@class")
 public class LoginRequest {
 
     @JsonProperty("username")
@@ -23,6 +25,7 @@ public class LoginRequest {
     }
 
     public LoginRequest(String username, String encryptedPassword) {
+        this.username = username;
         this.encryptedPassword = encryptedPassword;
     }
 

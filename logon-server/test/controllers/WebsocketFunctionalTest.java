@@ -1,110 +1,79 @@
 package controllers;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import de.michiruf.control_server.common.user.LoginRequest;
+import io.vertx.core.Vertx;
+import io.vertx.core.http.WebSocket;
+import io.vertx.core.streams.ReadStream;
+import io.vertx.ext.unit.Async;
+import io.vertx.ext.unit.TestContext;
+import io.vertx.ext.unit.junit.VertxUnitRunner;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
-import org.slf4j.Logger;
-import play.shaded.ahc.org.asynchttpclient.AsyncHttpClient;
-import play.shaded.ahc.org.asynchttpclient.DefaultAsyncHttpClient;
-import play.shaded.ahc.org.asynchttpclient.DefaultAsyncHttpClientConfig;
-import play.shaded.ahc.org.asynchttpclient.ListenableFuture;
-import play.shaded.ahc.org.asynchttpclient.ws.WebSocket;
-import play.shaded.ahc.org.asynchttpclient.ws.WebSocketTextListener;
-import play.shaded.ahc.org.asynchttpclient.ws.WebSocketUpgradeHandler;
+import org.junit.runner.RunWith;
 import play.test.WithServer;
-
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
-import java.util.function.Consumer;
-
-import static org.awaitility.Awaitility.await;
 
 /**
  * @author Michael Ruf
- * @since 2018-03-23
+ * @since 2015-09-08
  */
+@RunWith(VertxUnitRunner.class)
 public class WebsocketFunctionalTest extends WithServer {
 
-    // TODO This is way to complicated for a simple test....
+    private Vertx vertx;
+    private ObjectMapper objectMapper;
 
-    @SuppressWarnings("Duplicates") // TODO Remove
+    @Before
+    public void setUp() {
+        objectMapper = new ObjectMapper();
+        objectMapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
+
+        vertx = Vertx.vertx();
+    }
+
+    @After
+    public void tearDown() {
+        vertx.close();
+    }
+
+    private ReadStream<WebSocket> createStream() {
+        return vertx.createHttpClient()
+                .websocketStream(testServer.port(), "localhost", "/ws");
+    }
+
     @Test
-    public void testCompleteWorkflow() throws Exception {
-        String testServerUrl = "http://localhost:" + this.testServer.port() + "/";
-
-        // Create the client
-        DefaultAsyncHttpClientConfig config = new DefaultAsyncHttpClientConfig.Builder()
-                .setMaxRequestRetry(0)
-                .build();
-        DefaultAsyncHttpClient httpClient = new DefaultAsyncHttpClient(config);
-        WebSocket
-        WebsocketClient client = new WebsocketClient(httpClient);
-
-        try {
-            LoggingWebsocketTextListener listener = new LoggingWebsocketTextListener(message -> {
-            });
-            CompletableFuture<WebSocket> completionStage = client.start(testServerUrl, listener);
-
-            httpClient
-
-            await().until(completionStage::isDone);
-            await().until(() -> completionStage.get().isOpen());
-        } finally {
-            httpClient.close();
-        }
+    public void testConnect(TestContext context) {
+        Async async = context.async();
+        createStream()
+                .exceptionHandler(context::fail)
+                .handler(websocket -> {
+                    try {
+                        testConnectSetupWebsocket(context, async, websocket);
+                    } catch (Exception e) {
+                        context.fail(e);
+                    }
+                });
+        async.await();
     }
 
-    public static class WebsocketClient {
+    private void testConnectSetupWebsocket(TestContext context, Async async, WebSocket websocket) throws Exception {
+        websocket
+                .exceptionHandler(context::fail)
+                .handler(System.out::println)
+                .closeHandler(event -> {
+                    System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+                    async.complete();
+                });
 
-        private AsyncHttpClient client;
+        // TODO Necessary?
+        // Periodically send ping messages (there is also a pongHandler on the websocket object)
+        //vertx.setPeriodic(10000, timerId -> {
+        //    websocket.writePing(Buffer.buffer("ping"));
+        //});
 
-        public WebsocketClient(AsyncHttpClient c) {
-            this.client = c;
-        }
-
-        public CompletableFuture<WebSocket> start(String url, WebSocketTextListener listener) throws ExecutionException, InterruptedException {
-            WebSocketUpgradeHandler handler = new WebSocketUpgradeHandler.Builder()
-                    .addWebSocketListener(listener)
-                    .build();
-            ListenableFuture<WebSocket> future = client.prepareGet(url).execute(handler);
-            return future.toCompletableFuture();
-        }
-
-        public void send(Object message) {
-        }
-    }
-
-    private static class LoggingWebsocketTextListener implements WebSocketTextListener {
-        private final Consumer<String> onMessageCallback;
-
-        public LoggingWebsocketTextListener(Consumer<String> onMessageCallback) {
-            this.onMessageCallback = onMessageCallback;
-        }
-
-        private Logger logger = org.slf4j.LoggerFactory.getLogger(controllers.WebSocketClient.LoggingListener.class);
-
-        private Throwable throwableFound = null;
-
-        public Throwable getThrowable() {
-            return throwableFound;
-        }
-
-        public void onOpen(WebSocket websocket) {
-            //logger.info("onClose: ");
-            //websocket.sendMessage("hello");
-        }
-
-        public void onClose(WebSocket websocket) {
-            //logger.info("onClose: ");
-        }
-
-        public void onError(Throwable t) {
-            //logger.error("onError: ", t);
-            throwableFound = t;
-        }
-
-        @Override
-        public void onMessage(String s) {
-            //logger.info("onMessage: s = " + s);
-            onMessageCallback.accept(s);
-        }
+        String t = objectMapper.writeValueAsString(new LoginRequest("bobbi", "123456"));
+        websocket.writeTextMessage(t);
     }
 }
