@@ -16,6 +16,8 @@ GET         /register-success               controllers.UserController.doneRegis
 GET         /forgot-password                controllers.UserController.forgotPassword
 POST        /forgot-password                controllers.UserController.doForgotPassword()
 GET         /forgot-password-success        controllers.UserController.doneForgotPassword
+#+ nocsrf
+#POST        /api/authenticate               controllers.UserController.authenticate()
 
 # Contact
 GET         /contact                        controllers.ContactController.index

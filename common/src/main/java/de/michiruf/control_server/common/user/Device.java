@@ -1,7 +1,6 @@
 package de.michiruf.control_server.common.user;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 /**
  * @author Michael Ruf
@@ -15,13 +14,17 @@ public class Device {
     @JsonProperty("name")
     private String name;
 
+    @JsonProperty("isApproved")
+    private boolean isApproved;
+
     @SuppressWarnings("unused") // for jackson
-    public Device() {
+    protected Device() {
     }
 
-    public Device(String id, String name) {
+    public Device(String id, String name, boolean isApproved) {
         this.id = id;
         this.name = name;
+        this.isApproved = isApproved;
     }
 
     public String getId() {
@@ -30,5 +33,9 @@ public class Device {
 
     public String getName() {
         return name;
+    }
+
+    public boolean isApproved() {
+        return isApproved;
     }
 }

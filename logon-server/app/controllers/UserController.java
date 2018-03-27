@@ -2,6 +2,7 @@ package controllers;
 
 import config.mvc.ControllerBase;
 import models.User;
+import models.forms.AuthenticateForm;
 import models.forms.ForgotPasswordForm;
 import models.forms.UserForm;
 import play.data.Form;
@@ -23,11 +24,13 @@ public class UserController extends ControllerBase {
 
     private final Form<UserForm> userForm;
     private final Form<ForgotPasswordForm> forgotPasswordForm;
+    private final Form<AuthenticateForm> authenticateForm;
 
     @Inject
     public UserController(FormFactory formFactory) {
         userForm = formFactory.form(UserForm.class);
         forgotPasswordForm = formFactory.form(ForgotPasswordForm.class);
+        authenticateForm = formFactory.form(AuthenticateForm.class);
     }
 
     public Result register() {
@@ -83,5 +86,17 @@ public class UserController extends ControllerBase {
 
     public Result doneForgotPassword() {
         return ok(forgot_password_done.render());
+    }
+
+    public Result authenticate() {
+        return Results.TODO;
+        //// TODO Later we should use this to get a token and the websocket shell validate this on connection
+        //Form<AuthenticateForm> data = authenticateForm.bindFromRequest();
+        //if (data.hasErrors()) {
+        //    return badRequest();
+        //}
+        //
+        //String token = data.get().findUser().generateToken();
+        //return ok(token);
     }
 }

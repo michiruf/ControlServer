@@ -15,6 +15,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import play.libs.Json;
 import play.test.WithServer;
 
 /**
@@ -25,12 +26,10 @@ import play.test.WithServer;
 public class WebsocketFunctionalTest extends WithServer {
 
     private Vertx vertx;
-    private ObjectMapper objectMapper;
 
     @Before
     public void setUp() {
-        objectMapper = new ObjectMapper();
-        objectMapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
+        Json.mapper().disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
 
         vertx = Vertx.vertx();
     }
@@ -68,7 +67,7 @@ public class WebsocketFunctionalTest extends WithServer {
     private void testLoginRequest(TestContext context, WebSocket websocket) throws Exception {
         websocket.handler(message -> {
             try {
-                LoginResult result = objectMapper.readValue(message.toString(), LoginResult.class);
+                LoginResult result = Json.mapper().readValue(message.toString(), LoginResult.class);
                 context.assertNotNull(result);
                 context.assertTrue(result.isSuccess());
             } catch (Exception e) {
@@ -82,15 +81,16 @@ public class WebsocketFunctionalTest extends WithServer {
                 context.fail(e);
             }
         });
-        websocket.writeTextMessage(objectMapper.writeValueAsString(new LoginRequest("bobbi", "123456")));
+        websocket.writeTextMessage(Json.mapper().writeValueAsString(new LoginRequest("testuser", "testpassword")));
     }
 
     private void testDeviceRequest(TestContext context, WebSocket websocket) throws Exception {
         websocket.handler(message -> {
             try {
-                DeviceResult result = objectMapper.readValue(message.toString(), DeviceResult.class);
+                DeviceResult result = Json.mapper().readValue(message.toString(), DeviceResult.class);
                 context.assertNotNull(result);
-                // TODO More
+                context.assertEquals(1, result.getDevices().size());
+                context.assertEquals("testuser-1-device-1", result.getDevices().get(0).getName());
             } catch (Exception e) {
                 context.fail(e);
             }
@@ -98,7 +98,7 @@ public class WebsocketFunctionalTest extends WithServer {
             // Disconnect after everything was tested
             testDisconnect(websocket);
         });
-        websocket.writeTextMessage(objectMapper.writeValueAsString(new DeviceRequest()));
+        websocket.writeTextMessage(Json.mapper().writeValueAsString(new DeviceRequest()));
     }
 
     private void testDisconnect(WebSocket websocket) {

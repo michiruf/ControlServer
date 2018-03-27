@@ -3,6 +3,7 @@ package controllers;
 import akka.actor.ActorRef;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import config.actor.MultiTypeAbstractActor;
+import de.michiruf.control_server.common.control.StartControlRequest;
 import de.michiruf.control_server.common.event.Event;
 import de.michiruf.control_server.common.user.DeviceRequest;
 import de.michiruf.control_server.common.user.DeviceResult;
@@ -24,6 +25,8 @@ import java.util.stream.Collectors;
  */
 public class WebsocketActor extends MultiTypeAbstractActor {
 
+    private static Map<Device, WebsocketActor> actors = new HashMap<>();
+
     private User user;
 
     public WebsocketActor(ActorRef out, ObjectMapper objectMapper) {
@@ -32,20 +35,20 @@ public class WebsocketActor extends MultiTypeAbstractActor {
 
     @Override
     public Map<Class<?>, Consumer<Object>> onReceiveTypeDelegation() {
-        Map<Class<?>, Consumer<Object>> doByClass = new HashMap<>();
-        doByClass.put(LoginRequest.class, o -> onLogin((LoginRequest) o));
-        doByClass.put(DeviceRequest.class, o -> onDeviceRequest((DeviceRequest) o));
-        doByClass.put(Event.class, o -> onEvent((Event) o));
-        doByClass.put(String.class, o -> onUnknownMessage((String) o));
-        return doByClass;
+        Map<Class<?>, Consumer<Object>> delegateMap = new HashMap<>();
+        delegateMap.put(LoginRequest.class, o -> onLogin((LoginRequest) o));
+        delegateMap.put(DeviceRequest.class, o -> onDeviceRequest((DeviceRequest) o));
+        delegateMap.put(Event.class, o -> onEvent((Event) o));
+        delegateMap.put(String.class, o -> onUnknownMessage((String) o));
+        return delegateMap;
     }
 
     // Killing a connection: self().tell(PoisonPill.getInstance(), self());
 
     @Override
     public void postStop() throws Exception {
-        user = null;
         super.postStop();
+        user = null;
         Logger.info("Websocket closed");
     }
 
@@ -70,9 +73,20 @@ public class WebsocketActor extends MultiTypeAbstractActor {
     private void onDeviceRequest(DeviceRequest deviceRequest) {
         checkAuthentication();
 
+        Device device = Device.fromCommon(deviceRequest.getOwnDevice());
+        if (device == null) {
+            tell(new DeviceResult());
+        }
+
+        actors.put(device, this);
+
         tell(new DeviceResult(user.devices.stream()
                 .map(Device::toCommon)
                 .collect(Collectors.toList())));
+    }
+
+    private void onStartControlRequest(StartControlRequest startControlRequest) {
+//        startControlRequest.getDevice();
     }
 
     private void onEvent(Event event) {

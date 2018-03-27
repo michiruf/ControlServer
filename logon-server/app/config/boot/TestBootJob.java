@@ -14,17 +14,17 @@ import javax.inject.Inject;
  * @author Michael Ruf
  * @since 2018-03-06
  */
-public class DevBootJob {
+public class TestBootJob {
 
     private final ActorSystem actorSystem;
     private final ExecutionContext executionContext;
 
     @Inject
-    public DevBootJob(Application application, ActorSystem actorSystem, ExecutionContext executionContext) {
+    public TestBootJob(Application application, ActorSystem actorSystem, ExecutionContext executionContext) {
         this.actorSystem = actorSystem;
         this.executionContext = executionContext;
 
-        if (application.isDev()) {
+        if (application.isTest()) {
             initialize();
         }
     }
@@ -33,10 +33,10 @@ public class DevBootJob {
         actorSystem.scheduler().scheduleOnce(
                 Duration.fromNanos(0),
                 () -> {
-                    Logger.info("DevBootJob starting");
+                    Logger.info("TestBootJob starting");
                     mayCreateUsers();
                     mayCreateDevices();
-                    Logger.info("DevBootJob done");
+                    Logger.info("TestBootJob done");
                 },
                 executionContext
         );
@@ -47,7 +47,7 @@ public class DevBootJob {
             return;
         }
 
-        new User("bobbi", "cs@michiruf.de", "123456").save();
+        new User("testuser", "testuser@example.com", "testpassword").save();
     }
 
     @SuppressWarnings("ConstantConditions")
@@ -56,8 +56,8 @@ public class DevBootJob {
             return;
         }
 
-        User.finder.query().where().eq("username", "bobbi").findOneOrEmpty().ifPresent(user -> {
-            Device d1 = new Device(user, "bobbi-PC");
+        User.finder.query().where().eq("username", "testuser").findOneOrEmpty().ifPresent(user -> {
+            Device d1 = new Device(user, "testuser-1-device-1");
             d1.save();
             user.devices.add(d1);
             user.save();

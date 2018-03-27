@@ -48,14 +48,20 @@ public class UserForm implements Constraints.Validatable<ValidationError> {
     }
 
     public int getCountForUsername() {
-        return User.finder.query().where().eq("username", username).findCount();
+        return User.finder.query()
+                .where()
+                .eq("username", username)
+                .findCount();
     }
 
     public int getCountForEmail() {
         if (email == null || email.isEmpty()) {
             return 0;
         }
-        return User.finder.query().where().eq("email", email).findCount();
+        return User.finder.query()
+                .where()
+                .eq("email", email)
+                .findCount();
     }
 
     public User createUser() {

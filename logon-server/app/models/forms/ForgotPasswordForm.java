@@ -7,6 +7,7 @@ import play.data.validation.Constraints;
  * @author Michael Ruf
  * @since 2018-03-06
  */
+@Constraints.Validate
 public class ForgotPasswordForm {
 
     @Constraints.Required
@@ -14,6 +15,9 @@ public class ForgotPasswordForm {
     public String email;
 
     public User findUser() {
-        return User.finder.query().where().eq("email", email).findOne();
+        return User.finder.query()
+                .where()
+                .eq("email", email)
+                .findOne();
     }
 }

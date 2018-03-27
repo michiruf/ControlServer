@@ -14,3 +14,7 @@ Es könnte so sein:
   -> Mega geile usability
 
 Account am Loginserver sollte optional
+
+TODO Logout all devices -> invalidate token
+
+NOTE Accounts können durch Token und "accept device button" nur ohne aktives Device übernommen werden
