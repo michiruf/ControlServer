@@ -3,6 +3,7 @@ package de.michiruf.control_server.common.user;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,10 +14,10 @@ import java.util.List;
 public class DeviceResult {
 
     @JsonProperty("devices")
-    List<Device> devices;
+    private List<Device> devices;
 
-    @SuppressWarnings("unused") // for jackson
     public DeviceResult() {
+        devices = new ArrayList<>();
     }
 
     public DeviceResult(List<Device> devices) {
@@ -25,5 +26,10 @@ public class DeviceResult {
 
     public List<Device> getDevices() {
         return devices;
+    }
+
+    public DeviceResult addDevice(Device device) {
+        devices.add(device);
+        return this;
     }
 }

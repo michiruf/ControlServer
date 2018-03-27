@@ -9,7 +9,11 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "@class")
 public class LoginResult {
 
-    private final boolean success;
+    private boolean success;
+
+    @SuppressWarnings("unused") // for jackson
+    protected LoginResult() {
+    }
 
     public LoginResult(boolean success) {
         this.success = success;

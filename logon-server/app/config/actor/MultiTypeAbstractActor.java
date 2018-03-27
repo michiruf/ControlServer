@@ -13,7 +13,7 @@ import java.util.Map;
 import java.util.function.Consumer;
 
 /**
- * NOTE: Document with usage (JsonTypeInfo...)
+ * NOTE: Document with usage (JsonTypeInfo required.. Socket type text)
  *
  * @author Michael Ruf
  * @since 2018-03-26

@@ -2,10 +2,12 @@ package controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import de.michiruf.control_server.common.user.DeviceRequest;
+import de.michiruf.control_server.common.user.DeviceResult;
 import de.michiruf.control_server.common.user.LoginRequest;
+import de.michiruf.control_server.common.user.LoginResult;
 import io.vertx.core.Vertx;
 import io.vertx.core.http.WebSocket;
-import io.vertx.core.streams.ReadStream;
 import io.vertx.ext.unit.Async;
 import io.vertx.ext.unit.TestContext;
 import io.vertx.ext.unit.junit.VertxUnitRunner;
@@ -38,19 +40,15 @@ public class WebsocketFunctionalTest extends WithServer {
         vertx.close();
     }
 
-    private ReadStream<WebSocket> createStream() {
-        return vertx.createHttpClient()
-                .websocketStream(testServer.port(), "localhost", "/ws");
-    }
-
     @Test
-    public void testConnect(TestContext context) {
+    public void testWebsocket(TestContext context) {
         Async async = context.async();
-        createStream()
+        vertx.createHttpClient()
+                .websocketStream(testServer.port(), "localhost", "/ws")
                 .exceptionHandler(context::fail)
                 .handler(websocket -> {
                     try {
-                        testConnectSetupWebsocket(context, async, websocket);
+                        testSetupWebsocket(context, async, websocket);
                     } catch (Exception e) {
                         context.fail(e);
                     }
@@ -58,22 +56,53 @@ public class WebsocketFunctionalTest extends WithServer {
         async.await();
     }
 
-    private void testConnectSetupWebsocket(TestContext context, Async async, WebSocket websocket) throws Exception {
+    private void testSetupWebsocket(TestContext context, Async async, WebSocket websocket) throws Exception {
         websocket
                 .exceptionHandler(context::fail)
-                .handler(System.out::println)
-                .closeHandler(event -> {
-                    System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-                    async.complete();
-                });
+                .closeHandler(event -> async.complete());
 
-        // TODO Necessary?
-        // Periodically send ping messages (there is also a pongHandler on the websocket object)
-        //vertx.setPeriodic(10000, timerId -> {
-        //    websocket.writePing(Buffer.buffer("ping"));
-        //});
+        // Start the first test call
+        testLoginRequest(context, websocket);
+    }
 
-        String t = objectMapper.writeValueAsString(new LoginRequest("bobbi", "123456"));
-        websocket.writeTextMessage(t);
+    private void testLoginRequest(TestContext context, WebSocket websocket) throws Exception {
+        websocket.handler(message -> {
+            try {
+                LoginResult result = objectMapper.readValue(message.toString(), LoginResult.class);
+                context.assertNotNull(result);
+                context.assertTrue(result.isSuccess());
+            } catch (Exception e) {
+                context.fail(e);
+            }
+
+            // Start the next test call
+            try {
+                testDeviceRequest(context, websocket);
+            } catch (Exception e) {
+                context.fail(e);
+            }
+        });
+        websocket.writeTextMessage(objectMapper.writeValueAsString(new LoginRequest("bobbi", "123456")));
+    }
+
+    private void testDeviceRequest(TestContext context, WebSocket websocket) throws Exception {
+        websocket.handler(message -> {
+            try {
+                DeviceResult result = objectMapper.readValue(message.toString(), DeviceResult.class);
+                context.assertNotNull(result);
+                // TODO More
+            } catch (Exception e) {
+                context.fail(e);
+            }
+
+            // Disconnect after everything was tested
+            testDisconnect(websocket);
+        });
+        websocket.writeTextMessage(objectMapper.writeValueAsString(new DeviceRequest()));
+    }
+
+    private void testDisconnect(WebSocket websocket) {
+        // At last close the websocket to get the test done
+        websocket.close();
     }
 }

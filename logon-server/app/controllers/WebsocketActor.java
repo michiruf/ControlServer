@@ -5,15 +5,18 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import config.actor.MultiTypeAbstractActor;
 import de.michiruf.control_server.common.event.Event;
 import de.michiruf.control_server.common.user.DeviceRequest;
+import de.michiruf.control_server.common.user.DeviceResult;
 import de.michiruf.control_server.common.user.LoginRequest;
 import de.michiruf.control_server.common.user.LoginResult;
 import de.michiruf.control_server.common.user.UnauthenticatedError;
+import models.Device;
 import models.User;
 import play.Logger;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 /**
  * @author Michael Ruf
@@ -21,7 +24,7 @@ import java.util.function.Consumer;
  */
 public class WebsocketActor extends MultiTypeAbstractActor {
 
-    private boolean authenticated = false;
+    private User user;
 
     public WebsocketActor(ActorRef out, ObjectMapper objectMapper) {
         super(out, objectMapper);
@@ -41,13 +44,13 @@ public class WebsocketActor extends MultiTypeAbstractActor {
 
     @Override
     public void postStop() throws Exception {
-        authenticated = false;
+        user = null;
         super.postStop();
         Logger.info("Websocket closed");
     }
 
     private void checkAuthentication() {
-        if (!authenticated) {
+        if (user == null) {
             tell(new UnauthenticatedError());
             throw new IllegalStateException("Not authenticated!");
             // TODO Do this better?
@@ -55,19 +58,21 @@ public class WebsocketActor extends MultiTypeAbstractActor {
     }
 
     private void onLogin(LoginRequest loginRequest) {
-        authenticated = User.finder.query()
+        user = User.finder.query()
                 .where()
                 .eq("username", loginRequest.getUsername())
                 .and()
                 .eq("password", loginRequest.getEncryptedPassword())
-                .findCount() > 0;
-        tell(new LoginResult(authenticated));
+                .findOne();
+        tell(new LoginResult(user != null));
     }
 
     private void onDeviceRequest(DeviceRequest deviceRequest) {
         checkAuthentication();
 
-        // TODO
+        tell(new DeviceResult(user.devices.stream()
+                .map(Device::toCommon)
+                .collect(Collectors.toList())));
     }
 
     private void onEvent(Event event) {
